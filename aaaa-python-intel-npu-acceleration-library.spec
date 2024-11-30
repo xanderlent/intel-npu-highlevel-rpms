@@ -1,0 +1,1 @@
+python-intel-npu-acceleration-library.spec

@@ -1,0 +1,12 @@
+/intel_npu_acceleration_library-*.tar.gz
+/neural_compressor-*.tar.gz
+/requirements*.txt
+/pyroma-*.tar.gz
+/sphinx_book_theme-*.tar.gz
+/ablog-*.tar.gz
+/sphinx-automodapi-*.tar.gz
+/sphinx-examples-*.tar.gz
+/sphinx_thebe-*.tar.gz
+/sphinx-togglebutton-*.tar.gz
+/sphinxcontrib_youtube-*.tar.gz
+/transformers-*.tar.gz
