@@ -19,10 +19,12 @@ I also unofficially maintain the driver packaging in [another project](https://g
   - neural-compressor (TODO)
     - opencv-python-headless (TODO, shouldn't this be satisfied by the OpenCV Python full package in Fedora???)
     - pycocotools (TODO)
-    - tensorflow (only required for +tf) (TODO, but defer for a while)
+    - tensorflow (only required for +tf) (TODO, but probably not anytime soon)
   - transformers (TODO)
+    - tokenizers (downloads rust packages from internet during build)
+    - safetensors (TODO)
   - pyroma (only required for +dev)
-  - sphinx-book-theme (only required for +dev)
+  - sphinx-book-theme (only required for +dev) (downloads webpack etc. from internet during build)
     - ablog
       - sphinx-automodapi
     - sphinx-examples
@@ -46,6 +48,8 @@ I also unofficially maintain the driver packaging in [another project](https://g
 - sphinx-thebe with extra sphinx has a circular dependency on sphinx-book-theme
 - sphinx-togglebutton with extra sphinx has a circular dep on sphinx-book-theme
 - sphinx-book-theme seems to download NPM packages during the build... really?
+- tokenizers downloads and compiles a whole smorgasboard of rust code... sigh.
+- safetensors downloads and compiles a whole smorgasboard of rust code... sigh.
 
 ## Candidates for evaluation for future packaging
 
