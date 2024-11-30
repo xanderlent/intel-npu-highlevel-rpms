@@ -20,19 +20,20 @@ I also unofficially maintain the driver packaging in [another project](https://g
     - opencv-python-headless (TODO, shouldn't this be satisfied by the OpenCV Python full package in Fedora???)
     - pycocotools (TODO)
     - tensorflow (TODO, big TODO)
-  - pyroma
-  - sphinx-book-theme
+  - transformers (TODO)
+  - pyroma [only required for +dev, including docs]
+  - sphinx-book-theme [only required for +dev, including docs]
     - ablog
       - sphinx-automodapi
     - sphinx-examples
     - sphinx-thebe
     - sphinx-togglebutton
     - sphinxcontrib-youtube
-  - transformers (TODO)
 
 ### TODOs on those packages
 
 - a lot of packages need their licenses fixed up to be SPDX
+- I may need to manually specify deps on packages?
 - the aaaa spec link exists because the default spec for rpkg should be alphabetically first
 - neural\_compressor is missing the requirements.txt files in the source distribution, instead they are in the egg-info requires.txt format...
 - pyroma and zest.releaser have a circular dependency, if pyroma's test extra is built, so exclude it in the conf file
