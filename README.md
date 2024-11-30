@@ -1,0 +1,3 @@
+# High level software using the Intel NPU, packaged for Fedora
+
+Mostly using pyp2spec...
