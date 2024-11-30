@@ -25,18 +25,13 @@ Summary:        %{summary}
 
 %description -n python3-transformers %_description
 
-# For official Fedora packages, review which extras should be actually packaged
-# See: https://docs.fedoraproject.org/en-US/packaging-guidelines/Python/#Extras
-%pyproject_extras_subpkg -n python3-transformers accelerate,agents,all,audio,benchmark,codecarbon,deepspeed,deepspeed-testing,dev,dev-tensorflow,dev-torch,flax,flax-speech,ftfy,integrations,ja,modelcreation,natten,onnx,onnxruntime,optuna,quality,ray,retrieval,ruff,sagemaker,sentencepiece,serving,sigopt,sklearn,speech,testing,tf,tf-cpu,tf-speech,tiktoken,timm,tokenizers,torch,torch-speech,torch-vision,torchhub,video,vision
-
 
 %prep
 %autosetup -p1 -n transformers-%{version}
 
 
 %generate_buildrequires
-# Keep only those extras which you actually want to package or use during tests
-%pyproject_buildrequires -x accelerate,agents,all,audio,benchmark,codecarbon,deepspeed,deepspeed-testing,dev,dev-tensorflow,dev-torch,flax,flax-speech,ftfy,integrations,ja,modelcreation,natten,onnx,onnxruntime,optuna,quality,ray,retrieval,ruff,sagemaker,sentencepiece,serving,sigopt,sklearn,speech,testing,tf,tf-cpu,tf-speech,tiktoken,timm,tokenizers,torch,torch-speech,torch-vision,torchhub,video,vision
+%pyproject_buildrequires
 
 
 %build

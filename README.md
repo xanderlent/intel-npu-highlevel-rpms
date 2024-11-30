@@ -19,10 +19,10 @@ I also unofficially maintain the driver packaging in [another project](https://g
   - neural-compressor (TODO)
     - opencv-python-headless (TODO, shouldn't this be satisfied by the OpenCV Python full package in Fedora???)
     - pycocotools (TODO)
-    - tensorflow (TODO, big TODO)
+    - tensorflow (only required for +tf) (TODO, but defer for a while)
   - transformers (TODO)
-  - pyroma [only required for +dev, including docs]
-  - sphinx-book-theme [only required for +dev, including docs]
+  - pyroma (only required for +dev)
+  - sphinx-book-theme (only required for +dev)
     - ablog
       - sphinx-automodapi
     - sphinx-examples
