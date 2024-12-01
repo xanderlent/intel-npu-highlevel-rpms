@@ -12,6 +12,8 @@ Source:         %{pypi_source safetensors}
 
 BuildRequires:  python3-devel
 BuildRequires:  gcc
+BuildRequires:  cargo-rpm-macros >= 24
+# TODO: Shouldn't this use the existing rust-safetensors library in Fedora?
 
 
 # Fill in the actual package description to submit package to Fedora
@@ -28,10 +30,15 @@ Summary:        %{summary}
 
 %prep
 %autosetup -p1 -n safetensors-%{version}
-
+%cargo_prep
+# Remove locked versions
+rm bindings/python/Cargo.lock
 
 %generate_buildrequires
 %pyproject_buildrequires
+cd bindings/python
+%cargo_generate_buildrequires
+cd ../..
 
 
 %build
@@ -45,6 +52,7 @@ Summary:        %{summary}
 
 
 %check
+# TODO: Fails on trying to import jax
 %pyproject_check_import
 
 

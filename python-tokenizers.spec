@@ -12,6 +12,7 @@ Source:         %{pypi_source tokenizers}
 
 BuildRequires:  python3-devel
 BuildRequires:  gcc
+BuildRequires:  cargo-rpm-macros >= 24
 
 
 # Fill in the actual package description to submit package to Fedora
@@ -28,11 +29,19 @@ Summary:        %{summary}
 
 %prep
 %autosetup -p1 -n tokenizers-%{version}
+%cargo_prep
+# Remove locked versions
+rm bindings/python/Cargo.lock
+# Try using newer ndarray
+sed -i -e "s/ndarray = \"0.15\"/ndarray = \"0.16\"/" bindings/python/Cargo.toml
 
 
 %generate_buildrequires
 %pyproject_buildrequires
-
+%cargo_generate_buildrequires
+cd bindings/python
+%cargo_generate_buildrequires
+cd ../..
 
 %build
 %pyproject_wheel
