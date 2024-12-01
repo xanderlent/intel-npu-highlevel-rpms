@@ -32,6 +32,8 @@ Summary:        %{summary}
 
 %prep
 %autosetup -p1 -n ablog-%{version}
+# Skip the tests in the makefile that use git to remove specific files
+sed -i -e "s/set -e; /set -e; #/g" Makefile
 
 
 %generate_buildrequires
@@ -51,6 +53,7 @@ Summary:        %{summary}
 
 %check
 %pyproject_check_import
+%tox
 
 
 %files -n python3-ablog -f %{pyproject_files}
