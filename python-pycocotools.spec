@@ -1,6 +1,6 @@
 Name:           python-pycocotools
 Version:        2.0.7
-Release:        %autorelease
+Release:        1
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Official APIs for the MS-COCO dataset
 

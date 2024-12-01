@@ -1,6 +1,6 @@
 Name:           python-sphinx-examples
 Version:        0.0.5
-Release:        %autorelease
+Release:        2
 # Fill in the actual package summary to submit package to Fedora
 Summary:        A lightweight example directive to make it easy to demonstrate code / results.
 

@@ -1,6 +1,6 @@
 Name:           python-intel-npu-acceleration-library
 Version:        1.4.0
-Release:        %autorelease
+Release:        1
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Intel® NPU Acceleration Library
 

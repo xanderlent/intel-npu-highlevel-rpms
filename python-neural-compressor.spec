@@ -1,6 +1,6 @@
 Name:           python-neural-compressor
 Version:        3.1.1
-Release:        %autorelease
+Release:        1
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Repository of Intel® Neural Compressor
 

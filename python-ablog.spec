@@ -1,6 +1,6 @@
 Name:           python-ablog
 Version:        0.11.8
-Release:        %autorelease
+Release:        2
 # Fill in the actual package summary to submit package to Fedora
 Summary:        A Sphinx extension that converts any documentation or personal website project into a full-fledged blog.
 

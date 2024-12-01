@@ -1,6 +1,6 @@
 Name:           python-sphinx-book-theme
 Version:        1.1.3
-Release:        %autorelease
+Release:        2
 # Fill in the actual package summary to submit package to Fedora
 Summary:        A clean book theme for scientific explanations and documentation with Sphinx
 

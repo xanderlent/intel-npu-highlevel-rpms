@@ -1,6 +1,6 @@
 Name:           python-sphinx-automodapi
 Version:        0.15.0
-Release:        %autorelease
+Release:        2
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Sphinx extension for auto-generating API documentation for entire modules
 
