@@ -38,6 +38,8 @@ I also unofficially maintain the driver packaging in [another project](https://g
 - I may need to manually specify deps on packages?
 - the aaaa spec link exists because the default spec for rpkg should be alphabetically first
 - neural\_compressor is missing the requirements.txt files in the source distribution, instead they are in the egg-info requires.txt format...
+- pycocotools <= 2.0.7 is needed to work with numpy 1.x which Fedora is shipping, also the numpy dependency needs to be tweaked with sed
+- pycocotools has a randomly-included MIT-licensed C++ JSON parser taken from https://github.com/vivkin/gason at some point. Why? Whyyyyyyyyy?
 - pyroma and zest.releaser have a circular dependency, if pyroma's test extra is built, so exclude it in the conf file
 - ablog >0.11.8 requires deps that are too new!
 - sphinx-automodapi, old version needed because newer versions require newer sphinx

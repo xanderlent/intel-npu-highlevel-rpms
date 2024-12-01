@@ -1,6 +1,7 @@
 /intel_npu_acceleration_library-*.tar.gz
 /neural_compressor-*.tar.gz
 /requirements*.txt
+/pycocotools-*.tar.gz
 /transformers-*.tar.gz
 /tokenizers-*.tar.gz
 /safetensors-*.tar.gz
