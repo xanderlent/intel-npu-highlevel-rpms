@@ -51,6 +51,9 @@ Summary:        %{summary}
 
 %check
 %pyproject_check_import
+# Tox runs but doesn't seem to test anything in the current environment
+%tox
+
 
 
 %files -n python3-sphinx-thebe -f %{pyproject_files}
