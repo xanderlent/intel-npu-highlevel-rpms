@@ -35,6 +35,7 @@ I also unofficially maintain the driver packaging in [another project](https://g
 ### TODOs on those packages
 
 - a lot of packages need their licenses fixed up to be SPDX
+- most of my packages don't correctly annotate licenses, docs, test data, etc right now
 - I may need to manually specify deps on packages?
 - the aaaa spec link exists because the default spec for rpkg should be alphabetically first
 - neural\_compressor is missing the requirements.txt files in the source distribution, instead they are in the egg-info requires.txt format...
