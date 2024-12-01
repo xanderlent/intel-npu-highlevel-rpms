@@ -46,6 +46,9 @@ Summary:        %{summary}
 
 %check
 %pyproject_check_import
+# We would use tox to check the package, but the sources do not include the tests
+# That doesn't prevent tox from succeeding, so I guess keep running it?
+%tox
 
 
 %files -n python3-sphinx-togglebutton -f %{pyproject_files}
