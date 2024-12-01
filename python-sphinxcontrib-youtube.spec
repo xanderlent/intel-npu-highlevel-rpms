@@ -51,7 +51,8 @@ Summary:        %{summary}
 
 %check
 %pyproject_check_import
-
+# We would run the tests here but the official source distribution doesn't actually include them.
+#{py3_test_envvars} #{python3} -m nox -s test
 
 %files -n python3-sphinxcontrib-youtube -f %{pyproject_files}
 
