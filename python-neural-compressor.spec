@@ -20,7 +20,7 @@ BuildRequires:  python3-onnx
 BuildRequires:  python3-onnxruntime
 # Torch also seems to be an optional dependency, but we are building with the pt extra
 BuildRequires:  python3-torch
-#BuildRequires:  python3-transformers
+BuildRequires:  python3-transformers
 
 
 # Fill in the actual package description to submit package to Fedora
@@ -52,8 +52,8 @@ sed -i -e "s/opencv-python-headless/opencv/" requirements.txt
 # Remove all the files that should only ship if we enable extras
 # This makes the import check pass
 # keras_utils, tf_utils needs tensorflow, which would be the +tf extra
-#rm -rf neural_compressor/adaptor/keras_utils
-#rm -rf neural_compressor/adaptor/tf_utils
+rm -rf neural_compressor/adaptor/keras_utils
+rm -rf neural_compressor/adaptor/tf_utils
 
 
 %generate_buildrequires
@@ -73,7 +73,7 @@ sed -i -e "s/opencv-python-headless/opencv/" requirements.txt
 
 %check
 # Just drop the import checks so we can ship the package for now
-#pyproject_check_import
+%pyproject_check_import
 
 
 %files -n python3-neural-compressor -f %{pyproject_files}
