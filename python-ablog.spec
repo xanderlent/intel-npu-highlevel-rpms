@@ -32,8 +32,8 @@ Summary:        %{summary}
 
 %prep
 %autosetup -p1 -n ablog-%{version}
-# Skip the tests in the makefile that use git to remove specific files
-sed -i -e "s/set -e; /set -e; #/g" Makefile
+# Skip the tests that use the Makefile that use git to remove specific files
+sed -i -e "s/make tests//g" tox.ini
 
 
 %generate_buildrequires
