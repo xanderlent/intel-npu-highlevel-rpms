@@ -38,7 +38,7 @@ sed -i -e "s/set -e; /set -e; #/g" Makefile
 
 %generate_buildrequires
 # Keep only those extras which you actually want to package or use during tests
-%pyproject_buildrequires -x all,dev,docs,markdown,notebook,tests
+%pyproject_buildrequires -x all,dev,docs,markdown,notebook,tests -t
 
 
 %build

@@ -31,7 +31,7 @@ Summary:        %{summary}
 
 
 %generate_buildrequires
-%pyproject_buildrequires
+%pyproject_buildrequires -t
 
 
 %build

@@ -38,7 +38,7 @@ rm -rf sphinx_automodapi/tests/cases/nested
 
 %generate_buildrequires
 # Keep only those extras which you actually want to package or use during tests
-%pyproject_buildrequires -x test
+%pyproject_buildrequires -x test -t
 
 
 %build
