@@ -16,17 +16,16 @@ I also unofficially maintain the driver packaging in [another project](https://g
 
 ### Packaged software and dependencies:
 - intel-npu-acceleration-library (TODO)
-  - neural-compressor (with +pt extra, since torch is already packaged in Fedora)
+  - neural-compressor (with +pt extra, since torch is already packaged in Fedora, but without +tf since Tensorflow isn't) (TODO)
     - opencv-python-headless (substituted with opencv)
     - pycocotools
       - oldest-supported-numpy (substituted with numpy)
-    - transformers (TODO, see below, since it's a direct dep too)
-    - tensorflow (only required for +tf, NOT IMPLEMENTED)
+    - transformers (TODO)
   - transformers (TODO)
     - tokenizers (TODO)
-    - safetensors (+numpy,+torch extras, since already packaged; Tensorflow support not implemented.)
+    - safetensors (+numpy,+torch extras, since they're in Fedora, but without other extras like Tensorflow)
   - pyroma (only required for +dev)
-  - sphinx-book-theme (only required for +dev) (downloads webpack etc. from internet during build)
+  - sphinx-book-theme (only required for +dev)
     - ablog
       - sphinx-automodapi
     - sphinx-examples
@@ -66,7 +65,7 @@ I also unofficially maintain the driver packaging in [another project](https://g
 
 Feel free to file bugs to suggest additional candidates.
 
-- OpenVINO itself?
+- [OpenVINO](https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/overview.html) itself?
 - [OpenVINO AI Plugins for GIMP](https://github.com/intel/openvino-ai-plugins-gimp)
 - [OpenVINO AI Plugins for Audacity](https://github.com/intel/openvino-plugins-ai-audacity)
 - [Intel LLM Library for PyTorch](https://github.com/intel-analytics/ipex-llm)
