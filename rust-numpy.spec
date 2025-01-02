@@ -5,8 +5,8 @@
 %global crate numpy
 
 Name:           rust-numpy
-Version:        0.23.0
-Release:        1
+Version:        0.22.1
+Release:        1%{?dist}
 Summary:        PyO3-based Rust bindings of the NumPy C-API
 
 License:        BSD-2-Clause
@@ -49,6 +49,18 @@ This package contains library source intended for building other packages which
 use the "default" feature of the "%{crate}" crate.
 
 %files       -n %{name}+default-devel
+%ghost %{crate_instdir}/Cargo.toml
+
+%package     -n %{name}+gil-refs-devel
+Summary:        %{summary}
+BuildArch:      noarch
+
+%description -n %{name}+gil-refs-devel %{_description}
+
+This package contains library source intended for building other packages which
+use the "gil-refs" feature of the "%{crate}" crate.
+
+%files       -n %{name}+gil-refs-devel
 %ghost %{crate_instdir}/Cargo.toml
 
 %package     -n %{name}+half-devel
@@ -94,4 +106,5 @@ use the "nalgebra" feature of the "%{crate}" crate.
 %endif
 
 %changelog
-%autochangelog
+* Thu Jan 02 2025 Alexander F. Lent <lx@xanderlent.com> - 0.22.1-1
+- Initial package
