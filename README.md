@@ -16,15 +16,15 @@ I also unofficially maintain the driver packaging in [another project](https://g
 
 ### Packaged software and dependencies:
 - intel-npu-acceleration-library (TODO)
-  - neural-compressor (technically, +pt not required, but torch is already packaged in Fedora so...)
+  - neural-compressor (with +pt extra, since torch is already packaged in Fedora)
     - opencv-python-headless (substituted with opencv)
     - pycocotools
       - oldest-supported-numpy (substituted with numpy)
-    - transformers (TODO, see below) (required with +pt?)
-    - tensorflow (only required for +tf) (NOT IMPLEMENTED)
+    - transformers (TODO, see below, since it's a direct dep too)
+    - tensorflow (only required for +tf, NOT IMPLEMENTED)
   - transformers (TODO)
     - tokenizers (TODO)
-    - safetensors (TODO)
+    - safetensors (+numpy,+torch extras, since already packaged; Tensorflow support not implemented.)
   - pyroma (only required for +dev)
   - sphinx-book-theme (only required for +dev) (downloads webpack etc. from internet during build)
     - ablog
@@ -46,8 +46,8 @@ I also unofficially maintain the driver packaging in [another project](https://g
 - neural\_compressor only needs the deps because parts of it try to import them, we are currently skipping that check to get it to build
 - pycocotools <= 2.0.7 is needed to work with numpy 1.x which Fedora is shipping, also the numpy dependency needs to be tweaked with sed
 - pycocotools has a randomly-included MIT-licensed C++ JSON parser taken from https://github.com/vivkin/gason at some point. Why? Whyyyyyyyyy?
-- tokenizers downloads and compiles a whole smorgasboard of rust code... sigh.
-- safetensors downloads and compiles a whole smorgasboard of rust code... sigh.
+- tokenizers needs some rust deps I haven't figured out
+- safetensors the rust package seems to already be packaged in Fedora; can we add these bindings to that package rather than recompile?
 
 #### TODOs for building intel-npu-acceleration-library with +dev
 

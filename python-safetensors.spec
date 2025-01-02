@@ -14,6 +14,9 @@ BuildRequires:  python3-devel
 BuildRequires:  gcc
 BuildRequires:  cargo-rpm-macros >= 24
 # TODO: Shouldn't this use the existing rust-safetensors library in Fedora?
+# Actually, this package seems to recomplile that one...
+# Because the python package is really bindings to the rust package?
+# TODO: Maybe these bindings belong with the rust package upstream?
 
 
 # Fill in the actual package description to submit package to Fedora
@@ -27,19 +30,29 @@ Summary:        %{summary}
 
 %description -n python3-safetensors %_description
 
+# For official Fedora packages, review which extras should be actually packaged
+# See: https://docs.fedoraproject.org/en-US/packaging-guidelines/Python/#Extras
+%pyproject_extras_subpkg -n python3-safetensors numpy,torch
+
 
 %prep
 %autosetup -p1 -n safetensors-%{version}
 %cargo_prep
 # Remove locked versions
 rm bindings/python/Cargo.lock
+# flax needs jax, not built, so remove it (avoid failing the import test for unpackaged stuff)
+rm py_src/safetensors/flax.py
+# paddle needs paddlepaddle, so remove it to pass the import test
+rm py_src/safetensors/paddle.py
+# tensorflow needs tensorflow, so remove it to pass the import test
+rm py_src/safetensors/tensorflow.py
 
 %generate_buildrequires
-%pyproject_buildrequires
+# Keep only those extras which you actually want to package or use during tests
+%pyproject_buildrequires -x numpy,torch
 cd bindings/python
 %cargo_generate_buildrequires
 cd ../..
-
 
 %build
 %pyproject_wheel
@@ -52,7 +65,6 @@ cd ../..
 
 
 %check
-# TODO: Fails on trying to import jax
 %pyproject_check_import
 
 
