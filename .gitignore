@@ -4,6 +4,8 @@
 /pycocotools-*.tar.gz
 /transformers-*.tar.gz
 /numpy-*.crate
+/criterion-*.crate
+/esaxx-rs-*.crate
 /tokenizers-*.tar.gz
 /safetensors-*.tar.gz
 /pyroma-*.tar.gz

@@ -23,7 +23,9 @@ I also unofficially maintain the driver packaging in [another project](https://g
     - transformers (TODO)
   - transformers (TODO)
     - tokenizers (TODO)
-      - rust-numpy
+      - rust-numpy (TODO: Needs nalgebra ^0.32 which isn't packaged in F41+.)
+      - rust-esaxx-rs
+        - rust-criterion
     - safetensors (+numpy,+torch extras, since they're in Fedora, but without other extras like Tensorflow)
   - pyroma (only required for +dev)
   - sphinx-book-theme (only required for +dev)
