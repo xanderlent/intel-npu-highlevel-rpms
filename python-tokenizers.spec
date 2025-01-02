@@ -38,7 +38,6 @@ sed -i -e "s/ndarray = \"0.15\"/ndarray = \"0.16\"/" bindings/python/Cargo.toml
 
 %generate_buildrequires
 %pyproject_buildrequires
-%cargo_generate_buildrequires
 cd bindings/python
 %cargo_generate_buildrequires
 cd ../..
