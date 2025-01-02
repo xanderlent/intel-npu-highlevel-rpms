@@ -25,7 +25,7 @@ I also unofficially maintain the driver packaging in [another project](https://g
     - tokenizers (TODO)
       - rust-numpy (TODO: Needs nalgebra ^0.32 which isn't packaged in F41+.)
       - rust-esaxx-rs
-        - rust-criterion (TODO: Needs dep vers which aren't packaged in F41+.)
+        - rust-criterion (TODO: All the dependencies were orphaned leaves and removed from F41+. Also only a dev dependency?)
     - safetensors (+numpy,+torch extras, since they're in Fedora, but without other extras like Tensorflow)
   - pyroma (only required for +dev)
   - sphinx-book-theme (only required for +dev)
@@ -47,9 +47,11 @@ I also unofficially maintain the driver packaging in [another project](https://g
 - neural\_compressor is missing the requirements.txt files in the source distribution, instead they are in the egg-info requires.txt format...
 - neural\_compressor only needs the deps because parts of it try to import them, we are currently skipping that check to get it to build
 - pycocotools <= 2.0.7 is needed to work with numpy 1.x which Fedora is shipping, also the numpy dependency needs to be tweaked with sed
-- pycocotools has a randomly-included MIT-licensed C++ JSON parser taken from https://github.com/vivkin/gason at some point. Why? Whyyyyyyyyy?
+- pycocotools has a randomly-included MIT-licensed C++ JSON parser taken from https://github.com/vivkin/gason at some point. Sigh.
 - tokenizers needs some rust deps I haven't figured out
 - safetensors the rust package seems to already be packaged in Fedora; can we add these bindings to that package rather than recompile?
+- I need to check the huggingface packages and rust deps for vendored stuff
+- for ex, the esaxx-rs crate is Apache-2.0 licensed but it vendors an MIT licensed C++ library. Sigh.
 
 #### TODOs for building intel-npu-acceleration-library with +dev
 
