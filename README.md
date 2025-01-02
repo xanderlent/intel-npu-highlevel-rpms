@@ -25,7 +25,7 @@ I also unofficially maintain the driver packaging in [another project](https://g
     - tokenizers (TODO)
       - rust-numpy (TODO: Needs nalgebra ^0.32 which isn't packaged in F41+.)
       - rust-esaxx-rs
-        - rust-criterion
+        - rust-criterion (TODO: Needs dep vers which aren't packaged in F41+.)
     - safetensors (+numpy,+torch extras, since they're in Fedora, but without other extras like Tensorflow)
   - pyroma (only required for +dev)
   - sphinx-book-theme (only required for +dev)
