@@ -1,5 +1,5 @@
 Name:           python-safetensors
-Version:        0.4.5
+Version:        0.4.1
 Release:        1
 # Fill in the actual package summary to submit package to Fedora
 Summary:        ...
