@@ -14,6 +14,9 @@ URL:            https://crates.io/crates/numpy
 Source:         %{crates_source}
 
 BuildRequires:  cargo-rpm-macros >= 24
+# TODO: The test phase requires this, technically not used when building or at runtime...
+# ...but all your API calls will fail badly when numpy is missing, so let's just require it.
+Requires:  python3-numpy
 
 %global _description %{expand:
 PyO3-based Rust bindings of the NumPy C-API.}
