@@ -1,6 +1,6 @@
 Name:           python-transformers
-Version:        4.46.3
-Release:        1
+Version:        4.47.1
+Release:        1%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        State-of-the-art Machine Learning for JAX, PyTorch and TensorFlow
 
