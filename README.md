@@ -20,10 +20,10 @@ I also unofficially maintain the driver packaging in [another project](https://g
     - opencv-python-headless (substituted with opencv)
     - pycocotools
       - oldest-supported-numpy (substituted with numpy)
-    - transformers (TODO, see below) (required with +pt?) (SKIPPED for now)
+    - transformers (TODO, see below) (required with +pt?)
     - tensorflow (only required for +tf) (NOT IMPLEMENTED)
   - transformers (TODO)
-    - tokenizers (downloads rust packages from internet during build)
+    - tokenizers (TODO)
     - safetensors (TODO)
   - pyroma (only required for +dev)
   - sphinx-book-theme (only required for +dev) (downloads webpack etc. from internet during build)
@@ -36,14 +36,21 @@ I also unofficially maintain the driver packaging in [another project](https://g
 
 ### TODOs on those packages
 
+#### Main TODOs
+
 - a lot of packages need their licenses fixed up to be SPDX
 - most of my packages don't correctly annotate licenses, docs, test data, etc right now
-- I may need to manually specify deps on packages?
+- I may need to manually specify deps on packages outside of the python ones?
 - the aaaa spec link exists because the default spec for rpkg should be alphabetically first
 - neural\_compressor is missing the requirements.txt files in the source distribution, instead they are in the egg-info requires.txt format...
 - neural\_compressor only needs the deps because parts of it try to import them, we are currently skipping that check to get it to build
 - pycocotools <= 2.0.7 is needed to work with numpy 1.x which Fedora is shipping, also the numpy dependency needs to be tweaked with sed
 - pycocotools has a randomly-included MIT-licensed C++ JSON parser taken from https://github.com/vivkin/gason at some point. Why? Whyyyyyyyyy?
+- tokenizers downloads and compiles a whole smorgasboard of rust code... sigh.
+- safetensors downloads and compiles a whole smorgasboard of rust code... sigh.
+
+#### TODOs for building intel-npu-acceleration-library with +dev
+
 - pyroma and zest.releaser have a circular dependency, if pyroma's test extra is built, so exclude it in the conf file
 - ablog >0.11.8 requires deps that are too new!
 - sphinx-automodapi, old version needed because newer versions require newer sphinx
@@ -54,13 +61,12 @@ I also unofficially maintain the driver packaging in [another project](https://g
 - sphinx-thebe with extra sphinx has a circular dependency on sphinx-book-theme
 - sphinx-togglebutton with extra sphinx has a circular dep on sphinx-book-theme
 - sphinx-book-theme seems to download NPM packages during the build... really?
-- tokenizers downloads and compiles a whole smorgasboard of rust code... sigh.
-- safetensors downloads and compiles a whole smorgasboard of rust code... sigh.
 
 ## Candidates for evaluation for future packaging
 
 Feel free to file bugs to suggest additional candidates.
 
+- OpenVINO itself?
 - [OpenVINO AI Plugins for GIMP](https://github.com/intel/openvino-ai-plugins-gimp)
 - [OpenVINO AI Plugins for Audacity](https://github.com/intel/openvino-plugins-ai-audacity)
 - [Intel LLM Library for PyTorch](https://github.com/intel-analytics/ipex-llm)
