@@ -6,6 +6,7 @@
 /numpy-*.crate
 /criterion-*.crate
 /esaxx-rs-*.crate
+/macro_rules_attribute-*.crate
 /tokenizers-*.tar.gz
 /safetensors-*.tar.gz
 /pyroma-*.tar.gz
