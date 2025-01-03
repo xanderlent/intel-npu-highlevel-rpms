@@ -1,6 +1,6 @@
 Name:           python-tokenizers
-Version:        0.21.0
-Release:        1
+Version:        0.20.3
+Release:        1%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        ...
 
@@ -26,6 +26,10 @@ Summary:        %{summary}
 
 %description -n python3-tokenizers %_description
 
+# For official Fedora packages, review which extras should be actually packaged
+# See: https://docs.fedoraproject.org/en-US/packaging-guidelines/Python/#Extras
+%pyproject_extras_subpkg -n python3-tokenizers docs
+
 
 %prep
 %autosetup -p1 -n tokenizers-%{version}
@@ -37,7 +41,8 @@ sed -i -e "s/ndarray = \"0.15\"/ndarray = \"0.16\"/" bindings/python/Cargo.toml
 
 
 %generate_buildrequires
-%pyproject_buildrequires
+# Keep only those extras which you actually want to package or use during tests
+%pyproject_buildrequires -x docs
 cd bindings/python
 %cargo_generate_buildrequires
 cd ../..

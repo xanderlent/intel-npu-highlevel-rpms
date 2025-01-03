@@ -57,8 +57,12 @@ I also unofficially maintain the driver packaging in [another project](https://g
 - pycocotools has a randomly-included MIT-licensed C++ JSON parser taken from https://github.com/vivkin/gason at some point. Sigh.
 - tokenizers needs some rust deps I haven't figured out
 - safetensors the rust package seems to already be packaged in Fedora; can we add these bindings to that package rather than recompile?
+- tokenizers seems similar; while it's a rust lib primirally used through python, we should probably try to build it once with bindings etc?
 - I need to check the huggingface packages and rust deps for vendored stuff
 - for ex, the esaxx-rs crate is Apache-2.0 licensed but it vendors an MIT licensed C++ library. Sigh.
+- tokenizers seems to have functions that download random models directly from the internet; these might already be *packaged* in Fedora in huggingface\_hub which IIUC Copr and others use for AI in log-detective? Is the random downloading potentially a problem? Should we be packaging models as well for Fedora? -> Probably a MUCH bigger discussion on the mailing list, frankly...
+- the criterion package tweaks a tight version bound on a tool to allow supposedly-compatible versions based on semver
+- the tokenizers package is also hacking the version of ndarray from 0.15 to 0.16 to make it compatible, eek
 
 #### TODOs for building intel-npu-acceleration-library with +dev
 
