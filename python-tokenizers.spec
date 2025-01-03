@@ -1,6 +1,6 @@
 Name:           python-tokenizers
 Version:        0.20.3
-Release:        4%{?dist}
+Release:        5%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        ...
 
@@ -58,19 +58,19 @@ cd ..
 
 %build
 %pyproject_wheel
-%cargo_build
-%cargo_license_summary
-%cargo_license
+#cargo_build
+#cargo_license_summary
+#cargo_license
 
 %install
 %pyproject_install
 # Add top-level Python module names here as arguments, you can use globs
 %pyproject_save_files tokenizers
-%cargo_install
+#cargo_install
 
 %check
 %pyproject_check_import
-%cargo_test
+#cargo_test
 
 
 %files -n python3-tokenizers -f %{pyproject_files}
