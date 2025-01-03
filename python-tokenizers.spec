@@ -1,6 +1,6 @@
 Name:           python-tokenizers
 Version:        0.20.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        ...
 
@@ -13,10 +13,6 @@ Source:         %{pypi_source tokenizers}
 BuildRequires:  python3-devel
 BuildRequires:  gcc
 BuildRequires:  cargo-rpm-macros >= 24
-# Not sure why we have to manually specify these deps?
-# Maybe cargo deps autodiscovery is missing them the first time?
-BuildRequires:	rust-tempfile+default-devel
-BuildRequires:	rust-derive_builder+default-devel
 
 
 # Fill in the actual package description to submit package to Fedora
@@ -50,6 +46,9 @@ sed -i -e "s/ndarray = \"0.15\"/ndarray = \"0.16\"/" bindings/python/Cargo.toml
 cd bindings/python
 %cargo_generate_buildrequires
 cd ../..
+cd tokenizers
+%cargo_generate_buildrequires
+cd ..
 
 %build
 %pyproject_wheel
