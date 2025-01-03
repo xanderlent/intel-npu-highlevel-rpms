@@ -13,6 +13,8 @@ Source:         %{pypi_source tokenizers}
 BuildRequires:  python3-devel
 BuildRequires:  gcc
 BuildRequires:  cargo-rpm-macros >= 24
+# Not sure why we have to manually specify this one
+BuildRequires:	rust-tempfile+default-devel
 
 
 # Fill in the actual package description to submit package to Fedora
