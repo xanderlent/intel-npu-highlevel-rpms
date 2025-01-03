@@ -1,6 +1,6 @@
 Name:           python-tokenizers
 Version:        0.20.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        ...
 
