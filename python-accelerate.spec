@@ -1,6 +1,6 @@
 Name:           python-accelerate
 Version:        1.2.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Accelerate
 
@@ -28,18 +28,18 @@ Summary:        %{summary}
 
 %prep
 %autosetup -p1 -n accelerate-%{version}
-
-
-%generate_buildrequires
-%pyproject_buildrequires
 # Delete all the test_utils with external deps
-rm -r src/accelerate/test_utils/scripts/external_deps
+rm -r src/accelerate/test_utils/scripts/external_deps/*
 # This particular utility tries to access something internal to pytorch?
 rm src/accelerate/test_utils/scripts/test_merge_weights.py
 # This particular utility uses pytest, but we don't package the test extras...
 rm src/accelerate/test_utils/scripts/test_notebook.py
 # The rich extra doesn't like system packages, insisting you use pip, so don't bother with it...
 rm src/accelerate/utils/rich.py
+
+
+%generate_buildrequires
+%pyproject_buildrequires
 
 
 %build
