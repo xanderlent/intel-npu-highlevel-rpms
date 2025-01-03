@@ -26,7 +26,7 @@ I also unofficially maintain the driver packaging in [another project](https://g
       - safetensors (see below)
     - tokenizers
       - rust-esaxx-rs
-        - rust-criterion (TODO: All the dependencies were orphaned leaves and removed from F41+. Also only a dev dependency?)
+        - rust-criterion (see notes for F41+)
       - rust-macro\_rules\_attribute
         - rust-macro\_rules\_attribute-proc\_macro
       - rust-monostate
@@ -44,6 +44,31 @@ I also unofficially maintain the driver packaging in [another project](https://g
     - sphinx-thebe
     - sphinx-togglebutton
     - sphinxcontrib-youtube
+
+### Revived orphaned deps of rust-criterion from F40
+
+In F41+, various deps of rust-criterion were removed. Rather than vendoring them all here, I have set up
+the copr system to build them for F41+ based on the code last used in f40. While eventually these versions
+will get stale, we can keep these orphaned leaf packages alive a little longer.
+
+(Fedora removed rust-criterion itself as an orphaned leaf in F38+, so we vendor it here since the version in
+dist-git is old.)
+
+  - rust-anes
+  - rust-criterion-plot
+    - rust-itertools-num
+  - rust-oorandom
+    - rust-random-fast-rng
+      - rust-random-trait
+    - rust-randomize
+  - rust-plotters
+    - rust-plotters-backend
+    - rust-plotters-bitmap
+      - rust-gif (TODO: Needs ^0.12 but F41+ packages 0.13 and higher.)
+      - rust-plotters-backend
+    - rust-plotters-svg
+      - rust-plotters-backend
+  - rust-tinytemplate
 
 ### TODOs on those packages
 
