@@ -21,10 +21,10 @@ I also unofficially maintain the driver packaging in [another project](https://g
     - pycocotools
       - oldest-supported-numpy (substituted with packaged numpy)
     - transformers (see below)
-  - transformers (TODO)
+  - transformers (+accelerate,+ftfy,+serving,+sklearn,+tokenizers,+torch,+torch-vision,+vision since those are packaged; notably not +onnx{,runtime} since that also requires pieces that aren't packaged, and not +modelcreation since it pins a specific cookiecutter 1.x version)
     - accelerate
       - safetensors (see below)
-    - tokenizers
+    - tokenizers (+docs, since those deps are packaged)
       - rust-esaxx-rs
         - rust-criterion (see notes for F41+)
       - rust-macro\_rules\_attribute
