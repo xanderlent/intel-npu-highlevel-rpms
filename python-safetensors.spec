@@ -1,5 +1,5 @@
 Name:           python-safetensors
-Version:        0.4.1
+Version:        0.4.3
 Release:        1
 # Fill in the actual package summary to submit package to Fedora
 Summary:        ...
@@ -17,6 +17,7 @@ BuildRequires:  cargo-rpm-macros >= 24
 # Actually, this package seems to recomplile that one...
 # Because the python package is really bindings to the rust package?
 # TODO: Maybe these bindings belong with the rust package upstream?
+Provides:	bundled(crate(safetensors)) = %version
 
 
 # Fill in the actual package description to submit package to Fedora
@@ -46,6 +47,8 @@ rm py_src/safetensors/flax.py
 rm py_src/safetensors/paddle.py
 # tensorflow needs tensorflow, so remove it to pass the import test
 rm py_src/safetensors/tensorflow.py
+# mlx needs mlx, so remove it to pass the import test
+rm py_src/safetensors/mlx.py
 
 %generate_buildrequires
 # Keep only those extras which you actually want to package or use during tests
