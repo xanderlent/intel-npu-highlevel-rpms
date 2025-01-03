@@ -3,6 +3,7 @@
 /requirements*.txt
 /pycocotools-*.tar.gz
 /transformers-*.tar.gz
+/accelerate-*.tar.gz
 /numpy-*.crate
 /criterion-*.crate
 /esaxx-rs-*.crate

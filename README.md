@@ -20,9 +20,11 @@ I also unofficially maintain the driver packaging in [another project](https://g
     - opencv-python-headless (substituted with packaged opencv)
     - pycocotools
       - oldest-supported-numpy (substituted with packaged numpy)
-    - transformers (TODO)
+    - transformers (see below)
   - transformers (TODO)
-    - tokenizers (TODO)
+    - accelerate
+      - safetensors (see below)
+    - tokenizers
       - rust-esaxx-rs
         - rust-criterion (TODO: All the dependencies were orphaned leaves and removed from F41+. Also only a dev dependency?)
       - rust-macro\_rules\_attribute
