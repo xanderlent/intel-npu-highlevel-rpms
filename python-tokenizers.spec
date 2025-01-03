@@ -13,8 +13,10 @@ Source:         %{pypi_source tokenizers}
 BuildRequires:  python3-devel
 BuildRequires:  gcc
 BuildRequires:  cargo-rpm-macros >= 24
-# Not sure why we have to manually specify this one
+# Not sure why we have to manually specify these deps?
+# Maybe cargo deps autodiscovery is missing them the first time?
 BuildRequires:	rust-tempfile+default-devel
+BuildRequires:	rust-derive_builder+default-devel
 
 
 # Fill in the actual package description to submit package to Fedora
