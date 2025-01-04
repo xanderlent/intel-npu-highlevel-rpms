@@ -1,6 +1,6 @@
 Name:           python-neural-compressor
 Version:        3.1.1
-Release:        4%{?dist}
+Release:        5%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Repository of Intel® Neural Compressor
 
@@ -24,6 +24,8 @@ BuildRequires:  python3-torch
 BuildRequires:  python3-transformers
 # Some code uses nltk, and it is packaged so require it
 BuildRequires:	python3-nltk
+# Apparently some code also uses accelerate
+BuildRequires:	python3-accelerate
 
 
 
