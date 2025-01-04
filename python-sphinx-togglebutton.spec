@@ -1,6 +1,6 @@
 Name:           python-sphinx-togglebutton
 Version:        0.3.2
-Release:        2
+Release:        3%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Toggle page content and collapse admonitions in Sphinx.
 

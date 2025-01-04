@@ -1,6 +1,6 @@
 Name:           python-sphinx-thebe
 Version:        0.3.1
-Release:        2
+Release:        3%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Integrate interactive code blocks into your documentation with Thebe and Binder.
 

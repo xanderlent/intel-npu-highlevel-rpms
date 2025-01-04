@@ -1,6 +1,6 @@
 Name:           python-sphinxcontrib-youtube
 Version:        1.4.1
-Release:        2
+Release:        3%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Sphinx "youtube" extension.
 

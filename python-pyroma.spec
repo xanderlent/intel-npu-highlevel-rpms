@@ -1,6 +1,6 @@
 Name:           python-pyroma
 Version:        4.2
-Release:        1
+Release:        2%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Test your project's packaging friendliness
 
