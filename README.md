@@ -15,16 +15,18 @@ I also unofficially maintain the driver packaging in [another project](https://g
 	- A Python library for running various AI/ML workloads on the Intel NPU. They also provide some [docs](https://intel.github.io/intel-npu-acceleration-library/index.html).
 
 ### Packaged software and dependencies:
-- intel-npu-acceleration-library (TODO)
-  - neural-compressor (with +pt extra, since torch is already packaged in Fedora, but without +tf since Tensorflow isn't) (TODO)
+- intel-npu-acceleration-library (TODO: The only remaining TODO on F40!)
+  - neural-compressor (+pt)
+    - accelerate
+      - safetensors (+numpy,+torch)
     - opencv-python-headless (substituted with packaged opencv)
     - pycocotools
       - oldest-supported-numpy (substituted with packaged numpy)
     - transformers (see below)
-  - transformers (+accelerate,+ftfy,+serving,+sklearn,+tokenizers,+torch,+torch-vision,+vision since those are packaged; notably not +onnx{,runtime} since that also requires pieces that aren't packaged, and not +modelcreation since it pins a specific cookiecutter 1.x version)
-    - accelerate
-      - safetensors (see below)
-    - tokenizers (+docs, since those deps are packaged)
+  - transformers (+accelerate,+ftfy,+serving,+sklearn,+tokenizers,+torch,+torch-vision,+vision; future work for +onnx{,runtime},+modelcreation)
+    - accelerate (see above)
+      - safetensors (see above)
+    - tokenizers (+docs)
       - rust-esaxx-rs
         - rust-criterion (see notes for F41+)
       - rust-macro\_rules\_attribute
@@ -33,13 +35,14 @@ I also unofficially maintain the driver packaging in [another project](https://g
         - rust-monostate-impl
       - rust-ndarray0.15
         - rust-approx0.4
-      - rust-numpy (TODO: Needs nalgebra ^0.32 which isn't packaged in F41+.)
+      - rust-numpy
+        - rust-nalgebra0.32 (for F41+ only) (TODO)
       - rust-rayon-cond
       - rust-spm\_precompiled
       - rust-unicode-normalization-alignments
-    - safetensors (+numpy,+torch extras, since they're in Fedora, but without other extras like Tensorflow)
-  - pyroma (only required for +dev)
-  - sphinx-book-theme (only required for +dev)
+    - safetensors (see above)
+  - pyroma (only required for +dev on intel-npu-acceleration-library)
+  - sphinx-book-theme (only required for +dev on intel-npu-acceleration-library)
     - ablog
       - sphinx-automodapi
     - sphinx-examples
@@ -76,6 +79,8 @@ dist-git is old.)
 
 #### Main TODOs
 
+- The build process for intel-npu-acceleration-library downloads a binary OpenVINO distribution and both bundles and builds against that. Yikes, Intel!
+  - Even worse, their OS detection doesn't handle all the prebuilt distros...
 - a lot of packages need their licenses fixed up to be SPDX
 - most of my packages don't correctly annotate licenses, docs, test data, etc right now
 - I may need to manually specify deps on packages outside of the python ones?
@@ -92,6 +97,7 @@ dist-git is old.)
 - tokenizers seems to have functions that download random models directly from the internet; these might already be *packaged* in Fedora in huggingface\_hub which IIUC Copr and others use for AI in log-detective? Is the random downloading potentially a problem? Should we be packaging models as well for Fedora? -> Probably a MUCH bigger discussion on the mailing list, frankly...
 - the criterion package tweaks a tight version bound on a tool to allow supposedly-compatible versions based on semver
 - rust-gif0.12 needs to be built without check since that creates a circular dep on rust-criterion
+- did deleting things in neural-compressor (esp.) or acclerate or transformers etc. damage the package rather than just stripping unused stuff?
 
 #### TODOs for building intel-npu-acceleration-library with +dev
 
