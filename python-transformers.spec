@@ -1,6 +1,6 @@
 Name:           python-transformers
 Version:        4.46.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        State-of-the-art Machine Learning for JAX, PyTorch and TensorFlow
 
@@ -330,8 +330,9 @@ rm src/transformers/models/x_clip/convert_x_clip_original_pytorch_to_hf.py
 rm src/transformers/models/wavlm/convert_wavlm_original_pytorch_checkpoint_to_pytorch.py
 # Needs ipython
 rm src/transformers/utils/notebook.py
-# Needs google.protobuf.internal
+# Needs google.protobuf
 rm src/transformers/utils/sentencepiece_model_pb2_new.py
+rm src/transformers/utils/sentencepiece_model_pb2.py
 # This one seems like a pyTorch issue?
 # "Dynamo is not supported on Python 3.12+"
 rm src/transformers/integrations/bitnet.py
