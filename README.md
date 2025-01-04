@@ -31,6 +31,8 @@ I also unofficially maintain the driver packaging in [another project](https://g
         - rust-macro\_rules\_attribute-proc\_macro
       - rust-monostate
         - rust-monostate-impl
+      - rust-ndarray0.15
+        - rust-approx0.4
       - rust-numpy (TODO: Needs nalgebra ^0.32 which isn't packaged in F41+.)
       - rust-rayon-cond
       - rust-spm\_precompiled

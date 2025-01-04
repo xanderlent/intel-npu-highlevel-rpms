@@ -1,6 +1,6 @@
 Name:           python-tokenizers
 Version:        0.20.3
-Release:        5%{?dist}
+Release:        6%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        ...
 
@@ -42,8 +42,6 @@ Summary:        %{summary}
 %cargo_prep
 # Remove locked versions
 rm bindings/python/Cargo.lock
-# Try using newer ndarray
-sed -i -e "s/ndarray = \"0.15\"/ndarray = \"0.16\"/" bindings/python/Cargo.toml
 
 
 %generate_buildrequires

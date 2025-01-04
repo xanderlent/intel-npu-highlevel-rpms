@@ -13,6 +13,8 @@
 /spm_precompiled-*.crate
 /unicode-normalization-alignments-*.crate
 /tokenizers-*.tar.gz
+/ndarray-0.15.6.crate
+/approx-0.4.0.crate
 /safetensors-*.tar.gz
 /pyroma-*.tar.gz
 /sphinx_book_theme-*.tar.gz
