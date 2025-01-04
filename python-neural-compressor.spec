@@ -21,6 +21,9 @@ BuildRequires:  python3-onnxruntime
 # Torch also seems to be an optional dependency, but we are building with the pt extra
 BuildRequires:  python3-torch
 BuildRequires:  python3-transformers
+# Some code uses nltk, and it is packaged so require it
+BuildRequires:	python3-nltk
+
 
 
 # Fill in the actual package description to submit package to Fedora
@@ -52,8 +55,50 @@ sed -i -e "s/opencv-python-headless/opencv/" requirements.txt
 # Remove all the files that should only ship if we enable extras
 # This makes the import check pass
 # keras_utils, tf_utils needs tensorflow, which would be the +tf extra
-rm -rf neural_compressor/adaptor/keras_utils
-rm -rf neural_compressor/adaptor/tf_utils
+rm -r neural_compressor/adaptor/keras_utils
+rm -r neural_compressor/adaptor/tf_utils
+rm -r neural_compressor/tensorflow/
+# needs xgboost
+rm neural_compressor/compression/hpo/search_algorithms.py
+rm neural_compressor/compression/hpo/__init__.py
+# needs bigcode_eval
+rm neural_compressor/evaluation/bigcode_eval/evaluator.py
+rm neural_compressor/evaluation/bigcode_eval/__init__.py
+# needs evaluate
+rm neural_compressor/evaluation/hf_eval/evaluator.py
+rm neural_compressor/evaluation/hf_eval/__init__.py
+# needs datasets
+rm neural_compressor/evaluation/hf_eval/hf_datasets/cnn_dailymail.py
+rm neural_compressor/transformers/quantization/utils.py
+rm neural_compressor/transformers/quantization/__init__.py
+rm neural_compressor/transformers/models/modeling_auto.py
+rm neural_compressor/transformers/models/__init__.py
+# needs lm_eval
+rm neural_compressor/evaluation/lm_eval/accuracy.py
+rm neural_compressor/evaluation/lm_eval/models/huggingface.py
+rm neural_compressor/evaluation/lm_eval/__init__.py
+rm neural_compressor/evaluation/lm_eval/models/__init__.py
+rm neural_compressor/transformers/__init__.py
+# needs habana_frameworks
+rm neural_compressor/torch/algorithms/fp8_quant/_quant_common/quant_config.py
+rm neural_compressor/torch/algorithms/fp8_quant/common.py
+rm neural_compressor/torch/algorithms/fp8_quant/__init__.py
+rm neural_compressor/torch/algorithms/fp8_quant/fp8_quant.py
+rm neural_compressor/torch/algorithms/fp8_quant/_core/measure.py
+rm neural_compressor/torch/algorithms/fp8_quant/prepare_quant/prepare_model.py
+rm neural_compressor/torch/algorithms/mixed_low_precision/custom_methods/gptq.py
+# needs ipex (intel_extensions_for_pytorch)
+rm neural_compressor/torch/algorithms/smooth_quant/utility.py
+rm neural_compressor/torch/algorithms/smooth_quant/__init__.py
+rm neural_compressor/torch/algorithms/smooth_quant/save_load.py
+rm neural_compressor/torch/algorithms/smooth_quant/smooth_quant.py
+rm neural_compressor/torch/algorithms/static_quant/static_quant.py
+rm neural_compressor/torch/algorithms/static_quant/__init__.py
+rm neural_compressor/torch/algorithms/static_quant/save_load.py
+# needs auto_round
+rm neural_compressor/torch/algorithms/weight_only/autoround.py
+# needs numba
+rm neural_compressor/torch/utils/bit_packer.py
 
 
 %generate_buildrequires
