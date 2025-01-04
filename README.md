@@ -66,7 +66,7 @@ dist-git is old.)
   - rust-plotters
     - rust-plotters-backend
     - rust-plotters-bitmap
-      - rust-gif (TODO: Needs ^0.12 but F41+ packages 0.13 and higher.)
+      - rust-gif0.12 (of these, the only one in this tree, built on Fedora 41+ only, note lack of check to break circular dep)
       - rust-plotters-backend
     - rust-plotters-svg
       - rust-plotters-backend
