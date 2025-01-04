@@ -1,6 +1,6 @@
 Name:           python-neural-compressor
 Version:        3.1.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Repository of Intel® Neural Compressor
 
@@ -15,6 +15,7 @@ Source:		https://raw.githubusercontent.com/intel/neural-compressor/a8cd9aa815ba7
 
 BuildArch:      noarch
 BuildRequires:  python3-devel
+BuildRequires:	git
 # ONNX seems to be an optional dependency, but we need it because we want the import checks to succeed, and some parts use ONNX
 BuildRequires:  python3-onnx
 BuildRequires:  python3-onnxruntime
