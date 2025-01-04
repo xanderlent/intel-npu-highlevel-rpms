@@ -1,6 +1,6 @@
 Name:           python-neural-compressor
 Version:        3.1.1
-Release:        1
+Release:        3%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Repository of Intel® Neural Compressor
 
@@ -44,9 +44,9 @@ Summary:        %{summary}
 
 %prep
 %autosetup -p1 -n neural_compressor-%{version}
-cp ../requirements.txt requirements.txt
-cp ../requirements_pt.txt requirements_pt.txt
-cp ../requirements_tf.txt requirements_tf.txt
+cp -a %{SOURCE1} requirements.txt
+cp -a %{SOURCE2} requirements_pt.txt
+cp -a %{SOURCE3} requirements_tf.txt
 sed -i -e "s/opencv-python-headless/opencv/" neural_compressor.egg-info/requires.txt
 sed -i -e "s/opencv-python-headless/opencv/" neural_compressor.egg-info/PKG-INFO
 sed -i -e "s/opencv-python-headless/opencv/" PKG-INFO
