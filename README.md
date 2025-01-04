@@ -66,7 +66,7 @@ dist-git is old.)
   - rust-plotters
     - rust-plotters-backend
     - rust-plotters-bitmap
-      - rust-gif0.12 (of these, the only one in this tree, built on Fedora 41+ only, note lack of check to break circular dep)
+      - rust-gif0.12 (of these, the only one in this tree, built on Fedora 41+ only)
       - rust-plotters-backend
     - rust-plotters-svg
       - rust-plotters-backend
@@ -91,7 +91,7 @@ dist-git is old.)
 - for ex, the esaxx-rs crate is Apache-2.0 licensed but it vendors an MIT licensed C++ library. Sigh.
 - tokenizers seems to have functions that download random models directly from the internet; these might already be *packaged* in Fedora in huggingface\_hub which IIUC Copr and others use for AI in log-detective? Is the random downloading potentially a problem? Should we be packaging models as well for Fedora? -> Probably a MUCH bigger discussion on the mailing list, frankly...
 - the criterion package tweaks a tight version bound on a tool to allow supposedly-compatible versions based on semver
-- the tokenizers package is also hacking the version of ndarray from 0.15 to 0.16 to make it compatible, eek
+- rust-gif0.12 needs to be built without check since that creates a circular dep on rust-criterion
 
 #### TODOs for building intel-npu-acceleration-library with +dev
 
