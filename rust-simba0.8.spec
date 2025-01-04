@@ -4,8 +4,8 @@
 
 %global crate simba
 
-Name:           rust-simba0.4
-Version:        0.4.0
+Name:           rust-simba0.8
+Version:        0.8.1
 Release:        1%{?dist}
 Summary:        SIMD algebra for Rust
 
@@ -57,6 +57,42 @@ This package contains library source intended for building other packages which
 use the "cordic" feature of the "%{crate}" crate.
 
 %files       -n %{name}+cordic-devel
+%ghost %{crate_instdir}/Cargo.toml
+
+%package     -n %{name}+cuda-devel
+Summary:        %{summary}
+BuildArch:      noarch
+
+%description -n %{name}+cuda-devel %{_description}
+
+This package contains library source intended for building other packages which
+use the "cuda" feature of the "%{crate}" crate.
+
+%files       -n %{name}+cuda-devel
+%ghost %{crate_instdir}/Cargo.toml
+
+%package     -n %{name}+cuda_std-devel
+Summary:        %{summary}
+BuildArch:      noarch
+
+%description -n %{name}+cuda_std-devel %{_description}
+
+This package contains library source intended for building other packages which
+use the "cuda_std" feature of the "%{crate}" crate.
+
+%files       -n %{name}+cuda_std-devel
+%ghost %{crate_instdir}/Cargo.toml
+
+%package     -n %{name}+cust_core-devel
+Summary:        %{summary}
+BuildArch:      noarch
+
+%description -n %{name}+cust_core-devel %{_description}
+
+This package contains library source intended for building other packages which
+use the "cust_core" feature of the "%{crate}" crate.
+
+%files       -n %{name}+cust_core-devel
 %ghost %{crate_instdir}/Cargo.toml
 
 %package     -n %{name}+decimal-devel
@@ -143,6 +179,30 @@ use the "rand" feature of the "%{crate}" crate.
 %files       -n %{name}+rand-devel
 %ghost %{crate_instdir}/Cargo.toml
 
+%package     -n %{name}+rkyv-devel
+Summary:        %{summary}
+BuildArch:      noarch
+
+%description -n %{name}+rkyv-devel %{_description}
+
+This package contains library source intended for building other packages which
+use the "rkyv" feature of the "%{crate}" crate.
+
+%files       -n %{name}+rkyv-devel
+%ghost %{crate_instdir}/Cargo.toml
+
+%package     -n %{name}+rkyv-serialize-devel
+Summary:        %{summary}
+BuildArch:      noarch
+
+%description -n %{name}+rkyv-serialize-devel %{_description}
+
+This package contains library source intended for building other packages which
+use the "rkyv-serialize" feature of the "%{crate}" crate.
+
+%files       -n %{name}+rkyv-serialize-devel
+%ghost %{crate_instdir}/Cargo.toml
+
 %package     -n %{name}+serde-devel
 Summary:        %{summary}
 BuildArch:      noarch
@@ -210,5 +270,5 @@ use the "wide" feature of the "%{crate}" crate.
 %endif
 
 %changelog
-* Sat Jan 04 2025 Alexander F. Lent <lx@xanderlent.com> - 0.4.0-1
+* Sat Jan 04 2025 Alexander F. Lent <lx@xanderlent.com> - 0.8.1-1
 - Initial package

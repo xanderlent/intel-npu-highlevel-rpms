@@ -38,7 +38,7 @@ I also unofficially maintain the driver packaging in [another project](https://g
       - rust-numpy
         - rust-nalgebra0.32 (this subtree built on Fedora 41+ only)
           - rust-criterion0.4 (uses most of the same deps, including rust-approx0.4)
-          - rust-simba0.4
+          - rust-simba0.8
       - rust-rayon-cond
       - rust-spm\_precompiled
       - rust-unicode-normalization-alignments
