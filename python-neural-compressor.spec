@@ -1,6 +1,6 @@
 Name:           python-neural-compressor
 Version:        3.1.1
-Release:        7%{?dist}
+Release:        8%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Repository of Intel® Neural Compressor
 
@@ -54,13 +54,15 @@ cp -a %{SOURCE3} requirements_tf.txt
 # that, per this PR https://github.com/intel/neural-compressor/pull/1684 is only
 # because of old versions of scikit-learn, so remove the restriction!
 sed -i -e "s/numpy < 2.0/numpy/" requirements.txt
-sed -i -e "s/numpy<2.0 ; python_version >= '3.12'/numpy/" requirements_pt.txt
+sed -i -e "s/numpy<2.0/numpy/" neural_compressor.egg-info/requires.txt
+sed -i -e "s/numpy<2.0/numpy/" neural_compressor.egg-info/PKG-INFO
+sed -i -e "s/numpy<2.0/numpy/" PKG-INFO
+sed -i -e "s/numpy<2.0/numpy/" requirements_pt.txt
 # We also need to substitute the PyPI name for a special reduced opencv with
 # the full opencv that is packaged by Fedora
 sed -i -e "s/opencv-python-headless/opencv/" neural_compressor.egg-info/requires.txt
 sed -i -e "s/opencv-python-headless/opencv/" neural_compressor.egg-info/PKG-INFO
 sed -i -e "s/opencv-python-headless/opencv/" PKG-INFO
-# This is the only substituion that matters, but do it in all the places above just in case
 sed -i -e "s/opencv-python-headless/opencv/" requirements.txt
 # Remove all the files that should only ship if we enable extras
 # This makes the import check pass
