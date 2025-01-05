@@ -1,6 +1,6 @@
 Name:           python-transformers
 Version:        4.46.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        State-of-the-art Machine Learning for JAX, PyTorch and TensorFlow
 
@@ -347,6 +347,11 @@ rm src/transformers/models/mt5/modeling_tf_mt5.py
 rm src/transformers/models/vit_mae/convert_vit_mae_to_pytorch.py
 # Seems to use an internal pytorch function?
 rm src/transformers/trainer_seq2seq.py
+# Fedora Rawhide (42+) packages huggingface-hub >= 0.26.0 which removes a function used in this file
+# Therefore, only on F42+, dump this file
+%if 0%{?fedora} >= 42
+rm src/transformers/models/deprecated/van/convert_van_to_pytorch.py
+%endif
 
 
 
