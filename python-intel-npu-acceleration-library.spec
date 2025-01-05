@@ -1,6 +1,6 @@
 Name:           python-intel-npu-acceleration-library
 Version:        1.4.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Intel® NPU Acceleration Library
 
@@ -10,9 +10,10 @@ License:        Apache-2.0
 URL:            https://github.com/intel/intel-npu-acceleration-library
 Source:         %{pypi_source intel_npu_acceleration_library}
 
-BuildRequires:  python3-devel
-BuildRequires:  gcc
-BuildRequires:  lsb_release
+BuildRequires:	python3-devel
+BuildRequires:	cmake
+BuildRequires:	gcc
+BuildRequires:	lsb_release
 
 
 # Fill in the actual package description to submit package to Fedora
