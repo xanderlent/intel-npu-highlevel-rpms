@@ -82,7 +82,12 @@ dist-git is old.)
 #### Main TODOs
 
 - The build process for intel-npu-acceleration-library downloads a binary OpenVINO distribution and both bundles and builds against that. Yikes, Intel!
-  - Even worse, their OS detection doesn't handle all the prebuilt distros...
+  - Even worse, their OS detection doesn't handle all the prebuilt distros... Oh because only some have NPU support. Sigh.
+  - I might package OpenVINO in it's own COPR or repo, or even the main repo since it can integrate tightly with the driver.
+- Apparently Fedora 42+ isn't yet packaging numpy v1, so builds of python-neural-compressor are failing in rawhide?
+  - Not sure if this is another temporary rawhide fail or something permanent, since other numpy-based packages built in the past?
+  - maybe those have multiple paths for v1/v2 though
+  - seems like the numpy v2 transition is generally a big deal
 - a lot of packages need their licenses fixed up to be SPDX
 - most of my packages don't correctly annotate licenses, docs, test data, etc right now
 - I may need to manually specify deps on packages outside of the python ones?
