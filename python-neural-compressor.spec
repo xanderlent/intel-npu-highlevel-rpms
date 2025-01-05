@@ -1,6 +1,6 @@
 Name:           python-neural-compressor
 Version:        3.1.1
-Release:        5%{?dist}
+Release:        6%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Repository of Intel® Neural Compressor
 
@@ -50,6 +50,12 @@ Summary:        %{summary}
 cp -a %{SOURCE1} requirements.txt
 cp -a %{SOURCE2} requirements_pt.txt
 cp -a %{SOURCE3} requirements_tf.txt
+# Fedora 41+ packages numpy 2.x.y and requirements.txt specifies numpy < 2, but
+# that, per this PR https://github.com/intel/neural-compressor/pull/1684 is only
+# because of old versions of scikit-learn, so remove the restriction!
+sed -i -e "s/numpy < 2.0/numpy/" requirements.txt
+# We also need to substitute the PyPI name for a special reduced opencv with
+# the full opencv that is packaged by Fedora
 sed -i -e "s/opencv-python-headless/opencv/" neural_compressor.egg-info/requires.txt
 sed -i -e "s/opencv-python-headless/opencv/" neural_compressor.egg-info/PKG-INFO
 sed -i -e "s/opencv-python-headless/opencv/" PKG-INFO
@@ -75,12 +81,14 @@ rm neural_compressor/evaluation/hf_eval/hf_datasets/cnn_dailymail.py
 rm neural_compressor/transformers/quantization/utils.py
 rm neural_compressor/transformers/quantization/__init__.py
 rm neural_compressor/transformers/models/modeling_auto.py
+# TODO: I'm worries that some of these removals, like this one, break the package?
 rm neural_compressor/transformers/models/__init__.py
 # needs lm_eval
 rm neural_compressor/evaluation/lm_eval/accuracy.py
 rm neural_compressor/evaluation/lm_eval/models/huggingface.py
 rm neural_compressor/evaluation/lm_eval/__init__.py
 rm neural_compressor/evaluation/lm_eval/models/__init__.py
+# TODO: I'm worries that some of these removals, like this one, break the package?
 rm neural_compressor/transformers/__init__.py
 # needs habana_frameworks
 rm neural_compressor/torch/algorithms/fp8_quant/_quant_common/quant_config.py
