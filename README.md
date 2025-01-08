@@ -1,6 +1,10 @@
 # RPM Packages of software for the Intel NPU
 
-The goal of this repository is to provide Fedora packages for software that runs on the Intel NPU at a higher level than the driver. You can find binary packages built from this repository in [my xanderlent/intel-npu-highlevel Copr](https://copr.fedorainfracloud.org/coprs/xanderlent/intel-npu-highlevel/). Hopefully, with effort and care, these packages will eventually find their way upstream, into Fedora proper. (For now, the Fedora Review step has been disabled in copr to improve build times.)
+The goal of this repository is to provide Fedora packages for software that runs on the Intel NPU at a higher level than the driver. You can find binary packages built from this repository in [my xanderlent/intel-npu-highlevel Copr](https://copr.fedorainfracloud.org/coprs/xanderlent/intel-npu-highlevel/).
+
+Because this repo happens to provide many AI/ML packages not yet upstream in Fedora, I have also enabled aarch64 builds where possible. (I am not adverse to enabling ppc64le or s390x builds; If you want me to enable said builds, please create an Issue requesting them.)
+
+Hopefully, with effort and care, these packages will eventually find their way upstream, into Fedora proper. (For now, the Fedora Review step has been disabled in copr to improve build times.) Perhaps the place to start would be with the Fedora AI/ML SIG?
 
 Right now, most of these packages are originally for Python, so they were generated with the [`pyp2spec`](https://github.com/befeleme/pyp2spec) tool. I'm not completely sure how to use it, so I might be missing some steps, but it definitely does not seem as automated as I would like in terms of converting Python packages to RPMs... On the other hand, [rust2rpm](https://pagure.io/fedora-rust/rust2rpm) was a breeze to use. (`rust2rpm --no-rpmautospec -t fedora --compat crate@version`, leave out `--compat` for non-versioned packages.)
 
@@ -15,18 +19,18 @@ I also unofficially maintain the driver packaging in [another project](https://g
 	- A Python library for running various AI/ML workloads on the Intel NPU. They also provide some [docs](https://intel.github.io/intel-npu-acceleration-library/index.html).
 
 ### Packaged software and dependencies:
-- intel-npu-acceleration-library (TODO: The only remaining TODO on F40!)
-  - neural-compressor (+pt)
-    - accelerate
-      - safetensors (+numpy,+torch)
-    - opencv-python-headless (substituted with packaged opencv)
-    - pycocotools
-      - oldest-supported-numpy (substituted with packaged numpy)
-    - transformers (see below)
-  - transformers (+accelerate,+ftfy,+serving,+sklearn,+tokenizers,+torch,+torch-vision,+vision; future work for +onnx{,runtime},+modelcreation)
-    - accelerate (see above)
-      - safetensors (see above)
-    - tokenizers (+docs)
+- python-intel-npu-acceleration-library (TODO: The only remaining TODO!)
+  - python-neural-compressor (+pt)
+    - python-accelerate
+      - python-safetensors (+numpy,+torch)
+    - (opencv-python-headlesswas substituted with packaged opencv)
+    - python-pycocotools
+      - (oldest-supported-numpy was substituted with packaged numpy)
+    - python-transformers (see below)
+  - python-transformers (+accelerate,+ftfy,+serving,+sklearn,+tokenizers,+torch,+torch-vision,+vision; future work for +onnx{,runtime},+modelcreation)
+    - python-accelerate (see above)
+      - python-safetensors (see above)
+    - python-tokenizers (+docs)
       - rust-esaxx-rs
         - rust-criterion (see notes for F41+)
       - rust-macro\_rules\_attribute
@@ -42,15 +46,15 @@ I also unofficially maintain the driver packaging in [another project](https://g
       - rust-rayon-cond
       - rust-spm\_precompiled
       - rust-unicode-normalization-alignments
-    - safetensors (see above)
-  - pyroma (only required for +dev on intel-npu-acceleration-library)
-  - sphinx-book-theme (only required for +dev on intel-npu-acceleration-library)
-    - ablog
-      - sphinx-automodapi
-    - sphinx-examples
-    - sphinx-thebe
-    - sphinx-togglebutton
-    - sphinxcontrib-youtube
+    - python-safetensors (see above)
+  - python-pyroma (only required for +dev on intel-npu-acceleration-library)
+  - python-sphinx-book-theme (only required for +dev on intel-npu-acceleration-library)
+    - python-ablog
+      - python-sphinx-automodapi
+    - python-sphinx-examples
+    - python-sphinx-thebe
+    - python-sphinx-togglebutton
+    - python-sphinxcontrib-youtube
 
 ### Revived orphaned deps of rust-criterion from F40
 
