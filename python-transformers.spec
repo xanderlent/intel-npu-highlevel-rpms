@@ -1,6 +1,6 @@
 Name:           python-transformers
 Version:        4.46.3
-Release:        3%{?dist}
+Release:        4%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        State-of-the-art Machine Learning for JAX, PyTorch and TensorFlow
 
@@ -27,7 +27,7 @@ Summary:        %{summary}
 
 # For official Fedora packages, review which extras should be actually packaged
 # See: https://docs.fedoraproject.org/en-US/packaging-guidelines/Python/#Extras
-%pyproject_extras_subpkg -n python3-transformers accelerate,ftfy,serving,sklearn,tokenizers,torch,torch-vision,vision
+%pyproject_extras_subpkg -n python3-transformers accelerate,ftfy,sentencepiece,serving,sklearn,tokenizers,torch,torch-vision,vision
 
 
 %prep
@@ -181,45 +181,6 @@ rm src/transformers/models/wav2vec2/modeling_flax_wav2vec2.py
 rm src/transformers/models/whisper/modeling_flax_whisper.py
 rm src/transformers/models/xglm/modeling_flax_xglm.py
 rm src/transformers/models/xlm_roberta/modeling_flax_xlm_roberta.py
-# These files needs sentencepiece, which is related to an extra we don't package.
-rm src/transformers/models/albert/tokenization_albert.py
-rm src/transformers/models/barthez/tokenization_barthez.py
-rm src/transformers/models/bartpho/tokenization_bartpho.py
-rm src/transformers/models/bert_generation/tokenization_bert_generation.py
-rm src/transformers/models/big_bird/tokenization_big_bird.py
-rm src/transformers/models/camembert/tokenization_camembert.py
-rm src/transformers/models/gemma/modular_gemma.py
-rm src/transformers/models/moshi/convert_moshi_transformers.py
-# these files using sentencepiece were found with grep and are manually unverified
-rm src/transformers/models/code_llama/tokenization_code_llama.py
-rm src/transformers/models/cpm/tokenization_cpm.py
-rm src/transformers/models/deberta_v2/tokenization_deberta_v2.py
-rm src/transformers/models/deprecated/ernie_m/tokenization_ernie_m.py
-rm src/transformers/models/deprecated/xlm_prophetnet/tokenization_xlm_prophetnet.py
-rm src/transformers/models/fnet/tokenization_fnet.py
-rm src/transformers/models/gemma/tokenization_gemma.py
-rm src/transformers/models/gpt_sw3/tokenization_gpt_sw3.py
-rm src/transformers/models/layoutxlm/tokenization_layoutxlm.py
-rm src/transformers/models/llama/tokenization_llama.py
-rm src/transformers/models/m2m_100/tokenization_m2m_100.py
-rm src/transformers/models/marian/tokenization_marian.py
-rm src/transformers/models/mbart50/tokenization_mbart50.py
-rm src/transformers/models/mbart/tokenization_mbart.py
-rm src/transformers/models/mluke/tokenization_mluke.py
-rm src/transformers/models/nllb/tokenization_nllb.py
-rm src/transformers/models/pegasus/tokenization_pegasus.py
-rm src/transformers/models/plbart/tokenization_plbart.py
-rm src/transformers/models/reformer/tokenization_reformer.py
-rm src/transformers/models/rembert/tokenization_rembert.py
-rm src/transformers/models/seamless_m4t/tokenization_seamless_m4t.py
-rm src/transformers/models/siglip/tokenization_siglip.py
-rm src/transformers/models/speecht5/tokenization_speecht5.py
-rm src/transformers/models/speech_to_text/tokenization_speech_to_text.py
-rm src/transformers/models/t5/tokenization_t5.py
-rm src/transformers/models/udop/tokenization_udop.py
-rm src/transformers/models/xglm/tokenization_xglm.py
-rm src/transformers/models/xlm_roberta/tokenization_xlm_roberta.py
-rm src/transformers/models/xlnet/tokenization_xlnet.py
 # The falcom_mamba kernel needs einops
 # These probably belong to one of the extras we don't package
 rm -r src/transformers/kernels/falcon_mamba
@@ -357,7 +318,7 @@ rm src/transformers/models/deprecated/van/convert_van_to_pytorch.py
 
 %generate_buildrequires
 # Keep only those extras which you actually want to package or use during tests
-%pyproject_buildrequires -x accelerate,ftfy,serving,sklearn,tokenizers,torch,torch-vision,vision
+%pyproject_buildrequires -x accelerate,ftfy,sentencepiece,serving,sklearn,tokenizers,torch,torch-vision,vision
 
 
 %build

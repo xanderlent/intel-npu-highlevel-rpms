@@ -27,7 +27,7 @@ I also unofficially maintain the driver packaging in [another project](https://g
     - python-pycocotools
       - (oldest-supported-numpy was substituted with packaged numpy)
     - python-transformers (see below)
-  - python-transformers (+accelerate,+ftfy,+serving,+sklearn,+tokenizers,+torch,+torch-vision,+vision; future work for +onnx{,runtime},+modelcreation)
+  - python-transformers (+accelerate,+ftfy,+sentencepiece,+serving,+sklearn,+tokenizers,+torch,+torch-vision,+vision; future work for +onnx{,runtime},+modelcreation)
     - python-accelerate (see above)
       - python-safetensors (see above)
     - python-tokenizers (+docs)
