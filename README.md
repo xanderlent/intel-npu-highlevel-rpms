@@ -2,7 +2,7 @@
 
 The goal of this repository is to provide Fedora packages for software that runs on the Intel NPU at a higher level than the driver. You can find binary packages built from this repository in [my xanderlent/intel-npu-highlevel Copr](https://copr.fedorainfracloud.org/coprs/xanderlent/intel-npu-highlevel/).
 
-Because this repo happens to provide many AI/ML packages not yet upstream in Fedora, I have also enabled aarch64 builds where possible. (I am not adverse to enabling ppc64le or s390x builds; If you want me to enable said builds, please create an Issue requesting them.)
+Because this repo happens to provide many AI/ML packages not yet upstream in Fedora, I have also enabled aarch64 builds where possible. (I am not adverse to enabling ppc64le or s390x builds, or even 32-bit compatability builds; If you want me to enable said builds, please create an Issue requesting them.)
 
 Hopefully, with effort and care, these packages will eventually find their way upstream, into Fedora proper. (For now, the Fedora Review step has been disabled in copr to improve build times.) Perhaps the place to start would be with the Fedora AI/ML SIG?
 
