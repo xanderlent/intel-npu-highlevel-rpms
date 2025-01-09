@@ -1,6 +1,6 @@
 Name:           python-transformers
 Version:        4.46.3
-Release:        5%{?dist}
+Release:        4%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        State-of-the-art Machine Learning for JAX, PyTorch and TensorFlow
 
@@ -313,9 +313,6 @@ rm src/transformers/trainer_seq2seq.py
 %if 0%{?fedora} >= 42
 rm src/transformers/models/deprecated/van/convert_van_to_pytorch.py
 %endif
-# This module imports something we deleted, and it is itself imported as part of
-# running transformers-cli (which just imports all the model packages), so rm it
-rm src/transformers/models/mt5/__init__.py
 
 
 
