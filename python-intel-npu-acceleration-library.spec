@@ -1,6 +1,6 @@
 Name:           python-intel-npu-acceleration-library
 Version:        1.4.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Intel® NPU Acceleration Library
 
@@ -16,6 +16,7 @@ BuildRequires:	cmake
 BuildRequires:	gcc
 BuildRequires:	lsb_release
 BuildRequires:	dos2unix
+BuildRequires:	g++
 
 
 # Fill in the actual package description to submit package to Fedora
@@ -29,10 +30,6 @@ Summary:        %{summary}
 
 %description -n python3-intel-npu-acceleration-library %_description
 
-# For official Fedora packages, review which extras should be actually packaged
-# See: https://docs.fedoraproject.org/en-US/packaging-guidelines/Python/#Extras
-%pyproject_extras_subpkg -n python3-intel-npu-acceleration-library dev
-
 
 %prep
 %autosetup -N -n intel_npu_acceleration_library-%{version}
@@ -43,8 +40,7 @@ dos2unix CMakeLists.txt
 
 
 %generate_buildrequires
-# Keep only those extras which you actually want to package or use during tests
-%pyproject_buildrequires -x dev
+%pyproject_buildrequires
 
 
 %build

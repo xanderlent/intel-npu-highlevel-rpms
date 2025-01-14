@@ -47,14 +47,6 @@ I also unofficially maintain the driver packaging in [another project](https://g
       - rust-spm\_precompiled
       - rust-unicode-normalization-alignments
     - python-safetensors (see above)
-  - python-pyroma (only required for +dev on intel-npu-acceleration-library)
-  - python-sphinx-book-theme (only required for +dev on intel-npu-acceleration-library)
-    - python-ablog
-      - python-sphinx-automodapi
-    - python-sphinx-examples
-    - python-sphinx-thebe
-    - python-sphinx-togglebutton
-    - python-sphinxcontrib-youtube
 
 ### Revived orphaned deps of rust-criterion from F40
 
@@ -109,19 +101,6 @@ dist-git is old.)
 - the criterion package tweaks a tight version bound on a tool to allow supposedly-compatible versions based on semver
 - rust-gif0.12 needs to be built without check since that creates a circular dep on rust-criterion
 - did deleting things in neural-compressor (esp.) or acclerate or transformers etc. damage the package rather than just stripping unused stuff?
-
-#### TODOs for building intel-npu-acceleration-library with +dev
-
-- pyroma and zest.releaser have a circular dependency, if pyroma's test extra is built, so exclude it in the conf file
-- ablog >0.11.8 requires deps that are too new!
-- sphinx-automodapi, old version needed because newer versions require newer sphinx
-- sphinx-automodapi needs the archive name modified in the spec file from _ to -
-- sphinx-examples has the URL issue with PyPI again...
-- sphinx-examples with extra sphinx has a circular dependency on sphinx-book-theme
-- sphinx-examples needs the archive name modified in the spec file from _ to -
-- sphinx-thebe with extra sphinx has a circular dependency on sphinx-book-theme
-- sphinx-togglebutton with extra sphinx has a circular dep on sphinx-book-theme
-- sphinx-book-theme seems to download NPM packages during the build... really?
 
 ## Candidates for evaluation for future packaging
 
