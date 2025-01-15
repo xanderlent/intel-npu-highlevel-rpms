@@ -19,7 +19,8 @@ I also unofficially maintain the driver packaging in [another project](https://g
 	- A Python library for running various AI/ML workloads on the Intel NPU. They also provide some [docs](https://intel.github.io/intel-npu-acceleration-library/index.html).
 
 ### Packaged software and dependencies:
-- python-intel-npu-acceleration-library (TODO: The only remaining TODO!)
+- python-intel-npu-acceleration-library
+  - openvino (only for F40/F41, see below, packaged starting in F42+)
   - python-neural-compressor (+pt)
     - python-accelerate
       - python-safetensors (+numpy,+torch)
@@ -47,6 +48,12 @@ I also unofficially maintain the driver packaging in [another project](https://g
       - rust-spm\_precompiled
       - rust-unicode-normalization-alignments
     - python-safetensors (see above)
+
+### A note on the openvino package
+
+Fedora 42+ (which is currently rawhide) packages OpenVINO 2024.5.0 which is newer than the bundled OpenVINO 2024.4.4 in intel-npu-acceleration-library 1.4.0, but seems to work OK, except that the NPU code is missing from the library.
+
+I have manually enabled building openvino from the rawhide package source for F40 and F41 in this copr to fill the gap. I might later try to modify it to build the NPU components. Right now, it's also x86\_64-only, so no aarch64 builds will be provided.
 
 ### Revived orphaned deps of rust-criterion from F40
 
@@ -77,9 +84,14 @@ dist-git is old.)
 
 #### Main TODOs
 
-- The build process for intel-npu-acceleration-library downloads a binary OpenVINO distribution and both bundles and builds against that. Yikes, Intel!
+- The unmodified build process for intel-npu-acceleration-library downloads a binary OpenVINO distribution.
+  - It both builds and bundles against that, requiring various changes.
+  - Ultimately their weird, non-standard module adding to Python means I have to disable the import test cuz it tries to import the
+    native library object as a python module. Maybe that needs to move to lib, lib64, or libexec for the package?
   - Even worse, their OS detection doesn't handle all the prebuilt distros... Oh because only some have NPU support. Sigh.
-  - I might package OpenVINO in it's own COPR or repo, or even the main repo since it can integrate tightly with the driver.
+  - Should probably suggest USE\_SYSTEM\_OPENVINO or something as a fallback upstream.
+- On OpenVINO, the good news is that Fedora 42+ packages OpenVINO. The bad news is it doesn't yet come with the NPU components.
+  - This means that I can build intel-npu-acceleration-library but it can't use the NPU?
 - Apparently Fedora 42+ isn't yet packaging numpy v1, so builds of python-neural-compressor are failing in rawhide?
   - Not sure if this is another temporary rawhide fail or something permanent, since other numpy-based packages built in the past?
   - maybe those have multiple paths for v1/v2 though
@@ -106,7 +118,7 @@ dist-git is old.)
 
 Feel free to file bugs to suggest additional candidates.
 
-- [OpenVINO](https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/overview.html) itself?
+- [OpenVINO](https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/overview.html) - Is actually packaged in Fedora 42+, hooray! But not with all the features we need, so *sad face*.
 - [OpenVINO AI Plugins for GIMP](https://github.com/intel/openvino-ai-plugins-gimp)
 - [OpenVINO AI Plugins for Audacity](https://github.com/intel/openvino-plugins-ai-audacity)
 - [Intel LLM Library for PyTorch](https://github.com/intel-analytics/ipex-llm)
