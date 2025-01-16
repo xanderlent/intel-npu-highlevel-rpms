@@ -21,12 +21,13 @@ BuildRequires:	lsb_release
 BuildRequires:	dos2unix
 BuildRequires:	g++
 BuildRequires:  openvino-devel
-# TODO: Is the following correct?
-Requires:	openvino
-Requires:	python3-openvino
 # For import tests
 BuildRequires:	openvino
 BuildRequires:	python3-openvino
+# TODO: Is the following correct?
+Requires:	openvino
+# TODO: Why isn't this being automatically installed as a depenedency?
+Requires:	python3-openvino
 
 
 # Fill in the actual package description to submit package to Fedora
