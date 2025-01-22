@@ -1,7 +1,7 @@
 From 4359254b754c808e213cf58f95d45fb11b26d801 Mon Sep 17 00:00:00 2001
 From: "Alexander F. Lent" <lx@xanderlent.com>
 Date: Tue, 14 Jan 2025 18:25:31 -0500
-Subject: [PATCH 2/3] Always use system OpenVINO rather than bundled one
+Subject: [PATCH 2/4] Always use system OpenVINO rather than bundled one
 
 (Our modified version for distro packaging doesn't bundle OpenVINO
 binary libraries or Python code. Those should come from the OS.)

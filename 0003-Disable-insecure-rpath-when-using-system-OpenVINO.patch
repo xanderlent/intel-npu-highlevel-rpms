@@ -1,7 +1,7 @@
 From 3387859452604035be542a830414c6fef1d38544 Mon Sep 17 00:00:00 2001
 From: "Alexander F. Lent" <lx@xanderlent.com>
 Date: Tue, 14 Jan 2025 19:18:02 -0500
-Subject: [PATCH 3/3] Disable insecure rpath when using system OpenVINO
+Subject: [PATCH 3/4] Disable insecure rpath when using system OpenVINO
 
 Signed-off-by: Alexander F. Lent <lx@xanderlent.com>
 ---

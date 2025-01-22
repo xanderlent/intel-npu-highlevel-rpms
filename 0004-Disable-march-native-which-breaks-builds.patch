@@ -1,0 +1,42 @@
+From f6491f210f271acc1940fc0981acb6c158f0b4c0 Mon Sep 17 00:00:00 2001
+From: "Alexander F. Lent" <lx@xanderlent.com>
+Date: Tue, 21 Jan 2025 21:44:21 -0500
+Subject: [PATCH 4/4] Disable -march=native which breaks builds
+
+Replace it with x86-64-v3 which all users of this CPU support.
+
+When copr built this with a big server, it built it with AVX-512.
+Sadly, Intel does not currently support AVX-512 on its consumer
+platforms with NPUs.
+This would lead to SIGILLs when attempting to test this on hardware.
+
+(It's not great since Fedora packages should support all arches, but
+this package uses AVX2 intriniscs and I'd like to get it at least
+building before doing deeper fixes for older platforms that don't
+even have an Intel NPU anyway.)
+
+Signed-off-by: Alexander F. Lent <lx@xanderlent.com>
+---
+ CMakeLists.txt | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 9d0de75..8a02b3a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -10,10 +10,11 @@ project(intel_npu_acceleration_library)
+ 
+ set(CMAKE_CXX_STANDARD 14 CACHE STRING "C++ standard to conform to")
+ 
++# TODO: Align build options with Fedora packaging guidelines
+ if(CMAKE_CXX_COMPILER_ID MATCHES "Clang" OR CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+     # lots of warnings and all warnings as errors
+     message(STATUS "Setting GCC/Clang specific flags for the entire build")
+-    add_compile_options(-Wall -Wextra -Werror -pedantic -Wdouble-promotion -Wfloat-conversion -march=native)
++    add_compile_options(-Wall -Wextra -Werror -pedantic -Wdouble-promotion -Wfloat-conversion -march=x86-64-v3)
+     set(CMAKE_CXX_FLAGS_DEBUG "-g")
+     set(CMAKE_CXX_FLAGS_RELEASE "-O3")
+ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+-- 
+2.45.2
+

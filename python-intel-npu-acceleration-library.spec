@@ -1,6 +1,6 @@
 Name:           python-intel-npu-acceleration-library
 Version:        1.4.0
-Release:        5%{?dist}
+Release:        6%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Intel® NPU Acceleration Library
 
@@ -12,6 +12,7 @@ Source:         %{pypi_source intel_npu_acceleration_library}
 Patch:		0001-Disable-download-copy-of-OpenVINO-distribution.patch
 Patch:		0002-Always-use-system-OpenVINO-rather-than-bundled-one.patch
 Patch:		0003-Disable-insecure-rpath-when-using-system-OpenVINO.patch
+Patch:		0004-Disable-march-native-which-breaks-builds.patch
 
 
 BuildRequires:	python3-devel
