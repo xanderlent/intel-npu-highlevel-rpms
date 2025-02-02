@@ -1,10 +1,20 @@
-# RPM Packages of software for the Intel NPU
+# High-Level Software that uses the Intel AI Boost NPU
 
-The goal of this repository is to provide Fedora packages for software that runs on the Intel NPU at a higher level than the driver. You can find binary packages built from this repository in [my xanderlent/intel-npu-highlevel Copr](https://copr.fedorainfracloud.org/coprs/xanderlent/intel-npu-highlevel/).
+The goal of this repository is to provide Fedora packages for software that runs on the Intel NPU at a higher level than the driver.
+
+You can find binary packages built from this repository in [my xanderlent/intel-npu-highlevel Copr](https://copr.fedorainfracloud.org/coprs/xanderlent/intel-npu-highlevel/).
+
+## Installation Instructions
+
+- Enable the copr.
+- Install the `python3-intel-npu-acceleration-library` package.
+- Read [Intel's docs](https://intel.github.io/intel-npu-acceleration-library/) to get examples and learn how to use the package to run LLMs and other workloads on your NPU.
+
+## More about the packages
+
+Hopefully, with effort and care, these packages will eventually find their way upstream, into Fedora proper. (For now, the Fedora Review step has been disabled in copr because it drastically improves build times on small packages like these.) As of late January 2025, I am working within the Fedora AI/ML SIG to help get this code upstream.
 
 Because this repo happens to provide many AI/ML packages not yet upstream in Fedora, I have also enabled aarch64 builds where possible. (I am not adverse to enabling ppc64le or s390x builds, or even 32-bit compatability builds; If you want me to enable said builds, please create an Issue requesting them.)
-
-Hopefully, with effort and care, these packages will eventually find their way upstream, into Fedora proper. (For now, the Fedora Review step has been disabled in copr to improve build times.) Perhaps the place to start would be with the Fedora AI/ML SIG?
 
 Right now, most of these packages are originally for Python, so they were generated with the [`pyp2spec`](https://github.com/befeleme/pyp2spec) tool. I'm not completely sure how to use it, so I might be missing some steps, but it definitely does not seem as automated as I would like in terms of converting Python packages to RPMs... On the other hand, [rust2rpm](https://pagure.io/fedora-rust/rust2rpm) was a breeze to use. (`rust2rpm --no-rpmautospec -t fedora --compat crate@version`, leave out `--compat` for non-versioned packages.)
 
@@ -12,15 +22,25 @@ Right now, most of these packages are originally for Python, so they were genera
 
 If you want to use this software with the Intel NPU, you will need to install the [driver](https://github.com/intel/linux-npu-driver) and have suitable hardware present in your system, which at present is an "Intel Core Ultra"-branded product from Intel's Meteor Lake, Lunar Lake, or Arrow Lake product lines.
 
-I also unofficially maintain the driver packaging in [another project](https://github.com/xanderlent/intel-npu-driver-rpm), with binaries available in [my xanderlent/intel-npu-driver Copr](https://copr.fedorainfracloud.org/coprs/xanderlent/intel-npu-driver/). Follow the directions there
+I also unofficially maintain the driver packaging in [another project](https://github.com/xanderlent/intel-npu-driver-rpm), with binaries available in [my xanderlent/intel-npu-driver Copr](https://copr.fedorainfracloud.org/coprs/xanderlent/intel-npu-driver/). Follow the directions there.
+
 ## List of software packaged
 
 - [Intel NPU Acceleration Library](https://github.com/intel/intel-npu-acceleration-library)
 	- A Python library for running various AI/ML workloads on the Intel NPU. They also provide some [docs](https://intel.github.io/intel-npu-acceleration-library/index.html).
 
+## Support Status
+
+My primary goal is supporting the above list of software packaged. All the deps have best-effort support for now, so that I can focus on making the NPU-related packages work.
+
+- Fedora 39 and below are not supported, were never supported in the past, and likely will never be supported in the future.
+- Fedora 40 is partially supported: All the deps except OpenVINO build easily, so the headline package is missing. I'll need to figure out what else to backport from f41 to make it build.
+- Fedora 41 is supported. (OpenVINO is built as a backport from Fedora rawhide. Some dropped deps are forward-ported from Fedora 40.)
+- Fedora rawhide is partially suppported, because 
+
 ### Packaged software and dependencies:
-- python-intel-npu-acceleration-library
-  - openvino (only for F40/F41, see below, packaged starting in F42+)
+- python-intel-npu-acceleration-library (docs are not packaged due to additional deps)
+  - openvino (only for F40/F41, see below, packaged with the NPU plugin even, starting in F42+)
   - python-neural-compressor (+pt)
     - python-accelerate
       - python-safetensors (+numpy,+torch)
@@ -49,11 +69,11 @@ I also unofficially maintain the driver packaging in [another project](https://g
       - rust-unicode-normalization-alignments
     - python-safetensors (see above)
 
-### A note on the openvino package
+### Backportin OpenVINO from rawhide/Fedora 42
 
-Fedora 42+ (which is currently rawhide) packages OpenVINO 2024.5.0 which is newer than the bundled OpenVINO 2024.4.4 in intel-npu-acceleration-library 1.4.0, but seems to work OK, except that the NPU code is missing from the library.
+Fedora 42+ (which is currently rawhide) packages OpenVINO 2024.5.0 which is newer than the bundled OpenVINO 2024.4.4 in intel-npu-acceleration-library 1.4.0, but seems to work OK. The NPU plugin spews warnings but is functional, if and only if the compiler-in-driver component is present.
 
-I have manually enabled building openvino from the rawhide package source for F40 and F41 in this copr to fill the gap. I might later try to modify it to build the NPU components. Right now, it's also x86\_64-only, so no aarch64 builds will be provided.
+I have manually enabled building openvino from the rawhide package source for F40 and F41 in this copr to fill the gap.
 
 ### Revived orphaned deps of rust-criterion from F40
 
