@@ -34,9 +34,10 @@ I also unofficially maintain the driver packaging in [another project](https://g
 My primary goal is supporting the above list of software packaged. All the deps have best-effort support for now, so that I can focus on making the NPU-related packages work.
 
 - Fedora 39 and below are not supported, were never supported in the past, and likely will never be supported in the future.
-- Fedora 40 is partially supported: All the deps except OpenVINO build easily, so the headline package is missing. I'll need to figure out what else to backport from f41 to make it build.
-- Fedora 41 is supported. (OpenVINO is built as a backport from Fedora rawhide. Some dropped deps are forward-ported from Fedora 40.)
-- Fedora rawhide is partially suppported, because 
+- Fedora 40 is supported. (OpenVINO is build as a backport from Fedora 42. My intel-npu-driver copr is enabled for the build process since it backports the latest OneAPI Level Zero headers from Fedora 41, which are needed to build OpenVINO's NPU plugin.)
+- Fedora 41 is supported. (OpenVINO is built as a backport from Fedora 42. Some dropped deps are forward-ported from Fedora 40.)
+- Fedora 42 is supported.
+- Fedora rawhide is partially suppported, because sometimes it breaks and I can't immediately fix it.
 
 ### Packaged software and dependencies:
 - python-intel-npu-acceleration-library (docs are not packaged due to additional deps)
@@ -69,11 +70,11 @@ My primary goal is supporting the above list of software packaged. All the deps 
       - rust-unicode-normalization-alignments
     - python-safetensors (see above)
 
-### Backportin OpenVINO from rawhide/Fedora 42
+### Backportin OpenVINO from Fedora 42
 
-Fedora 42+ (which is currently rawhide) packages OpenVINO 2024.5.0 which is newer than the bundled OpenVINO 2024.4.4 in intel-npu-acceleration-library 1.4.0, but seems to work OK. The NPU plugin spews warnings but is functional, if and only if the compiler-in-driver component is present.
+Fedora 42+ packages OpenVINO 2024.5.0 which is newer than the bundled OpenVINO 2024.4.4 in intel-npu-acceleration-library 1.4.0, but seems to work OK. The NPU plugin spews warnings but is functional, if and only if the compiler-in-driver component is present.
 
-I have manually enabled building openvino from the rawhide package source for F40 and F41 in this copr to fill the gap.
+I have manually enabled building openvino from the F42 package source for F40 and F41 in this copr to fill the gap. Also, because the NPU plugin sources need a newer version of OneAPI Level Zero headers, inlcude my intel-npu-driver copr to allow it to be used in the build process.
 
 ### Revived orphaned deps of rust-criterion from F40
 
