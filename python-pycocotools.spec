@@ -1,11 +1,13 @@
 Name:           python-pycocotools
-Version:        2.0.7
-Release:        2%{?dist}
+Version:        2.0.8
+Release:        1%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Official APIs for the MS-COCO dataset
 
 # Check if the automatically generated License and its spelling is correct for Fedora
 # https://docs.fedoraproject.org/en-US/packaging-guidelines/LicensingGuidelines/
+# BSD-2-Clause-Views covers most of the code as the main license.txt file
+# common/gason.{cpp,h} are a vendored dependency, and is licensed MIT
 License:        BSD-2-Clause-Views AND MIT
 URL:            https://github.com/ppwwyyxx/cocoapi
 Source:         %{pypi_source pycocotools}
@@ -28,8 +30,8 @@ Summary:        %{summary}
 
 %prep
 %autosetup -p1 -n pycocotools-%{version}
-# Use sed to swap out the oldest-supported-numpy magic package for numpy
-sed -i "s/oldest-supported-//" pyproject.toml
+# Use sed to drop the numpy 2 requirement, it's backwards-compatible
+sed -i "s/numpy>=2.0.0rc1/numpy/" pyproject.toml
 
 
 %generate_buildrequires
