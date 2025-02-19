@@ -1,6 +1,6 @@
 Name:           python-accelerate
-Version:        1.2.1
-Release:        2%{?dist}
+Version:        1.4.0
+Release:        1%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Accelerate
 
@@ -45,7 +45,6 @@ rm src/accelerate/utils/rich.py
 %build
 %pyproject_wheel
 
-
 %install
 %pyproject_install
 # Add top-level Python module names here as arguments, you can use globs
@@ -57,12 +56,13 @@ rm src/accelerate/utils/rich.py
 
 
 %files -n python3-accelerate -f %{pyproject_files}
+%license LICENSE
+%doc README.md
 %{_bindir}/accelerate
 %{_bindir}/accelerate-config
 %{_bindir}/accelerate-estimate-memory
 %{_bindir}/accelerate-launch
 %{_bindir}/accelerate-merge-weights
-
 
 
 %changelog
