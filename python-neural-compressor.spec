@@ -1,6 +1,6 @@
 Name:           python-neural-compressor
-Version:        3.1.1
-Release:        8%{?dist}
+Version:        3.2
+Release:        1%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Repository of Intel® Neural Compressor
 
@@ -94,12 +94,7 @@ rm neural_compressor/evaluation/lm_eval/models/__init__.py
 # TODO: I'm worries that some of these removals, like this one, break the package?
 rm neural_compressor/transformers/__init__.py
 # needs habana_frameworks
-rm neural_compressor/torch/algorithms/fp8_quant/_quant_common/quant_config.py
-rm neural_compressor/torch/algorithms/fp8_quant/common.py
-rm neural_compressor/torch/algorithms/fp8_quant/__init__.py
-rm neural_compressor/torch/algorithms/fp8_quant/fp8_quant.py
-rm neural_compressor/torch/algorithms/fp8_quant/_core/measure.py
-rm neural_compressor/torch/algorithms/fp8_quant/prepare_quant/prepare_model.py
+rm -r neural_compressor/torch/algorithms/fp8_quant/
 rm neural_compressor/torch/algorithms/mixed_low_precision/custom_methods/gptq.py
 # needs ipex (intel_extensions_for_pytorch)
 rm neural_compressor/torch/algorithms/smooth_quant/utility.py
@@ -131,7 +126,6 @@ rm neural_compressor/torch/utils/bit_packer.py
 
 
 %check
-# Just drop the import checks so we can ship the package for now
 %pyproject_check_import
 
 
