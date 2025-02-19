@@ -47,7 +47,6 @@ My primary goal is supporting the above list of software packaged. All the deps 
       - python-safetensors (+numpy,+torch)
     - (opencv-python-headlesswas substituted with packaged opencv)
     - python-pycocotools
-      - (oldest-supported-numpy was substituted with packaged numpy)
     - python-transformers (see below)
   - python-transformers (+accelerate,+ftfy,+sentencepiece,+serving,+sklearn,+tokenizers,+torch,+torch-vision,+vision; future work for +onnx{,runtime},+modelcreation)
     - python-accelerate (see above)
@@ -125,7 +124,6 @@ dist-git is old.)
 - the aaaa spec link exists because the default spec for rpkg should be alphabetically first
 - neural\_compressor is missing the requirements.txt files in the source distribution, instead they are in the egg-info requires.txt format...
 - neural\_compressor only needs the deps because parts of it try to import them, we are currently skipping that check to get it to build
-- pycocotools <= 2.0.7 is needed to work with numpy 1.x which Fedora is shipping, also the numpy dependency needs to be tweaked with sed
 - pycocotools has a randomly-included MIT-licensed C++ JSON parser taken from https://github.com/vivkin/gason at some point. Sigh.
 - tokenizers needs some rust deps I haven't figured out
 - safetensors the rust package seems to already be packaged in Fedora; can we add these bindings to that package rather than recompile?
