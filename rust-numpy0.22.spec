@@ -4,8 +4,8 @@
 
 %global crate numpy
 
-Name:           rust-numpy
-Version:        0.23.0
+Name:           rust-numpy0.22
+Version:        0.22.1
 Release:        1%{?dist}
 Summary:        PyO3-based Rust bindings of the NumPy C-API
 
@@ -14,10 +14,6 @@ URL:            https://crates.io/crates/numpy
 Source:         %{crates_source}
 
 BuildRequires:  cargo-rpm-macros >= 24
-# TODO: The test phase requires this, technically not used when building or at runtime...
-# ...but all your API calls will fail badly when numpy is missing, so let's just require it.
-# Require it at build time so the test phase of the build passes... Sigh.
-BuildRequires:  python3-numpy
 
 %global _description %{expand:
 PyO3-based Rust bindings of the NumPy C-API.}
@@ -49,6 +45,18 @@ This package contains library source intended for building other packages which
 use the "default" feature of the "%{crate}" crate.
 
 %files       -n %{name}+default-devel
+%ghost %{crate_instdir}/Cargo.toml
+
+%package     -n %{name}+gil-refs-devel
+Summary:        %{summary}
+BuildArch:      noarch
+
+%description -n %{name}+gil-refs-devel %{_description}
+
+This package contains library source intended for building other packages which
+use the "gil-refs" feature of the "%{crate}" crate.
+
+%files       -n %{name}+gil-refs-devel
 %ghost %{crate_instdir}/Cargo.toml
 
 %package     -n %{name}+half-devel
@@ -94,7 +102,4 @@ use the "nalgebra" feature of the "%{crate}" crate.
 %endif
 
 %changelog
-* Tue Feb 18 2025 Alexander F. Lent <lx@xanderlent.com> - 0.23.0-1
-- Uprev to latest version
-* Thu Jan 02 2025 Alexander F. Lent <lx@xanderlent.com> - 0.22.1-1
-- Initial package
+%autochangelog
