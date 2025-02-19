@@ -1,0 +1,14 @@
+diff -ur a/bindings/python/Cargo.toml b/bindings/python/Cargo.toml
+--- a/bindings/python/Cargo.toml	1969-12-31 19:00:00.000000000 -0500
++++ b/bindings/python/Cargo.toml	1969-12-31 19:00:00.000000000 -0500
+@@ -18,9 +18,7 @@
+ numpy = "0.22"
+ ndarray = "0.15"
+ itertools = "0.12"
+-
+-[dependencies.tokenizers]
+-path = "../../tokenizers"
++tokenizers = "=0.21.0"
+ 
+ [dev-dependencies]
+ tempfile = "3.10"

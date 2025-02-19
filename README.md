@@ -67,7 +67,6 @@ My primary goal is supporting the above list of software packaged. All the deps 
           - rust-macro\_rules\_attribute-proc\_macro
         - rust-monostate
           - rust-monostate-impl
-        - rust-numpy
         - rust-rayon-cond
         - rust-spm\_precompiled
         - rust-unicode-normalization-alignments
