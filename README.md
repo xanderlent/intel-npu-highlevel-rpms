@@ -53,9 +53,12 @@ My primary goal is supporting the above list of software packaged. All the deps 
     - python-accelerate (see above)
       - python-safetensors (see above)
     - python-tokenizers (+docs)
+      - rust-ndarray0.15
+        - rust-approx0.4
       - rust-numpy0.22
         - rust-nalgebra0.32 (this subtree built on Fedora 41+ only)
           - rust-criterion0.4 (uses most of the same deps as rust-criterion, as well as rust-approx0.4)
+            - rust-approx0.4
           - rust-simba0.8
       - rust-tokenizers
         - rust-esaxx-rs
