@@ -1,14 +1,24 @@
 Name:           python-safetensors
-Version:        0.4.3
-Release:        2%{?dist}
+Version:        0.5.2
+Release:        1%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        ...
 
 # Check if the automatically generated License and its spelling is correct for Fedora
 # https://docs.fedoraproject.org/en-US/packaging-guidelines/LicensingGuidelines/
-License:        Apache-2.0
+SourceLicense:        Apache-2.0
+# Results of the Cargo License Check
+# 
+# Apache-2.0
+# Apache-2.0 OR BSL-1.0
+# Apache-2.0 OR MIT
+# MIT
+# MIT OR Apache-2.0
+# Unlicense OR MIT
+License:	Apache-2.0 AND (Apache-2.0 OR BSL-1.0) AND (Apache-2.0 OR MIT) AND MIT AND (MIT OR Apache-2.0) AND (Unlicense OR MIT)
 URL:            https://github.com/huggingface/safetensors
 Source:         %{pypi_source safetensors}
+Patch:		pysafetensors.patch
 
 BuildRequires:  python3-devel
 BuildRequires:  gcc
@@ -39,9 +49,13 @@ Summary:        %{summary}
 %prep
 %autosetup -p1 -n safetensors-%{version}
 %cargo_prep
+# Copy over LICENSE file
+cp -a safetensors/LICENSE LICENSE
+# Delete the bundled crate
+rm -r safetensors/
 # Remove locked versions
 rm bindings/python/Cargo.lock
-# flax needs jax, not built, so remove it (avoid failing the import test for unpackaged stuff)
+# flax needs jax, not built, so remove it to pass the import test
 rm py_src/safetensors/flax.py
 # paddle needs paddlepaddle, so remove it to pass the import test
 rm py_src/safetensors/paddle.py
@@ -53,12 +67,16 @@ rm py_src/safetensors/mlx.py
 %generate_buildrequires
 # Keep only those extras which you actually want to package or use during tests
 %pyproject_buildrequires -x numpy,torch
-cd bindings/python
+cd bindings/python/
 %cargo_generate_buildrequires
-cd ../..
+cd ../../
 
 %build
 %pyproject_wheel
+cd bindings/python/
+%cargo_license_summary
+%{cargo_license} > LICENSE.dependencies
+cd ../../
 
 
 %install
@@ -72,6 +90,8 @@ cd ../..
 
 
 %files -n python3-safetensors -f %{pyproject_files}
+%license LICENSE bindings/python/LICENSE.dependencies
+%doc bindings/python/README.md
 
 
 %changelog

@@ -1,0 +1,11 @@
+diff -ur a/bindings/python/Cargo.toml b/bindings/python/Cargo.toml
+--- a/bindings/python/Cargo.toml	1969-12-31 19:00:00.000000000 -0500
++++ b/bindings/python/Cargo.toml	1969-12-31 19:00:00.000000000 -0500
+@@ -12,6 +12,4 @@
+ pyo3 = { version = "0.23", features = ["abi3", "abi3-py38"] }
+ memmap2 = "0.9"
+ serde_json = "1.0"
+-
+-[dependencies.safetensors]
+-path = "../../safetensors"
++safetensors = "=0.5.2"
