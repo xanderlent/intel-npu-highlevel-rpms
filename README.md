@@ -14,7 +14,7 @@ You can find binary packages built from this repository in [my xanderlent/intel-
 
 Hopefully, with effort and care, these packages will eventually find their way upstream, into Fedora proper. (For now, the Fedora Review step has been disabled in copr because it drastically improves build times on small packages like these.) As of late January 2025, I am working within the Fedora AI/ML SIG to help get this code upstream.
 
-Because this repo happens to provide many AI/ML packages not yet upstream in Fedora, I have also enabled aarch64 builds where possible. (I am not adverse to enabling ppc64le or s390x builds, or even 32-bit compatability builds; If you want me to enable said builds, please create an Issue requesting them.)
+Including the driver repo means I cannot easily provide aarch64 builds (without splitting the oneapi-level-zero dependency out into another copr). For now I am returning to only building on x86\_64, but I may consider that option in the future.
 
 Right now, most of these packages are originally for Python, so they were generated with the [`pyp2spec`](https://github.com/befeleme/pyp2spec) tool. I'm not completely sure how to use it, so I might be missing some steps, but it definitely does not seem as automated as I would like in terms of converting Python packages to RPMs... On the other hand, [rust2rpm](https://pagure.io/fedora-rust/rust2rpm) was a breeze to use. (`rust2rpm --no-rpmautospec -t fedora --compat crate@version`, leave out `--compat` for non-versioned packages.)
 
