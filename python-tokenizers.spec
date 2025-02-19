@@ -1,6 +1,6 @@
 Name:           python-tokenizers
 Version:        0.21.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        ...
 
@@ -48,7 +48,7 @@ Summary:        %{summary}
 %prep
 %autosetup -p1 -n tokenizers-%{version}
 # Copy out LICENSE
-cp tokenizers/LICENSE LICENSE
+cp -a tokenizers/LICENSE LICENSE
 # Remove vendored tokenizers
 rm -r tokenizers/
 # Remove locked versions
