@@ -53,18 +53,17 @@ My primary goal is supporting the above list of software packaged. All the deps 
     - python-accelerate (see above)
       - python-safetensors (see above)
     - python-tokenizers (+docs)
-      - rust-esaxx-rs
-        - rust-criterion (see notes for F41+)
-      - rust-macro\_rules\_attribute
-        - rust-macro\_rules\_attribute-proc\_macro
-      - rust-monostate
-        - rust-monostate-impl
-      - rust-ndarray0.15
-        - rust-approx0.4
-      - rust-numpy
-      - rust-rayon-cond
-      - rust-spm\_precompiled
-      - rust-unicode-normalization-alignments
+      - rust-tokenizers
+        - rust-esaxx-rs
+          - rust-criterion (see notes for F41+)
+        - rust-macro\_rules\_attribute
+          - rust-macro\_rules\_attribute-proc\_macro
+        - rust-monostate
+          - rust-monostate-impl
+        - rust-numpy
+        - rust-rayon-cond
+        - rust-spm\_precompiled
+        - rust-unicode-normalization-alignments
     - python-safetensors (see above)
 
 ### Backportin OpenVINO from Fedora 42
