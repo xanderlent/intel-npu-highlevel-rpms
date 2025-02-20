@@ -1,6 +1,6 @@
 Name:           python-tokenizers
 Version:        0.21.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        ...
 
@@ -47,20 +47,21 @@ Summary:        %{summary}
 
 %prep
 %autosetup -p1 -n tokenizers-%{version}
+%cargo_prep
 # Copy out LICENSE
 cp -a tokenizers/LICENSE LICENSE
 # Remove vendored tokenizers
 rm -r tokenizers/
 # Remove locked versions
 rm bindings/python/Cargo.lock
-%cargo_prep
 
 %generate_buildrequires
-# Keep only those extras which you actually want to package or use during tests
-%pyproject_buildrequires -x docs
+# Get the cargo buildrequires first, so that maturin will succeed
 cd bindings/python/
 %cargo_generate_buildrequires
 cd ../../
+# Keep only those extras which you actually want to package or use during tests
+%pyproject_buildrequires -x docs
 
 %build
 %pyproject_wheel

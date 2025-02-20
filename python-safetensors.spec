@@ -1,6 +1,6 @@
 Name:           python-safetensors
 Version:        0.5.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        ...
 
@@ -23,12 +23,6 @@ Patch:		pysafetensors.patch
 BuildRequires:  python3-devel
 BuildRequires:  gcc
 BuildRequires:  cargo-rpm-macros >= 24
-# TODO: Shouldn't this use the existing rust-safetensors library in Fedora?
-# Actually, this package seems to recomplile that one...
-# Because the python package is really bindings to the rust package?
-# TODO: Maybe these bindings belong with the rust package upstream?
-Provides:	bundled(crate(safetensors)) = %version
-
 
 # Fill in the actual package description to submit package to Fedora
 %global _description %{expand:
@@ -65,11 +59,12 @@ rm py_src/safetensors/tensorflow.py
 rm py_src/safetensors/mlx.py
 
 %generate_buildrequires
-# Keep only those extras which you actually want to package or use during tests
-%pyproject_buildrequires -x numpy,torch
+# Get the cargo buildrequires first, so that maturin will succeed
 cd bindings/python/
 %cargo_generate_buildrequires
 cd ../../
+# Keep only those extras which you actually want to package or use during tests
+%pyproject_buildrequires -x numpy,torch
 
 %build
 %pyproject_wheel
