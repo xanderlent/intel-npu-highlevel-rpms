@@ -71,7 +71,7 @@ My primary goal is supporting the above list of software packaged. All the deps 
         - rust-unicode-normalization-alignments
     - python-safetensors (see above)
 
-### Backportin OpenVINO from Fedora 42
+### Backporting OpenVINO from Fedora 42
 
 Fedora 42+ packages OpenVINO 2024.5.0 which is newer than the bundled OpenVINO 2024.4.4 in intel-npu-acceleration-library 1.4.0, but seems to work OK. The NPU plugin spews warnings but is functional, if and only if the compiler-in-driver component is present.
 
