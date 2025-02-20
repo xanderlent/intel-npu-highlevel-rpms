@@ -1,6 +1,6 @@
 Name:           python-tokenizers
 Version:        0.21.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        ...
 
@@ -27,6 +27,7 @@ Patch:		pytokenizers.patch
 BuildRequires:  python3-devel
 BuildRequires:  gcc
 BuildRequires:  cargo-rpm-macros >= 24
+BuildRequires:	crate(tempfile/default)
 
 
 # Fill in the actual package description to submit package to Fedora
