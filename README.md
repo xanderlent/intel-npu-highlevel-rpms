@@ -45,7 +45,7 @@ My primary goal is supporting the above list of software packaged. All the deps 
   - python-neural-compressor (+pt)
     - python-accelerate
       - python-safetensors (+numpy,+torch)
-    - (opencv-python-headlesswas substituted with packaged opencv)
+    - (opencv-python-headless was substituted with packaged opencv)
     - python-pycocotools
     - python-transformers (see below)
   - python-transformers (+accelerate,+ftfy,+sentencepiece,+serving,+sklearn,+tokenizers,+torch,+torch-vision,+vision; future work for +onnx{,runtime},+modelcreation)
@@ -112,12 +112,8 @@ dist-git is old.)
     native library object as a python module. Maybe that needs to move to lib, lib64, or libexec for the package?
   - Even worse, their OS detection doesn't handle all the prebuilt distros... Oh because only some have NPU support. Sigh.
   - Should probably suggest USE\_SYSTEM\_OPENVINO or something as a fallback upstream.
-- On OpenVINO, the good news is that Fedora 42+ packages OpenVINO. The bad news is it doesn't yet come with the NPU components.
-  - This means that I can build intel-npu-acceleration-library but it can't use the NPU?
-- Apparently Fedora 42+ isn't yet packaging numpy v1, so builds of python-neural-compressor are failing in rawhide?
-  - Not sure if this is another temporary rawhide fail or something permanent, since other numpy-based packages built in the past?
-  - maybe those have multiple paths for v1/v2 though
-  - seems like the numpy v2 transition is generally a big deal
+- On OpenVINO, the good news is that Fedora 42+ packages OpenVINO.
+- Numpy v2 is backwards-compatible with numpy v1, so not a big issue, just need to fix packages that specify one or the other.
 - a lot of packages need their licenses fixed up to be SPDX
 - most of my packages don't correctly annotate licenses, docs, test data, etc right now
 - I may need to manually specify deps on packages outside of the python ones?
@@ -125,9 +121,6 @@ dist-git is old.)
 - neural\_compressor is missing the requirements.txt files in the source distribution, instead they are in the egg-info requires.txt format...
 - neural\_compressor only needs the deps because parts of it try to import them, we are currently skipping that check to get it to build
 - pycocotools has a randomly-included MIT-licensed C++ JSON parser taken from https://github.com/vivkin/gason at some point. Sigh.
-- tokenizers needs some rust deps I haven't figured out
-- safetensors the rust package seems to already be packaged in Fedora; can we add these bindings to that package rather than recompile?
-- tokenizers seems similar; while it's a rust lib primirally used through python, we should probably try to build it once with bindings etc?
 - I need to check the huggingface packages and rust deps for vendored stuff
 - for ex, the esaxx-rs crate is Apache-2.0 licensed but it vendors an MIT licensed C++ library. Sigh.
 - tokenizers seems to have functions that download random models directly from the internet; these might already be *packaged* in Fedora in huggingface\_hub which IIUC Copr and others use for AI in log-detective? Is the random downloading potentially a problem? Should we be packaging models as well for Fedora? -> Probably a MUCH bigger discussion on the mailing list, frankly...
