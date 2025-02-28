@@ -1,6 +1,6 @@
 Name:           python-transformers
-Version:        4.46.3
-Release:        6%{?dist}
+Version:        4.49.0
+Release:        1%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        State-of-the-art Machine Learning for JAX, PyTorch and TensorFlow
 
@@ -35,7 +35,6 @@ Summary:        %{summary}
 # These files require Tensorflow, so remove them to make the import tests work
 # These probably belong to one of the extras we don't package
 rm src/transformers/activations_tf.py
-rm src/transformers/benchmark/benchmark_tf.py
 rm src/transformers/generation/tf_logits_process.py
 rm src/transformers/generation/tf_utils.py
 rm src/transformers/keras_callbacks.py
@@ -43,18 +42,11 @@ rm src/transformers/modeling_tf_outputs.py
 rm src/transformers/modeling_tf_utils.py
 rm src/transformers/models/albert/modeling_tf_albert.py
 rm src/transformers/models/bart/modeling_tf_bart.py
-rm src/transformers/models/bert/convert_bert_original_tf2_checkpoint_to_pytorch.py
-rm src/transformers/models/bert/convert_bert_pytorch_checkpoint_to_original_tf.py
-rm src/transformers/models/bert/convert_bert_token_dropping_original_tf2_checkpoint_to_pytorch.py
 rm src/transformers/models/bert/modeling_tf_bert.py
 rm src/transformers/models/bert/tokenization_bert_tf.py
-rm src/transformers/models/bigbird_pegasus/convert_bigbird_pegasus_tf_to_pytorch.py
-rm src/transformers/models/deprecated/gptsan_japanese/convert_gptsan_tf_checkpoint_to_pytorch.py
-rm src/transformers/models/efficientnet/convert_efficientnet_to_pytorch.py
 rm src/transformers/models/gpt2/tokenization_gpt2_tf.py
 rm src/transformers/models/idefics/perceiver_tf.py
 rm src/transformers/models/idefics/vision_tf.py
-rm src/transformers/models/pegasus/convert_pegasus_tf_to_pytorch.py
 rm src/transformers/optimization_tf.py
 rm src/transformers/tf_utils.py
 # these Tensorflow exclusions are found with grep and are manually unverified
@@ -138,14 +130,6 @@ rm src/transformers/models/bart/modeling_flax_bart.py
 rm src/transformers/models/beit/modeling_flax_beit.py
 rm src/transformers/models/bert/modeling_flax_bert.py
 rm src/transformers/models/big_bird/modeling_flax_big_bird.py
-rm src/transformers/models/fnet/convert_fnet_original_flax_checkpoint_to_pytorch.py
-rm src/transformers/models/owlv2/convert_owlv2_to_hf.py
-rm src/transformers/models/owlvit/convert_owlvit_original_flax_to_hf.py
-rm src/transformers/models/pix2struct/convert_pix2struct_original_pytorch_to_hf.py
-rm src/transformers/models/switch_transformers/convert_switch_transformers_original_flax_checkpoint_to_pytorch.py
-rm src/transformers/models/t5/convert_t5x_checkpoint_to_pytorch.py
-rm src/transformers/models/umt5/convert_umt5_checkpoint_to_pytorch.py
-rm src/transformers/models/vivit/convert_vivit_flax_to_pytorch.py
 # these jax/flax exclusions are found with grep, and are manually unverified
 rm src/transformers/models/blenderbot/modeling_flax_blenderbot.py
 rm src/transformers/models/blenderbot_small/modeling_flax_blenderbot_small.py
@@ -186,109 +170,10 @@ rm src/transformers/models/xlm_roberta/modeling_flax_xlm_roberta.py
 rm -r src/transformers/kernels/falcon_mamba
 # Not sure what's missing here, but agents is an extra we don't package?
 rm src/transformers/agents/evaluate_agent.py
-# Not sure which extra this is from, but align is missing and isn't a dep, so must be an extra
-rm src/transformers/models/align/convert_align_tf_to_hf.py
-# Needs torchaudio for this extra, not packaged in Fedora
-rm src/transformers/models/audio_spectrogram_transformer/convert_audio_spectrogram_transformer_original_to_pytorch.py
-rm src/transformers/models/wav2vec2_bert/convert_wav2vec2_seamless_checkpoint.py
-# Need bark
-rm src/transformers/models/bark/convert_suno_to_hf.py
-# Need fairseq
-rm src/transformers/models/bart/convert_bart_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/data2vec/convert_data2vec_audio_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/data2vec/convert_data2vec_text_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/deprecated/mega/convert_mega_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/fsmt/convert_fsmt_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/hubert/convert_hubert_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/kosmos2/convert_kosmos2_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/roberta/convert_roberta_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/sew/convert_sew_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/sew_d/convert_sew_d_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/speech_encoder_decoder/convert_mbart_wav2vec2_seq2seq_original_to_pytorch.py
-rm src/transformers/models/speech_encoder_decoder/convert_speech_to_text_wav2vec2_seq2seq_original_to_pytorch.py
-rm src/transformers/models/unispeech/convert_unispeech_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/unispeech_sat/convert_unispeech_sat_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/wav2vec2/convert_wav2vec2_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/wav2vec2_conformer/convert_wav2vec2_conformer_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/xlm_roberta_xl/convert_xlm_roberta_xl_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/xmod/convert_xmod_original_pytorch_checkpoint_to_pytorch.py
-# Needs datasets
-rm src/transformers/models/beit/convert_beit_unilm_to_pytorch.py
-rm src/transformers/models/donut/convert_donut_to_pytorch.py
-# Needs timm
-rm src/transformers/models/bit/convert_bit_to_pytorch.py
-rm src/transformers/models/data2vec/convert_data2vec_vision_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/deit/convert_deit_timm_to_pytorch.py
-rm src/transformers/models/deprecated/vit_hybrid/convert_vit_hybrid_timm_to_pytorch.py
-rm src/transformers/models/levit/convert_levit_timm_to_pytorch.py
-rm src/transformers/models/regnet/convert_regnet_to_pytorch.py
-rm src/transformers/models/resnet/convert_resnet_to_pytorch.py
-rm src/transformers/models/swin/convert_swin_timm_to_pytorch.py
-rm src/transformers/models/swinv2/convert_swinv2_timm_to_pytorch.py
-rm src/transformers/models/vit/convert_vit_timm_to_pytorch.py
-# Needs lavis
-rm src/transformers/models/blip_2/convert_blip_2_original_to_pytorch.py
-rm src/transformers/models/instructblip/convert_instructblip_original_to_pytorch.py
-rm src/transformers/models/instructblipvideo/convert_instructblipvideo_original_to_pytorch.py
-# Needs bros
-rm src/transformers/models/bros/convert_bros_to_pytorch.py
 # Needs trajectory
-rm src/transformers/models/deprecated/trajectory_transformer/convert_trajectory_transformer_original_pytorch_checkpoint_to_pytorch.py
-# Needs laion_clap
-rm src/transformers/models/clap/convert_clap_original_pytorch_to_hf.py
-# Needs clip
-rm src/transformers/models/clip/convert_clip_original_pytorch_to_hf.py
-# Needs model.blip that isn't transformers.model.blip - I guess that's another original package?
-rm src/transformers/models/blip/convert_blip_original_pytorch_to_hf.py
-# Needs gluonnlp
-rm src/transformers/models/deprecated/bort/convert_bort_original_gluonnlp_checkpoint_to_pytorch.py
-# Needs esm
-rm src/transformers/models/esm/convert_esm.py
-# Needs flatdict
-rm src/transformers/models/fuyu/convert_fuyu_model_weights_to_hf.py
-rm src/transformers/models/persimmon/convert_persimmon_weights_to_hf.py
-# Needs av
-rm src/transformers/models/git/convert_git_to_pytorch.py
-# Needs s3prl
-rm src/transformers/models/hubert/convert_distilhubert_original_s3prl_checkpoint_to_pytorch.py
-# Needs pytorch_lightning
-rm src/transformers/models/longformer/convert_longformer_original_pytorch_lightning_to_pytorch.py
-# Needs t5x
-rm src/transformers/models/longt5/convert_longt5x_checkpoint_to_flax.py
-rm src/transformers/models/t5/convert_t5x_checkpoint_to_flax.py
-# Needs detectron2
-rm src/transformers/models/mask2former/convert_mask2former_original_pytorch_checkpoint_to_pytorch.py
-rm src/transformers/models/maskformer/convert_maskformer_original_pytorch_checkpoint_to_pytorch.py
-# Needs audiocraft
-rm src/transformers/models/musicgen/convert_musicgen_transformers.py
-rm src/transformers/models/musicgen_melody/convert_musicgen_melody_transformers.py
-# Needs nemo
-rm src/transformers/models/nemotron/convert_nemotron_nemo_to_hf.py
-# Needs nougat
-rm src/transformers/models/nougat/convert_nougat_to_hf.py
-# Needs haiku
-rm src/transformers/models/perceiver/convert_perceiver_haiku_to_pytorch.py
-# Needs mistral_common
-rm src/transformers/models/pixtral/convert_pixtral_weights_to_hf.py
-# The data for this model is missing
-rm src/transformers/models/pop2piano/convert_pop2piano_weights_to_hf.py
+rm -r src/transformers/models/deprecated/trajectory_transformer/
 # Needs pretty_midi
 rm src/transformers/models/pop2piano/tokenization_pop2piano.py
-# Needs transformers_old
-rm src/transformers/models/prophetnet/convert_prophetnet_original_pytorch_checkpoint_to_pytorch.py
-# Needs classy_vision
-rm src/transformers/models/regnet/convert_regnet_seer_10b_to_pytorch.py
-# Needs seamless_communication
-rm src/transformers/models/seamless_m4t/convert_fairseq2_to_hf.py
-rm src/transformers/models/seamless_m4t_v2/convert_fairseq2_to_hf.py
-# Needs tensorstore
-rm src/transformers/models/switch_transformers/convert_big_switch.py
-# Needs gdown
-rm src/transformers/models/timesformer/convert_timesformer_to_pytorch.py
-rm src/transformers/models/videomae/convert_videomae_to_pytorch.py
-rm src/transformers/models/x_clip/convert_x_clip_original_pytorch_to_hf.py
-# Needs unlim
-rm src/transformers/models/wavlm/convert_wavlm_original_pytorch_checkpoint_to_pytorch.py
 # Needs ipython
 rm src/transformers/utils/notebook.py
 # Needs google.protobuf
@@ -297,15 +182,10 @@ rm src/transformers/utils/sentencepiece_model_pb2.py
 # This one seems like a pyTorch issue?
 # "Dynamo is not supported on Python 3.12+"
 rm src/transformers/integrations/bitnet.py
-# Internal import error?
-rm src/transformers/models/imagegpt/convert_imagegpt_original_tf2_to_pytorch.py
 # Some kinda docstring issue?
 rm src/transformers/models/llava_next_video/modular_llava_next_video.py
 # Uses a tensorflow function that we deleted
-rm src/transformers/models/lxmert/convert_lxmert_original_tf_checkpoint_to_pytorch.py
 rm src/transformers/models/mt5/modeling_tf_mt5.py
-# More import issues/removed functions?
-rm src/transformers/models/vit_mae/convert_vit_mae_to_pytorch.py
 # Seems to use an internal pytorch function?
 rm src/transformers/trainer_seq2seq.py
 # Fedora Rawhide (42+) packages huggingface-hub >= 0.26.0 which removes a function used in this file
@@ -336,6 +216,8 @@ rm src/transformers/models/deprecated/van/convert_van_to_pytorch.py
 
 
 %files -n python3-transformers -f %{pyproject_files}
+%license LICENSE
+%doc README.md
 %{_bindir}/transformers-cli
 
 

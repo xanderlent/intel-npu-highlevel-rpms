@@ -1,6 +1,6 @@
 Name:           python-accelerate
 Version:        1.4.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Accelerate
 
@@ -12,6 +12,8 @@ Source:         %{pypi_source accelerate}
 
 BuildArch:      noarch
 BuildRequires:  python3-devel
+# For passing the test suite
+BuildRequires:	python3-rich
 
 
 # Fill in the actual package description to submit package to Fedora
@@ -34,8 +36,6 @@ rm -r src/accelerate/test_utils/scripts/external_deps/*
 rm src/accelerate/test_utils/scripts/test_merge_weights.py
 # This particular utility uses pytest, but we don't package the test extras...
 rm src/accelerate/test_utils/scripts/test_notebook.py
-# The rich extra doesn't like system packages, insisting you use pip, so don't bother with it...
-rm src/accelerate/utils/rich.py
 
 
 %generate_buildrequires
@@ -52,7 +52,9 @@ rm src/accelerate/utils/rich.py
 
 
 %check
+export ACCELERATE_ENABLE_RICH=True
 %pyproject_check_import
+unset ACCELERATE_ENABLE_RICH
 
 
 %files -n python3-accelerate -f %{pyproject_files}
