@@ -1,12 +1,8 @@
 Name:           python-safetensors
 Version:        0.5.2
-Release:        2%{?dist}
-# Fill in the actual package summary to submit package to Fedora
-Summary:        ...
+Release:        3%{?dist}
+Summary:        Python bindings for the safetensors library
 
-# Check if the automatically generated License and its spelling is correct for Fedora
-# https://docs.fedoraproject.org/en-US/packaging-guidelines/LicensingGuidelines/
-SourceLicense:        Apache-2.0
 # Results of the Cargo License Check
 # 
 # Apache-2.0
@@ -16,17 +12,24 @@ SourceLicense:        Apache-2.0
 # MIT OR Apache-2.0
 # Unlicense OR MIT
 License:	Apache-2.0 AND (Apache-2.0 OR BSL-1.0) AND (Apache-2.0 OR MIT) AND MIT AND (MIT OR Apache-2.0) AND (Unlicense OR MIT)
+SourceLicense:	Apache-2.0
+# The PyPI package lives at https://pypi.org/project/safetensors/
+# But the GitHub URL encompasses the entire project including the separately-packaged Rust crate
 URL:            https://github.com/huggingface/safetensors
 Source:         %{pypi_source safetensors}
+# Patch the bindings crate to use the upstream crate, rather than the bundled crate sources
 Patch:		pysafetensors.patch
 
 BuildRequires:  python3-devel
 BuildRequires:  gcc
 BuildRequires:  cargo-rpm-macros >= 24
+# Test requirements
+BuildRequires:	python3-pytest
 
 # Fill in the actual package description to submit package to Fedora
 %global _description %{expand:
-This is package 'safetensors' generated automatically by pyp2spec.}
+This library implements a new simple format for storing tensors safely
+(as opposed to pickle) and that is still fast (zero-copy).}
 
 %description %_description
 
@@ -35,35 +38,35 @@ Summary:        %{summary}
 
 %description -n python3-safetensors %_description
 
-# For official Fedora packages, review which extras should be actually packaged
-# See: https://docs.fedoraproject.org/en-US/packaging-guidelines/Python/#Extras
 %pyproject_extras_subpkg -n python3-safetensors numpy,torch
 
 
 %prep
 %autosetup -p1 -n safetensors-%{version}
 %cargo_prep
-# Copy over LICENSE file
+# Copy the LICENSE file out of the bundled crate
 cp -a safetensors/LICENSE LICENSE
 # Delete the bundled crate
 rm -r safetensors/
-# Remove locked versions
+# Remove locked Rust dependencies on the bindings
 rm bindings/python/Cargo.lock
-# flax needs jax, not built, so remove it to pass the import test
+# The following Python sources are part of extras with dependencies not packaged in Fedora
+# If that changes, we should enable and build the extras as well as not removing the sources
 rm py_src/safetensors/flax.py
-# paddle needs paddlepaddle, so remove it to pass the import test
-rm py_src/safetensors/paddle.py
-# tensorflow needs tensorflow, so remove it to pass the import test
-rm py_src/safetensors/tensorflow.py
-# mlx needs mlx, so remove it to pass the import test
 rm py_src/safetensors/mlx.py
+rm py_src/safetensors/paddle.py
+rm py_src/safetensors/tensorflow.py
+# Also remove test cases that require unpackaged dependencies
+# TODO: Should probably submit an upstream bug to skip these automatically if deps are missing
+rm bindings/python/tests/test_flax_comparison.py
+rm bindings/python/tests/test_tf_comparison.py
+
 
 %generate_buildrequires
 # Get the cargo buildrequires first, so that maturin will succeed
 cd bindings/python/
 %cargo_generate_buildrequires
 cd ../../
-# Keep only those extras which you actually want to package or use during tests
 %pyproject_buildrequires -x numpy,torch
 
 %build
@@ -76,12 +79,17 @@ cd ../../
 
 %install
 %pyproject_install
-# Add top-level Python module names here as arguments, you can use globs
 %pyproject_save_files safetensors
 
 
 %check
 %pyproject_check_import
+# Test both the rust part of the bindings and the Python parts
+cd bindings/python/
+%cargo_test
+# But only run the tests/ and not benches/ in Python
+%pytest tests/
+cd ../../
 
 
 %files -n python3-safetensors -f %{pyproject_files}
