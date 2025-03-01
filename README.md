@@ -77,6 +77,10 @@ Fedora 42+ packages OpenVINO 2024.5.0 which is newer than the bundled OpenVINO 2
 
 I have manually enabled building openvino from the F42 package source for F40 and F41 in this copr to fill the gap. Also, because the NPU plugin sources need a newer version of OneAPI Level Zero headers, inlcude my intel-npu-driver copr to allow it to be used in the build process.
 
+### Backporting huggingface-hub from Fedora 42 to F40,F41
+
+This was set up in the copr to allow the newer version of huggingface transformers to build.
+
 ### Revived orphaned deps of rust-criterion from F40
 
 In F41+, various deps of rust-criterion were removed. Rather than vendoring them all here, I have set up
@@ -132,7 +136,8 @@ dist-git is old.)
 
 Feel free to file bugs to suggest additional candidates.
 
-- [OpenVINO](https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/overview.html) - Is actually packaged in Fedora 42+, hooray! But not with all the features we need, so *sad face*.
+- [OpenVINO](https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/overview.html) - Is now packaged in Fedora!
+- [huggingface/optimum-intel](https://github.com/huggingface/optimum-intel)
 - [OpenVINO AI Plugins for GIMP](https://github.com/intel/openvino-ai-plugins-gimp)
 - [OpenVINO AI Plugins for Audacity](https://github.com/intel/openvino-plugins-ai-audacity)
 - [Intel LLM Library for PyTorch](https://github.com/intel-analytics/ipex-llm)
