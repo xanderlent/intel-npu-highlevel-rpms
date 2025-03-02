@@ -1,7 +1,7 @@
-Name:           python-safetensors
-Version:        0.5.2
-Release:        3%{?dist}
-Summary:        Python bindings for the safetensors library
+Name:		python-safetensors
+Version:	0.5.2
+Release:	3%{?dist}
+Summary:	Python bindings for the safetensors library
 
 # Results of the Cargo License Check
 # 
@@ -15,14 +15,14 @@ License:	Apache-2.0 AND (Apache-2.0 OR BSL-1.0) AND (Apache-2.0 OR MIT) AND MIT 
 SourceLicense:	Apache-2.0
 # The PyPI package lives at https://pypi.org/project/safetensors/
 # But the GitHub URL encompasses the entire project including the separately-packaged Rust crate
-URL:            https://github.com/huggingface/safetensors
-Source:         %{pypi_source safetensors}
+URL:		https://github.com/huggingface/safetensors
+Source:		%{pypi_source safetensors}
 # Patch the bindings crate to use the upstream crate, rather than the bundled crate sources
 Patch:		pysafetensors.patch
 
-BuildRequires:  python3-devel
-BuildRequires:  gcc
-BuildRequires:  cargo-rpm-macros >= 24
+BuildRequires:	python3-devel
+BuildRequires:	gcc
+BuildRequires:	cargo-rpm-macros >= 24
 # Test requirements
 BuildRequires:	python3-pytest
 
@@ -33,8 +33,8 @@ This library implements a new simple format for storing tensors safely
 
 %description %_description
 
-%package -n     python3-safetensors
-Summary:        %{summary}
+%package -n python3-safetensors
+Summary:	%{summary}
 
 %description -n python3-safetensors %_description
 
