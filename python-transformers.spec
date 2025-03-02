@@ -12,6 +12,11 @@ Source:         %{pypi_source transformers}
 
 BuildArch:      noarch
 BuildRequires:  python3-devel
+# gcc is needed for transformers.models.deprecated.graphormer.algos_graphormer
+BuildRequires:	gcc
+# rich is needed for transformers.commands.chat
+BuildRequires:	python3dist(rich)
+Requires:	python3dist(rich)
 
 
 # Fill in the actual package description to submit package to Fedora
@@ -179,22 +184,33 @@ rm src/transformers/utils/notebook.py
 # Needs google.protobuf
 rm src/transformers/utils/sentencepiece_model_pb2_new.py
 rm src/transformers/utils/sentencepiece_model_pb2.py
-# This one seems like a pyTorch issue?
-# "Dynamo is not supported on Python 3.12+"
-rm src/transformers/integrations/bitnet.py
 # Some kinda docstring issue?
 rm src/transformers/models/llava_next_video/modular_llava_next_video.py
 # Uses a tensorflow function that we deleted
 rm src/transformers/models/mt5/modeling_tf_mt5.py
 # Seems to use an internal pytorch function?
 rm src/transformers/trainer_seq2seq.py
-# Fedora Rawhide (42+) packages huggingface-hub >= 0.26.0 which removes a function used in this file
-# Therefore, only on F42+, dump this file
-%if 0%{?fedora} >= 42
-rm src/transformers/models/deprecated/van/convert_van_to_pytorch.py
-%endif
-
-
+# Transformers needs the triton library to import this
+rm src/transformers/integrations/finegrained_fp8.py
+# This integration needs vptq
+rm src/transformers/integrations/vptq.py
+# This model fails in the import test because of a None docstring?
+rm src/transformers/models/aria/modular_aria.py
+# This file fails the import test because it's imports are too relative?
+rm src/transformers/models/dinov2_with_registers/modular_dinov2_with_registers.py
+# Again docstring issues
+rm src/transformers/models/got_ocr2/modular_got_ocr2.py
+# More None docstrings
+rm src/transformers/models/gpt_neox/modular_gpt_neox.py
+# Another docstring error
+rm src/transformers/models/moonshine/modular_moonshine.py
+# More misery with docstrings
+rm src/transformers/models/starcoder2/modular_starcoder2.py
+# These files use torch.compile, but that doesn't work with the combinations of new python and newish torch packaged
+# "Dynamo is not supported on Python <whatever>"
+rm src/transformers/integrations/bitnet.py
+rm src/transformers/models/modernbert/modeling_modernbert.py
+rm src/transformers/models/modernbert/modular_modernbert.py
 
 %generate_buildrequires
 # Keep only those extras which you actually want to package or use during tests
