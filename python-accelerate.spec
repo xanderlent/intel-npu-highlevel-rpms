@@ -1,6 +1,6 @@
 Name:           python-accelerate
-Version:        1.4.0
-Release:        2%{?dist}
+Version:        1.5.2
+Release:        1%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Accelerate
 
@@ -12,9 +12,10 @@ Source:         %{pypi_source accelerate}
 
 BuildArch:      noarch
 BuildRequires:  python3-devel
-# For passing the test suite
-BuildRequires:	python3-rich
-
+# For passing the test imports
+BuildRequires:	python3dist(pytest)
+BuildRequires:	python3dist(rich)
+#BuildRequires:	python3dist(parameterized)
 
 # Fill in the actual package description to submit package to Fedora
 %global _description %{expand:
@@ -30,12 +31,10 @@ Summary:        %{summary}
 
 %prep
 %autosetup -p1 -n accelerate-%{version}
-# Delete all the test_utils with external deps
+# Delete all the test_utils with external deps (they fail the import test)
 rm -r src/accelerate/test_utils/scripts/external_deps/*
-# This particular utility tries to access something internal to pytorch?
-rm src/accelerate/test_utils/scripts/test_merge_weights.py
-# This particular utility uses pytest, but we don't package the test extras...
-rm src/accelerate/test_utils/scripts/test_notebook.py
+# Delete a test that would create a circular dep on python3dist(transformers)
+#rm tests/test_big_modeling.py
 
 
 %generate_buildrequires
@@ -44,6 +43,7 @@ rm src/accelerate/test_utils/scripts/test_notebook.py
 
 %build
 %pyproject_wheel
+
 
 %install
 %pyproject_install
@@ -55,6 +55,9 @@ rm src/accelerate/test_utils/scripts/test_notebook.py
 export ACCELERATE_ENABLE_RICH=True
 %pyproject_check_import
 unset ACCELERATE_ENABLE_RICH
+# Upstream source uses make to run tests, but they don't ship the Makefile to PyPI so...
+# TODO: Skip all the failing tests?
+#pytest
 
 
 %files -n python3-accelerate -f %{pyproject_files}
