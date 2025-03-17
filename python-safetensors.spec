@@ -1,6 +1,6 @@
 Name:		python-safetensors
 Version:	0.5.2
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	Python bindings for the safetensors library
 
 # Results of the Cargo License Check
@@ -26,7 +26,6 @@ BuildRequires:	cargo-rpm-macros >= 24
 # Test requirements
 BuildRequires:	python3-pytest
 
-# Fill in the actual package description to submit package to Fedora
 %global _description %{expand:
 This library implements a new simple format for storing tensors safely
 (as opposed to pickle) and that is still fast (zero-copy).}
