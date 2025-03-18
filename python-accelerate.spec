@@ -1,6 +1,6 @@
 Name:           python-accelerate
 Version:        1.5.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Accelerate
 
@@ -35,6 +35,10 @@ Summary:        %{summary}
 rm -r src/accelerate/test_utils/scripts/external_deps/*
 # Delete a test that would create a circular dep on python3dist(transformers)
 #rm tests/test_big_modeling.py
+# On Fedora 40, this eventually imports torch._C which doesn't work
+%if 0%{?fedora} < 41
+rm src/accelerate/test_utils/scripts/test_merge_weights.py
+%endif
 
 
 %generate_buildrequires
