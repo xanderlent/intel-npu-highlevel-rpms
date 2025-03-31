@@ -1,6 +1,6 @@
 Name:           python-tokenizers
 Version:        0.21.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Implementation of today's most used tokenizers, with a focus on performances and versatility
 
@@ -27,6 +27,8 @@ Patch:		pytokenizers.patch
 BuildRequires:  python3-devel
 BuildRequires:  gcc
 BuildRequires:  cargo-rpm-macros >= 24
+# For some reason the generated buildrequires don't catch this?
+BuildRequires:	crate(tempfile/default)
 
 
 # Fill in the actual package description to submit package to Fedora
