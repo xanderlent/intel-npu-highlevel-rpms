@@ -5,7 +5,7 @@
 %global crate tokenizers
 
 Name:           rust-tokenizers
-Version:        0.21.0
+Version:        0.21.1
 Release:        1%{?dist}
 Summary:        Implementation of today's most used tokenizers, with a focus on performances and versatility
 
@@ -132,6 +132,18 @@ use the "progressbar" feature of the "%{crate}" crate.
 %files       -n %{name}+progressbar-devel
 %ghost %{crate_instdir}/Cargo.toml
 
+%package     -n %{name}+rustls-tls-devel
+Summary:        %{summary}
+BuildArch:      noarch
+
+%description -n %{name}+rustls-tls-devel %{_description}
+
+This package contains library source intended for building other packages which
+use the "rustls-tls" feature of the "%{crate}" crate.
+
+%files       -n %{name}+rustls-tls-devel
+%ghost %{crate_instdir}/Cargo.toml
+
 %package     -n %{name}+unstable_wasm-devel
 Summary:        %{summary}
 BuildArch:      noarch
@@ -159,6 +171,7 @@ use the "unstable_wasm" feature of the "%{crate}" crate.
 
 %if %{with check}
 %check
+# TODO: Many tests don't work because of missing data files in the crate distribution
 %cargo_test
 %endif
 
