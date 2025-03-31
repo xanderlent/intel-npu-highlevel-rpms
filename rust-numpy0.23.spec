@@ -4,9 +4,9 @@
 
 %global crate numpy
 
-Name:           rust-numpy0.22
-Version:        0.22.1
-Release:        3%{?dist}
+Name:           rust-numpy0.23
+Version:        0.23.0
+Release:        1%{?dist}
 Summary:        PyO3-based Rust bindings of the NumPy C-API
 
 License:        BSD-2-Clause
@@ -15,7 +15,7 @@ Source:         %{crates_source}
 
 BuildRequires:  cargo-rpm-macros >= 24
 # the numpy package needs to be present to run tests
-BuildRequires:	python3dist(numpy)
+BuildRequires: python3dist(numpy)
 
 %global _description %{expand:
 PyO3-based Rust bindings of the NumPy C-API.}
@@ -47,18 +47,6 @@ This package contains library source intended for building other packages which
 use the "default" feature of the "%{crate}" crate.
 
 %files       -n %{name}+default-devel
-%ghost %{crate_instdir}/Cargo.toml
-
-%package     -n %{name}+gil-refs-devel
-Summary:        %{summary}
-BuildArch:      noarch
-
-%description -n %{name}+gil-refs-devel %{_description}
-
-This package contains library source intended for building other packages which
-use the "gil-refs" feature of the "%{crate}" crate.
-
-%files       -n %{name}+gil-refs-devel
 %ghost %{crate_instdir}/Cargo.toml
 
 %package     -n %{name}+half-devel
