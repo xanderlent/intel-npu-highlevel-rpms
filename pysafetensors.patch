@@ -8,4 +8,4 @@ diff -ur a/bindings/python/Cargo.toml b/bindings/python/Cargo.toml
 -
 -[dependencies.safetensors]
 -path = "../../safetensors"
-+safetensors = "=0.5.2"
++safetensors = "=0.5.3"

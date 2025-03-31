@@ -1,6 +1,6 @@
 Name:		python-safetensors
-Version:	0.5.2
-Release:	4%{?dist}
+Version:	0.5.3
+Release:	1%{?dist}
 Summary:	Python bindings for the safetensors library
 
 # Results of the Cargo License Check
