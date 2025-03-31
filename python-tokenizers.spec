@@ -1,15 +1,15 @@
 Name:           python-tokenizers
-Version:        0.21.0
-Release:        4%{?dist}
+Version:        0.21.1
+Release:        1%{?dist}
 # Fill in the actual package summary to submit package to Fedora
-Summary:        ...
+Summary:        Implementation of today's most used tokenizers, with a focus on performances and versatility
 
 # Check if the automatically generated License and its spelling is correct for Fedora
 # https://docs.fedoraproject.org/en-US/packaging-guidelines/LicensingGuidelines/
 # The Python code is Apache-2.0
 SourceLicense:  Apache-2.0
 # Generated license info from Rust dependencies
-# 
+#
 # (MIT OR Apache-2.0) AND Unicode-DFS-2016
 # Apache-2.0
 # Apache-2.0 OR BSL-1.0
@@ -18,8 +18,8 @@ SourceLicense:  Apache-2.0
 # BSD-2-Clause OR Apache-2.0 OR MIT
 # MIT
 # MIT OR Apache-2.0
-# Unlicense OR MITw
-License:	((MIT OR Apache-2.0) AND Unicode-DFS-2016) AND (Apache-2.0) AND (Apache-2.0 OR BSL-1.0) AND (Apache-2.0 OR MIT) AND (BSD-2-Clause) AND (BSD-2-Clause OR Apache-2.0 OR MIT) AND (MIT) AND (MIT OR Apache2.0) AND (MIT OR Apache-2.0) AND (Unlicense OR MIT)
+# Unlicense OR MIT
+License:	((MIT OR Apache-2.0) AND Unicode-DFS-2016) AND (Apache-2.0) AND (Apache-2.0 OR BSL-1.0) AND (Apache-2.0 OR MIT) AND (BSD-2-Clause) AND (BSD-2-Clause OR Apache-2.0 OR MIT) AND (MIT) AND (MIT OR Apache-2.0) AND (Unlicense OR MIT)
 URL:            https://github.com/huggingface/tokenizers
 Source:         %{pypi_source tokenizers}
 Patch:		pytokenizers.patch
@@ -27,7 +27,6 @@ Patch:		pytokenizers.patch
 BuildRequires:  python3-devel
 BuildRequires:  gcc
 BuildRequires:  cargo-rpm-macros >= 24
-BuildRequires:	crate(tempfile/default)
 
 
 # Fill in the actual package description to submit package to Fedora
@@ -40,10 +39,6 @@ This is package 'tokenizers' generated automatically by pyp2spec.}
 Summary:        %{summary}
 
 %description -n python3-tokenizers %_description
-
-# For official Fedora packages, review which extras should be actually packaged
-# See: https://docs.fedoraproject.org/en-US/packaging-guidelines/Python/#Extras
-%pyproject_extras_subpkg -n python3-tokenizers docs
 
 
 %prep
@@ -61,8 +56,7 @@ rm bindings/python/Cargo.lock
 cd bindings/python/
 %cargo_generate_buildrequires
 cd ../../
-# Keep only those extras which you actually want to package or use during tests
-%pyproject_buildrequires -x docs
+%pyproject_buildrequires
 
 %build
 %pyproject_wheel
@@ -73,7 +67,6 @@ cd ../../
 
 %install
 %pyproject_install
-# Add top-level Python module names here as arguments, you can use globs
 %pyproject_save_files tokenizers
 
 %check
