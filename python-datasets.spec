@@ -1,6 +1,6 @@
 Name:           python-datasets
 Version:        3.5.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        HuggingFace community-driven open-source library of datasets
 
@@ -30,8 +30,17 @@ Summary:        %{summary}
 
 %prep
 %autosetup -p1 -n datasets-%{version}
-# Relax dill version bound a little
+# The project pins dill and multiprocess due to concerns about determinism.
+# Our package may, then, exhibit different behavior from upstream.
+# Relax dill version bound a little (to allow the latest version)
 sed -i "s/dill>=0.3.0,<0.3.9/dill>=0.3.0,<0.3.10/" setup.py
+# Relax multiprocess version bound a little (to allow the latest version)
+sed -i "s/multiprocess<0.70.17/multiprocess<0.70.18/" setup.py
+%if 0%{?fedora} == 40
+# Relax requests version bound a little (to allow an older version on F40)
+# This bound is because upstream is worried about CVEs in requests.
+sed -i "s/requests>=2.32.2/requests>=2.31.0/" setup.py
+%endif
 # Remove modules that use unpackaged dependencies
 rm src/datasets/io/spark.py
 
