@@ -1,6 +1,6 @@
 Name:           python-evaluate
 Version:        0.4.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        HuggingFace community-driven open-source library of evaluation
 
 License:        Apache-2.0
@@ -10,9 +10,11 @@ Source:         %{pypi_source evaluate}
 BuildArch:      noarch
 BuildRequires:  python3-devel
 # To import the CLI module we need cookiecutter.
-# Probably should submit dep bug upstream.
 BuildRequires:	python3dist(cookiecutter)
+# To import some other fils in the test phase
+BuildRequires:	python3dist(matplotlib)
 # We also need cookiecutter at runtime to use the CLI
+# Probably should submit dep bug upstream.
 Requires:	python3dist(cookiecutter)
 
 
