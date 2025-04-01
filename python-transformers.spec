@@ -1,6 +1,6 @@
 Name:           python-transformers
 Version:        4.50.3
-Release:        1%{?dist}
+Release:        2%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        State-of-the-art Machine Learning for JAX, PyTorch and TensorFlow
 
@@ -30,7 +30,7 @@ Summary:        %{summary}
 
 %description -n python3-transformers %_description
 
-%if 0%{?fedora} > 41
+%if 0%{?fedora} >= 41
 %pyproject_extras_subpkg -n python3-transformers accelerate,ftfy,num2words,optuna,sentencepiece,serving,sklearn,tiktoken,tokenizers,torch,torch-vision,torchhub,vision
 %else
 # Fedora 40 doesn't have optuna
@@ -222,7 +222,7 @@ sed -i "288d" src/transformers/models/prompt_depth_anything/modular_prompt_depth
 
 
 %generate_buildrequires
-%if 0%{?fedora} > 41
+%if 0%{?fedora} >= 41
 %pyproject_buildrequires -x accelerate,ftfy,num2words,optuna,sentencepiece,serving,sklearn,tiktoken,tokenizers,torch,torch-vision,torchhub,vision
 %else
 # Fedora 40 doesn't have optuna
