@@ -1,5 +1,5 @@
 Name:           python-transformers
-Version:        4.49.0
+Version:        4.50.3
 Release:        1%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        State-of-the-art Machine Learning for JAX, PyTorch and TensorFlow
@@ -14,9 +14,9 @@ BuildArch:      noarch
 BuildRequires:  python3-devel
 # gcc is needed for transformers.models.deprecated.graphormer.algos_graphormer
 BuildRequires:	gcc
-# rich is needed for transformers.commands.chat
-BuildRequires:	python3dist(rich)
-Requires:	python3dist(rich)
+# rich was? needed for transformers.commands.chat
+#BuildRequires:	python3dist(rich)
+#Requires:	python3dist(rich)
 
 
 # Fill in the actual package description to submit package to Fedora
@@ -30,9 +30,12 @@ Summary:        %{summary}
 
 %description -n python3-transformers %_description
 
-# For official Fedora packages, review which extras should be actually packaged
-# See: https://docs.fedoraproject.org/en-US/packaging-guidelines/Python/#Extras
-%pyproject_extras_subpkg -n python3-transformers accelerate,ftfy,sentencepiece,serving,sklearn,tokenizers,torch,torch-vision,vision
+%if 0%{?fedora} > 41
+%pyproject_extras_subpkg -n python3-transformers accelerate,ftfy,num2words,optuna,sentencepiece,serving,sklearn,tiktoken,tokenizers,torch,torch-vision,torchhub,vision
+%else
+# Fedora 40 doesn't have optuna
+%pyproject_extras_subpkg -n python3-transformers accelerate,ftfy,num2words,sentencepiece,serving,sklearn,tiktoken,tokenizers,torch,torch-vision,torchhub,vision
+%endif
 
 
 %prep
@@ -208,13 +211,23 @@ rm src/transformers/models/moonshine/modular_moonshine.py
 rm src/transformers/models/starcoder2/modular_starcoder2.py
 # These files use torch.compile, but that doesn't work with the combinations of new python and newish torch packaged
 # "Dynamo is not supported on Python <whatever>"
+# TODO: Will we ever be able to support this given how it lags behind the rest of PyTorch?
 rm src/transformers/integrations/bitnet.py
 rm src/transformers/models/modernbert/modeling_modernbert.py
 rm src/transformers/models/modernbert/modular_modernbert.py
+# Fixup a type error that only shows up when directly importing something as a test that we probably shouldn't
+sed -i "s/GEMMA3_INPUTS_DOCSTRING = None/GEMMA3_INPUTS_DOCSTRING = \"\"/" src/transformers/models/gemma3/modular_gemma3.py
+# Fixup another silly docstring automation error
+sed -i "288d" src/transformers/models/prompt_depth_anything/modular_prompt_depth_anything.py
+
 
 %generate_buildrequires
-# Keep only those extras which you actually want to package or use during tests
-%pyproject_buildrequires -x accelerate,ftfy,sentencepiece,serving,sklearn,tokenizers,torch,torch-vision,vision
+%if 0%{?fedora} > 41
+%pyproject_buildrequires -x accelerate,ftfy,num2words,optuna,sentencepiece,serving,sklearn,tiktoken,tokenizers,torch,torch-vision,torchhub,vision
+%else
+# Fedora 40 doesn't have optuna
+%pyproject_buildrequires -x accelerate,ftfy,num2words,sentencepiece,serving,sklearn,tiktoken,tokenizers,torch,torch-vision,torchhub,vision
+%endif
 
 
 %build
