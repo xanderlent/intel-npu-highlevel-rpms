@@ -1,31 +1,23 @@
 Name:           python-neural-compressor
-Version:        3.2
-Release:        2%{?dist}
-# Fill in the actual package summary to submit package to Fedora
-Summary:        Repository of Intel® Neural Compressor
+Version:        3.3.1
+Release:        1%{?dist}
+Summary:        Intel® Neural Compressor
 
-# Check if the automatically generated License and its spelling is correct for Fedora
-# https://docs.fedoraproject.org/en-US/packaging-guidelines/LicensingGuidelines/
 License:        Apache-2.0
 URL:            https://github.com/intel/neural-compressor
 Source:         %{pypi_source neural_compressor}
-Source:         https://raw.githubusercontent.com/intel/neural-compressor/a8cd9aa815ba7a94d9e0b4b028ce99eae22c2940/requirements.txt
-Source:		https://raw.githubusercontent.com/intel/neural-compressor/a8cd9aa815ba7a94d9e0b4b028ce99eae22c2940/requirements_pt.txt
-Source:		https://raw.githubusercontent.com/intel/neural-compressor/a8cd9aa815ba7a94d9e0b4b028ce99eae22c2940/requirements_tf.txt
+%define commit_hash 679def043cc78740fed4da6c81604a2beda785b0
+Source:		https://raw.githubusercontent.com/intel/neural-compressor/%{commit_hash}/requirements.txt
+Source:		https://raw.githubusercontent.com/intel/neural-compressor/%{commit_hash}/requirements_pt.txt
+Source:		https://raw.githubusercontent.com/intel/neural-compressor/%{commit_hash}/requirements_tf.txt
 
 BuildArch:      noarch
 BuildRequires:  python3-devel
-BuildRequires:	git
-# ONNX seems to be an optional dependency, but we need it because we want the import checks to succeed, and some parts use ONNX
-BuildRequires:  python3-onnx
-BuildRequires:  python3-onnxruntime
-# Torch also seems to be an optional dependency, but we are building with the pt extra
-BuildRequires:  python3-torch
-BuildRequires:  python3-transformers
-# Some code uses nltk, and it is packaged so require it
-BuildRequires:	python3-nltk
-# Apparently some code also uses accelerate
-BuildRequires:	python3-accelerate
+# Dependencies for successful import tests (though optional at runtime?)
+BuildRequires:  python3dist(datasets)
+BuildRequires:  python3dist(evaluate)
+BuildRequires:  python3dist(nltk)
+BuildRequires:  python3dist(onnx)
 
 
 
@@ -40,8 +32,6 @@ Summary:        %{summary}
 
 %description -n python3-neural-compressor %_description
 
-# For official Fedora packages, review which extras should be actually packaged
-# See: https://docs.fedoraproject.org/en-US/packaging-guidelines/Python/#Extras
 %pyproject_extras_subpkg -n python3-neural-compressor pt
 
 
@@ -76,38 +66,26 @@ rm neural_compressor/compression/hpo/__init__.py
 # needs bigcode_eval
 rm neural_compressor/evaluation/bigcode_eval/evaluator.py
 rm neural_compressor/evaluation/bigcode_eval/__init__.py
-# needs evaluate
-rm neural_compressor/evaluation/hf_eval/evaluator.py
-rm neural_compressor/evaluation/hf_eval/__init__.py
-# needs datasets
-rm neural_compressor/evaluation/hf_eval/hf_datasets/cnn_dailymail.py
-rm neural_compressor/transformers/quantization/utils.py
-rm neural_compressor/transformers/quantization/__init__.py
-rm neural_compressor/transformers/models/modeling_auto.py
-# TODO: I'm worries that some of these removals, like this one, break the package?
-rm neural_compressor/transformers/models/__init__.py
 # needs lm_eval
 rm neural_compressor/evaluation/lm_eval/accuracy.py
 rm neural_compressor/evaluation/lm_eval/models/huggingface.py
 rm neural_compressor/evaluation/lm_eval/__init__.py
 rm neural_compressor/evaluation/lm_eval/models/__init__.py
-# TODO: I'm worries that some of these removals, like this one, break the package?
-rm neural_compressor/transformers/__init__.py
 # needs habana_frameworks
-rm -r neural_compressor/torch/algorithms/fp8_quant/
+rm neural_compressor/torch/algorithms/fp8_quant/_quant_common/quant_config.py
+# fallout of the above
+rm neural_compressor/torch/algorithms/fp8_quant/common.py
+rm neural_compressor/torch/algorithms/fp8_quant/__init__.py
+rm neural_compressor/torch/algorithms/fp8_quant/observer.py
+rm neural_compressor/torch/algorithms/fp8_quant/patched_module_base.py
+# needs habana_frameworks
+rm neural_compressor/torch/algorithms/fp8_quant/_core/measure.py
+# fallout of the above
+rm neural_compressor/torch/algorithms/fp8_quant/prepare_quant/prepare_model.py
+rm neural_compressor/torch/algorithms/fp8_quant/quantizer.py
+rm neural_compressor/torch/algorithms/fp8_quant/save_load.py
+# needs habana_frameworks
 rm neural_compressor/torch/algorithms/mixed_low_precision/custom_methods/gptq.py
-# needs ipex (intel_extensions_for_pytorch)
-rm neural_compressor/torch/algorithms/smooth_quant/utility.py
-rm neural_compressor/torch/algorithms/smooth_quant/__init__.py
-rm neural_compressor/torch/algorithms/smooth_quant/save_load.py
-rm neural_compressor/torch/algorithms/smooth_quant/smooth_quant.py
-rm neural_compressor/torch/algorithms/static_quant/static_quant.py
-rm neural_compressor/torch/algorithms/static_quant/__init__.py
-rm neural_compressor/torch/algorithms/static_quant/save_load.py
-# needs auto_round
-rm neural_compressor/torch/algorithms/weight_only/autoround.py
-# needs numba
-rm neural_compressor/torch/utils/bit_packer.py
 # breaks on PyTorch 2.8 as shipped in rawhide/F43
 %if 0%{?fedora} >= 43
 rm neural_compressor/adaptor/torch_utils/hawq_metric.py
@@ -118,10 +96,21 @@ rm neural_compressor/torch/algorithms/pt2e_quant/utility.py
 rm neural_compressor/torch/export/pt2e_export.py
 rm neural_compressor/torch/export/__init__.py
 %endif
+# needs ipex (intel_extensions_for_pytorch)
+rm neural_compressor/torch/algorithms/smooth_quant/__init__.py
+rm neural_compressor/torch/algorithms/smooth_quant/save_load.py
+rm neural_compressor/torch/algorithms/smooth_quant/smooth_quant.py
+rm neural_compressor/torch/algorithms/smooth_quant/utility.py
+rm neural_compressor/torch/algorithms/static_quant/static_quant.py
+rm neural_compressor/torch/algorithms/static_quant/__init__.py
+rm neural_compressor/torch/algorithms/static_quant/save_load.py
+# needs auto_round
+rm neural_compressor/torch/algorithms/weight_only/autoround.py
+# needs numba
+rm neural_compressor/torch/utils/bit_packer.py
 
 
 %generate_buildrequires
-# Keep only those extras which you actually want to package or use during tests
 %pyproject_buildrequires -x pt
 
 
@@ -131,7 +120,6 @@ rm neural_compressor/torch/export/__init__.py
 
 %install
 %pyproject_install
-# Add top-level Python module names here as arguments, you can use globs
 %pyproject_save_files -l neural_compressor
 
 
@@ -140,6 +128,8 @@ rm neural_compressor/torch/export/__init__.py
 
 
 %files -n python3-neural-compressor -f %{pyproject_files}
+%license LICENSE
+%doc README.md
 %{_bindir}/incbench
 
 
