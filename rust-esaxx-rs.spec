@@ -6,12 +6,14 @@
 
 Name:           rust-esaxx-rs
 Version:        0.1.10
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Wrapping around sentencepiece's esaxxx library
 
 License:        Apache-2.0
 URL:            https://crates.io/crates/esaxx-rs
 Source:         %{crates_source}
+# Manually created patch for downstream crate metadata changes
+Patch:          esaxx-rs-fix-metadata.diff
 
 BuildRequires:  cargo-rpm-macros >= 24
 
@@ -89,5 +91,7 @@ use the "cpp" feature of the "%{crate}" crate.
 %endif
 
 %changelog
+* Sun Apr 06 2025 Alexander F. Lent <lx@xanderlent.com> - 0.1.10-2
+- Patch out criterion dev-dependency
 * Thu Jan 02 2025 Alexander F. Lent <lx@xanderlent.com> - 0.1.10-1
 - Initial package
