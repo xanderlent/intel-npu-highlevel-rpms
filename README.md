@@ -44,13 +44,11 @@ My primary goal is supporting the above list of software packaged. All the deps 
   - openvino (only for F40/F41, see below, packaged with the NPU plugin even, starting in F42+)
   - python-neural-compressor (+pt)
     - python-accelerate
-      - python-safetensors (+numpy,+torch)
     - (opencv-python-headless was substituted with packaged opencv)
     - python-pycocotools
     - python-transformers (see below)
   - python-transformers (+accelerate,+ftfy,+sentencepiece,+serving,+sklearn,+tokenizers,+torch,+torch-vision,+vision; future work for +onnx{,runtime},+modelcreation)
     - python-accelerate (see above)
-      - python-safetensors (see above)
     - python-tokenizers (+docs)
       - rust-numpy0.23
       - rust-tokenizers
@@ -64,6 +62,9 @@ My primary goal is supporting the above list of software packaged. All the deps 
         - rust-spm\_precompiled
         - rust-unicode-normalization-alignments
     - python-safetensors (see above)
+- python-datasets
+- python-blobfile
+- python-evaluate
 
 ### Backporting OpenVINO from Fedora 42
 
