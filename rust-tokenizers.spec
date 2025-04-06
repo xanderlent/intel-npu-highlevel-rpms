@@ -6,12 +6,14 @@
 
 Name:           rust-tokenizers
 Version:        0.21.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Implementation of today's most used tokenizers, with a focus on performances and versatility
 
 License:        Apache-2.0
 URL:            https://crates.io/crates/tokenizers
 Source:         %{crates_source}
+# Manually created patch for downstream crate metadata changes
+Patch:          tokenizers-fix-metadata.diff
 
 BuildRequires:  cargo-rpm-macros >= 24
 
