@@ -47,13 +47,13 @@ My primary goal is supporting the above list of software packaged. All the deps 
     - (opencv-python-headless was substituted with packaged opencv)
     - python-pycocotools
     - python-transformers (see below)
-  - python-transformers (+accelerate,+ftfy,+sentencepiece,+serving,+sklearn,+tokenizers,+torch,+torch-vision,+vision; future work for +onnx{,runtime},+modelcreation)
+  - python-transformers (+accelerate,+ftfy,+num2words,+optuna,+sentencepiece,+serving,+sklearn,+tiktoken,+tokenizers,+torch,+torch-vision,+torchhub,+vision; future work for +onnx{,runtime},+modelcreation)
     - python-accelerate (see above)
-    - python-tokenizers (+docs)
+    - python-blobfile
+    - python-tokenizers
       - rust-numpy0.23
       - rust-tokenizers
         - rust-esaxx-rs
-          - rust-criterion (see notes for F41+)
         - rust-macro\_rules\_attribute
           - rust-macro\_rules\_attribute-proc\_macro
         - rust-monostate
@@ -63,7 +63,6 @@ My primary goal is supporting the above list of software packaged. All the deps 
         - rust-unicode-normalization-alignments
     - python-safetensors (see above)
 - python-datasets
-- python-blobfile
 - python-evaluate
 
 ### Backporting OpenVINO from Fedora 42
@@ -76,32 +75,9 @@ I have manually enabled building openvino from the F42 package source for F40 an
 
 This was set up in the copr to allow the newer version of huggingface transformers to build.
 
-### Revived orphaned deps of rust-criterion from F40
+### A note on rust-criterion
 
-In F41+, various deps of rust-criterion were removed. Rather than vendoring them all here, I have set up
-the copr system to build them for F41+ based on the code last used in f40. While eventually these versions
-will get stale, we can keep these orphaned leaf packages alive a little longer.
-
-(Fedora removed rust-criterion itself as an orphaned leaf in F38+, so we vendor it here since the version in
-dist-git is old.)
-
-  - rust-anes
-  - rust-criterion-plot
-    - rust-itertools-num
-  - rust-oorandom
-    - rust-random-fast-rng
-      - rust-random-trait
-    - rust-randomize
-  - rust-plotters
-    - rust-plotters-backend
-    - rust-plotters-bitmap
-      - rust-gif0.12 (of these, the only one in this tree, built on Fedora 41+ only)
-      - rust-plotters-backend
-    - rust-plotters-svg
-      - rust-plotters-backend
-  - rust-tinytemplate
-
-### TODOs on those packages
+It was removed by the Fedora rust-sig as a dev dependency. It's easier just to drop it and any tests that use it.
 
 #### Main TODOs
 
@@ -123,8 +99,6 @@ dist-git is old.)
 - I need to check the huggingface packages and rust deps for vendored stuff
 - for ex, the esaxx-rs crate is Apache-2.0 licensed but it vendors an MIT licensed C++ library. Sigh.
 - tokenizers seems to have functions that download random models directly from the internet; these might already be *packaged* in Fedora in huggingface\_hub which IIUC Copr and others use for AI in log-detective? Is the random downloading potentially a problem? Should we be packaging models as well for Fedora? -> Probably a MUCH bigger discussion on the mailing list, frankly...
-- the criterion package tweaks a tight version bound on a tool to allow supposedly-compatible versions based on semver
-- rust-gif0.12 needs to be built without check since that creates a circular dep on rust-criterion
 - did deleting things in neural-compressor (esp.) or acclerate or transformers etc. damage the package rather than just stripping unused stuff?
 
 ## Candidates for evaluation for future packaging
