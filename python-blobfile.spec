@@ -46,7 +46,8 @@ Summary:        %{summary}
 %check
 %pyproject_check_import
 # We could run tests with python testing/run.py but
-# "The tests are rather slow, ~7 minutes to run (even though large file tests are disabled) and require accounts with every cloud provider."
+# "The tests are rather slow, ~7 minutes to run (even though large file tests
+# are disabled) and require accounts with every cloud provider."
 
 
 %files -n python3-blobfile -f %{pyproject_files}
