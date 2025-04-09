@@ -13,6 +13,7 @@ BuildArch:      noarch
 BuildRequires:  python3-devel
 # For passing the test imports
 BuildRequires:	python3dist(pytest)
+#BuildRequires:	python3dist(parameterized)
 
 # Fill in the actual package description to submit package to Fedora
 %global _description %{expand:
@@ -35,6 +36,8 @@ Summary:        %{summary}
 %autosetup -p1 -n accelerate-%{version}
 # Delete all the test_utils with external deps (they fail the import test)
 rm -r src/accelerate/test_utils/scripts/external_deps/*
+# This test would cause a circular dependency on python3dist(transformers)
+#rm tests/test_big_modeling.py
 # On Fedora 40, this eventually imports torch._C which doesn't work
 %if 0%{?fedora} < 41
 rm src/accelerate/test_utils/scripts/test_merge_weights.py
