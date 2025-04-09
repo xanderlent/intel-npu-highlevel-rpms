@@ -1,8 +1,7 @@
 Name:           python-accelerate
-Version:        1.5.2
-Release:        2%{?dist}
-# Fill in the actual package summary to submit package to Fedora
-Summary:        Accelerate
+Version:        1.6.0
+Release:        1%{?dist}
+Summary:        Accelerate PyTorch with distributed training and inference
 
 # Check if the automatically generated License and its spelling is correct for Fedora
 # https://docs.fedoraproject.org/en-US/packaging-guidelines/LicensingGuidelines/
@@ -15,11 +14,13 @@ BuildRequires:  python3-devel
 # For passing the test imports
 BuildRequires:	python3dist(pytest)
 BuildRequires:	python3dist(rich)
-#BuildRequires:	python3dist(parameterized)
 
 # Fill in the actual package description to submit package to Fedora
 %global _description %{expand:
-This is package 'accelerate' generated automatically by pyp2spec.}
+Accelerate is a library that enables the same PyTorch code to be run across any
+distributed configuration by adding just four lines of code! In short, training
+and inference at scale made simple, efficient and adaptable.}
+
 
 %description %_description
 
@@ -27,6 +28,8 @@ This is package 'accelerate' generated automatically by pyp2spec.}
 Summary:        %{summary}
 
 %description -n python3-accelerate %_description
+
+%pyproject_extras_subpkg -n python3-accelerate rich
 
 
 %prep
@@ -42,7 +45,8 @@ rm src/accelerate/test_utils/scripts/test_merge_weights.py
 
 
 %generate_buildrequires
-%pyproject_buildrequires
+# Keep only those extras which you actually want to package or use during tests
+%pyproject_buildrequires -x rich
 
 
 %build
