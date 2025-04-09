@@ -1,6 +1,6 @@
 Name:           python-accelerate
 Version:        1.6.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Accelerate PyTorch with distributed training and inference
 
 # Check if the automatically generated License and its spelling is correct for Fedora
@@ -13,7 +13,6 @@ BuildArch:      noarch
 BuildRequires:  python3-devel
 # For passing the test imports
 BuildRequires:	python3dist(pytest)
-BuildRequires:	python3dist(rich)
 
 # Fill in the actual package description to submit package to Fedora
 %global _description %{expand:
@@ -36,8 +35,6 @@ Summary:        %{summary}
 %autosetup -p1 -n accelerate-%{version}
 # Delete all the test_utils with external deps (they fail the import test)
 rm -r src/accelerate/test_utils/scripts/external_deps/*
-# Delete a test that would create a circular dep on python3dist(transformers)
-#rm tests/test_big_modeling.py
 # On Fedora 40, this eventually imports torch._C which doesn't work
 %if 0%{?fedora} < 41
 rm src/accelerate/test_utils/scripts/test_merge_weights.py
@@ -45,7 +42,6 @@ rm src/accelerate/test_utils/scripts/test_merge_weights.py
 
 
 %generate_buildrequires
-# Keep only those extras which you actually want to package or use during tests
 %pyproject_buildrequires -x rich
 
 
@@ -55,7 +51,6 @@ rm src/accelerate/test_utils/scripts/test_merge_weights.py
 
 %install
 %pyproject_install
-# Add top-level Python module names here as arguments, you can use globs
 %pyproject_save_files -l accelerate
 
 
