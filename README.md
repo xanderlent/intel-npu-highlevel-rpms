@@ -34,14 +34,14 @@ I also unofficially maintain the driver packaging in [another project](https://g
 My primary goal is supporting the above list of software packaged. All the deps have best-effort support for now, so that I can focus on making the NPU-related packages work.
 
 - Fedora 39 and below are not supported, were never supported in the past, and likely will never be supported in the future.
-- Fedora 40 is supported. (OpenVINO is build as a backport from Fedora 42. My intel-npu-driver copr is enabled for the build process since it backports the latest OneAPI Level Zero headers from Fedora 41, which are needed to build OpenVINO's NPU plugin.)
-- Fedora 41 is supported. (OpenVINO is built as a backport from Fedora 42. Some dropped deps are forward-ported from Fedora 40.)
-- Fedora 42 is supported.
+- Fedora 40 is no longer supported, as it reached EOL in May 2025.
+- Fedora 41 is supported. (OpenVINO is built as a backport from Fedora 42. Some deps are backported from rawhide.)
+- Fedora 42 is supported. (Some deps are backported from rawhide.)
 - Fedora rawhide is partially suppported, because sometimes it breaks and I can't immediately fix it.
 
 ### Packaged software and dependencies:
 - python-intel-npu-acceleration-library (docs are not packaged due to additional deps)
-  - openvino (only for F40/F41, see below, packaged with the NPU plugin even, starting in F42+)
+  - openvino (only for F41, see below, packaged upstream in F42+)
   - python-neural-compressor (+pt)
     - python-accelerate
     - (opencv-python-headless was substituted with packaged opencv)
@@ -56,12 +56,12 @@ My primary goal is supporting the above list of software packaged. All the deps 
         - rust-esaxx-rs
         - rust-macro\_rules\_attribute
           - rust-macro\_rules\_attribute-proc\_macro
-        - rust-monostate
-          - rust-monostate-impl
-        - rust-rayon-cond
+        - rust-monostate (backported from rawhide)
+          - rust-monostate-impl (backported from rawhide)
+        - rust-rayon-cond (backported from rawhide)
         - rust-spm\_precompiled
         - rust-unicode-normalization-alignments
-    - python-safetensors (see above)
+    - python-safetensors (backported from rawhide)
 - python-datasets
 - python-evaluate
 
@@ -69,11 +69,15 @@ My primary goal is supporting the above list of software packaged. All the deps 
 
 Fedora 42+ packages OpenVINO 2024.5.0 which is newer than the bundled OpenVINO 2024.4.4 in intel-npu-acceleration-library 1.4.0, but seems to work OK. The NPU plugin spews warnings but is functional, if and only if the compiler-in-driver component is present.
 
-I have manually enabled building openvino from the F42 package source for F40 and F41 in this copr to fill the gap. Also, because the NPU plugin sources need a newer version of OneAPI Level Zero headers, inlcude my intel-npu-driver copr to allow it to be used in the build process.
+I have manually enabled building openvino from the F42 package source for F41 in this copr to fill the gap.
 
-### Backporting huggingface-hub from Fedora 42 to F40,F41
+### Backporting huggingface-hub from Fedora 42
 
-This was set up in the copr to allow the newer version of huggingface transformers to build.
+This was set up in the copr to allow the newer version of huggingface transformers to build on F41.
+
+### Backporting other deps from rawhide
+
+As I work to get these packages into Fedora rawhide (for example in the F43 cycle), I will backport them to F41/F42.
 
 ### A note on rust-criterion
 
