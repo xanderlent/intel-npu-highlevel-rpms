@@ -5,11 +5,11 @@
 %global crate macro_rules_attribute
 
 Name:           rust-macro_rules_attribute
-Version:        0.2.0
+Version:        0.2.2
 Release:        1%{?dist}
 Summary:        Use declarative macros in attribute or derive position
 
-License:        MIT
+License:        Apache-2.0 OR MIT OR Zlib
 URL:            https://crates.io/crates/macro_rules_attribute
 Source:         %{crates_source}
 
@@ -91,5 +91,5 @@ use the "verbose-expansions" feature of the "%{crate}" crate.
 %endif
 
 %changelog
-* Thu Jan 02 2025 Alexander F. Lent <lx@xanderlent.com> - 0.2.0-1
+* Tue Jun 03 2025 Alexander F. Lent <lx@xanderlent.com> - 0.2.2-1
 - Initial package

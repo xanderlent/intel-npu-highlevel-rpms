@@ -55,11 +55,11 @@ My primary goal is supporting the above list of software packaged. All the deps 
       - rust-tokenizers
         - rust-esaxx-rs
         - rust-macro\_rules\_attribute
-          - rust-macro\_rules\_attribute-proc\_macro
+          - rust-macro\_rules\_attribute-proc\_macro (backported from rawhide)
         - rust-monostate (backported from rawhide)
           - rust-monostate-impl (backported from rawhide)
         - rust-rayon-cond (backported from rawhide)
-        - rust-spm\_precompiled
+        - rust-spm\_precompiled (backported from rawhide)
         - rust-unicode-normalization-alignments
     - python-safetensors (backported from rawhide)
 - python-datasets
