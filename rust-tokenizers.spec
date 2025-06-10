@@ -6,7 +6,7 @@
 
 Name:           rust-tokenizers
 Version:        0.21.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Implementation of today's most used tokenizers, with a focus on performances and versatility
 
 License:        Apache-2.0
@@ -173,7 +173,6 @@ use the "unstable_wasm" feature of the "%{crate}" crate.
 
 %if %{with check}
 %check
-# TODO: Many tests don't work because of missing data files in the crate distribution
 %cargo_test
 %endif
 
