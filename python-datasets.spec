@@ -1,6 +1,6 @@
 Name:           python-datasets
 Version:        3.6.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        HuggingFace community-driven open-source library of datasets
 
 License:        Apache-2.0
@@ -35,6 +35,8 @@ Summary:        %{summary}
 sed -i "s/dill>=0.3.0,<0.3.9/dill>=0.3.0,<0.5/" setup.py
 # Relax multiprocess version bound a little (to allow the latest version)
 sed -i "s/multiprocess<0.70.17/multiprocess<0.70.18/" setup.py
+# Relax fsspec dependency since it's really a minium bound
+sed -i "s/fsspec[http]>=2023.1.0,<=2025.3.0/fsspec[http]>=2023.1.0/" setup.py
 # Remove modules that use unpackaged dependencies
 # This file relies on pyspark
 rm src/datasets/io/spark.py
