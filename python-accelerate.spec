@@ -1,5 +1,5 @@
 Name:           python-accelerate
-Version:        1.7.0
+Version:        1.8.1
 Release:        1%{?dist}
 Summary:        Accelerate PyTorch with distributed training and inference
 
@@ -13,7 +13,6 @@ BuildRequires:  python3-devel
 BuildRequires:	python3dist(pytest)
 BuildRequires:	python3dist(parameterized)
 
-# Fill in the actual package description to submit package to Fedora
 %global _description %{expand:
 Accelerate is a library that enables the same PyTorch code to be run across any
 distributed configuration by adding just four lines of code! In short, training
