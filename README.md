@@ -60,7 +60,7 @@ My primary goal is supporting the above list of software packaged. All the deps 
           - rust-monostate-impl (backported from rawhide)
         - rust-rayon-cond (backported from rawhide)
         - rust-spm\_precompiled (backported from rawhide)
-        - rust-unicode-normalization-alignments
+        - rust-unicode-normalization-alignments (backported from rawhide)
     - python-safetensors (backported from rawhide)
 - python-datasets
 - python-evaluate
