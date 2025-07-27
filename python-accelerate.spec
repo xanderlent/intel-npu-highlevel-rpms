@@ -1,5 +1,5 @@
 Name:           python-accelerate
-Version:        1.8.1
+Version:        1.9.0
 Release:        1%{?dist}
 Summary:        Accelerate PyTorch with distributed training and inference
 
