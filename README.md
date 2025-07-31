@@ -53,7 +53,7 @@ My primary goal is supporting the above list of software packaged. All the deps 
     - python-tokenizers
       - rust-numpy0.23
       - rust-tokenizers
-        - rust-esaxx-rs
+        - rust-esaxx-rs (backported from rawhide)
         - rust-macro\_rules\_attribute (backported from rawhide)
           - rust-macro\_rules\_attribute-proc\_macro (backported from rawhide)
         - rust-monostate (backported from rawhide)
