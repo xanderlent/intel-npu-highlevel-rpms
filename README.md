@@ -49,7 +49,7 @@ My primary goal is supporting the above list of software packaged. All the deps 
     - python-transformers (see below)
   - python-transformers (+accelerate,+ftfy,+num2words,+optuna,+sentencepiece,+serving,+sklearn,+tiktoken,+tokenizers,+torch,+torch-vision,+torchhub,+vision; future work for +onnx{,runtime},+modelcreation)
     - python-accelerate (see above)
-    - python-blobfile
+    - python-blobfile (review in [rhbz#2385893](https://bugzilla.redhat.com/show_bug.cgi?id=2385893))
     - python-tokenizers
       - rust-numpy (review in [rhbz#2385892](https://bugzilla.redhat.com/show_bug.cgi?id=2385892))
       - rust-tokenizers (review in [rhbz#2358553](https://bugzilla.redhat.com/show_bug.cgi?id=2358553))
