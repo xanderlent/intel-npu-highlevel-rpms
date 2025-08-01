@@ -6,13 +6,14 @@
 
 Name:           rust-tokenizers
 Version:        0.21.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Implementation of today's most used tokenizers in Rust
 
 License:        Apache-2.0
 URL:            https://crates.io/crates/tokenizers
 Source:         %{crates_source}
 # Manually created patch for downstream crate metadata changes
+# * Allow indicatif dependency to vary between 0.17 and 0.18
 # * Downgrade onig dependency from 6.5.1 to 6.4.0
 # * Drop criterion dev-dependency
 Patch:          tokenizers-fix-metadata.diff

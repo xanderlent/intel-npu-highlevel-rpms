@@ -2,6 +2,7 @@
 [package]
 summary = "Implementation of today's most used tokenizers in Rust"
 cargo-toml-patch-comments = [
+    "Allow indicatif dependency to vary between 0.17 and 0.18",
     "Downgrade onig dependency from 6.5.1 to 6.4.0",
     "Drop criterion dev-dependency",
 ]
