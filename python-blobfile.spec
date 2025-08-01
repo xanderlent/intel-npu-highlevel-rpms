@@ -1,11 +1,8 @@
 Name:           python-blobfile
 Version:        3.0.0
-Release:        1%{?dist}
-# Fill in the actual package summary to submit package to Fedora
-Summary:        Read GCS, ABS and local paths with the same interface, clone of tensorflow.io.gfile
+Release:        2%{?dist}
+Summary:        Read GCS, ABS and local paths with the same interface
 
-# Check if the automatically generated License and its spelling is correct for Fedora
-# https://docs.fedoraproject.org/en-US/packaging-guidelines/LicensingGuidelines/
 License:        Unlicense
 URL:            https://github.com/christopher-hesse/blobfile
 Source:         %{pypi_source blobfile}
@@ -14,9 +11,22 @@ BuildArch:      noarch
 BuildRequires:  python3-devel
 
 
-# Fill in the actual package description to submit package to Fedora
 %global _description %{expand:
-This is package 'blobfile' generated automatically by pyp2spec.}
+This is a library that provides a Python-like interface for reading local and
+remote files (only from blob storage), with an API similar to open() as well as
+some of the os.path and shutil functions. blobfile supports local paths, Google
+Cloud Storage paths (gs://<bucket>), and Azure Blob Storage paths
+(az://<account>/<container>
+or https://<account>.blob.core.windows.net/<container>/).
+
+The main function is BlobFile, which lets you open local and remote files that
+act more or less like local ones. There are also a few additional functions
+such as basename, dirname, and join, which mostly do the same thing as their
+os.path namesakes, only they also support GCS paths and ABS paths.
+
+This library is inspired by TensorFlow's gfile but does not have exactly the
+same interface.
+}
 
 %description %_description
 
@@ -51,7 +61,6 @@ Summary:        %{summary}
 
 
 %files -n python3-blobfile -f %{pyproject_files}
-%license LICENSE
 %doc README.md
 
 
