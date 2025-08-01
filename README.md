@@ -51,8 +51,8 @@ My primary goal is supporting the above list of software packaged. All the deps 
     - python-accelerate (see above)
     - python-blobfile
     - python-tokenizers
-      - rust-numpy0.23
-      - rust-tokenizers
+      - rust-numpy (review in [rhbz#2385892](https://bugzilla.redhat.com/show_bug.cgi?id=2385892))
+      - rust-tokenizers (review in [rhbz#2358553](https://bugzilla.redhat.com/show_bug.cgi?id=2358553))
         - rust-esaxx-rs (backported from rawhide)
         - rust-macro\_rules\_attribute (backported from rawhide)
           - rust-macro\_rules\_attribute-proc\_macro (backported from rawhide)
