@@ -4,8 +4,8 @@
 
 %global crate numpy
 
-Name:           rust-numpy0.23
-Version:        0.23.0
+Name:           rust-numpy
+Version:        0.25.0
 Release:        1%{?dist}
 Summary:        PyO3-based Rust bindings of the NumPy C-API
 
@@ -14,6 +14,7 @@ URL:            https://crates.io/crates/numpy
 Source:         %{crates_source}
 
 BuildRequires:  cargo-rpm-macros >= 24
+# TODO: add this with rust2rpm
 # the numpy package needs to be present to run tests
 BuildRequires: python3dist(numpy)
 
