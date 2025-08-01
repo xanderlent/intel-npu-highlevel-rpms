@@ -1,6 +1,6 @@
 Name:           python-datasets
-Version:        3.6.0
-Release:        4%{?dist}
+Version:        4.0.0
+Release:        1%{?dist}
 Summary:        HuggingFace community-driven open-source library of datasets
 
 License:        Apache-2.0
@@ -9,8 +9,6 @@ Source:         %{pypi_source datasets}
 
 BuildArch:      noarch
 BuildRequires:  python3-devel
-# for tests
-BuildRequires:	pytest
 
 
 # Fill in the actual package description to submit package to Fedora
@@ -35,12 +33,11 @@ Summary:        %{summary}
 sed -i "s/dill>=0.3.0,<0.3.9/dill>=0.3.0/" setup.py
 # Relax multiprocess version bound to allow the latest version
 sed -i "s/multiprocess<0.70.17/multiprocess/" setup.py
-# Relax fsspec version because Fedora ships a newer version
+# Relax fsspec version because Fedora might ship a newer version
 sed -i "s/fsspec\[http\]>=2023.1.0,<=2025.3.0/fsspec\[http\]>=2023.1.0/" setup.py
 # Remove modules that use unpackaged dependencies
 # This file relies on pyspark
 rm src/datasets/io/spark.py
-
 
 %generate_buildrequires
 %pyproject_buildrequires -x torch,vision
@@ -57,9 +54,7 @@ rm src/datasets/io/spark.py
 
 %check
 %pyproject_check_import
-# Would run pytest macro but I can't figure out how to get it to work...
-#pytest
-
+# TODO: run the tests
 
 %files -n python3-datasets -f %{pyproject_files}
 %license LICENSE AUTHORS
