@@ -1,6 +1,6 @@
 Name:           python-tokenizers
 Version:        0.21.4
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Implementation of today's most used tokenizers, with a focus on performances and versatility
 
 SourceLicense:  Apache-2.0
