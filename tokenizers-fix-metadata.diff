@@ -1,20 +1,20 @@
---- tokenizers-0.21.1/Cargo.toml	1970-01-01T00:00:01+00:00
-+++ tokenizers-0.21.1/Cargo.toml	2025-06-10T05:59:10.510206+00:00
-@@ -193,7 +193,7 @@
- version = "1.10"
+--- tokenizers-0.21.4/Cargo.toml	1970-01-01T00:00:01+00:00
++++ tokenizers-0.21.4/Cargo.toml	2025-08-01T02:39:48.343571+00:00
+@@ -187,7 +187,7 @@
+ version = "0.1.12"
  
- [dependencies.rayon-cond]
--version = "0.3"
-+version = "0.4"
+ [dependencies.onig]
+-version = "6.5.1"
++version = "6.4.0"
+ optional = true
+ default-features = false
  
- [dependencies.regex]
- version = "1.10"
-@@ -226,9 +226,6 @@
+@@ -234,9 +234,6 @@
  [dev-dependencies.assert_approx_eq]
  version = "1.1"
  
 -[dev-dependencies.criterion]
--version = "0.5"
+-version = "0.6"
 -
  [dev-dependencies.tempfile]
  version = "3.10"

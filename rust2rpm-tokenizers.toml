@@ -1,0 +1,57 @@
+# Regenerate package with: rust2rpm -C rust2rpm-tokenizers.toml -r tokenizers
+[package]
+summary = "Implementation of today's most used tokenizers in Rust"
+cargo-toml-patch-comments = [
+    "Downgrade onig dependency from 6.5.1 to 6.4.0",
+    "Drop criterion dev-dependency",
+]
+
+[tests]
+run = [
+    "doc",
+    "tests",
+]
+skip.doc = [
+    "926",
+]
+skip-exact.doc = false
+skip.tests = [
+    # tokenizers test (the main unit tests) runs fine
+    # added_tokens test fails partially
+    "overlapping_tokens",
+    "lstrip_tokens",
+    "rstrip_tokens",
+    "single_word_tokens",
+    # documentation test fails entirely
+    "load_tokenizer",
+    "pipeline",
+    "pipeline_bert",
+    "quicktour",
+    "streaming_tokenizer",
+    "train_tokenizer",
+    # offsets test fails entirely
+    "byte_level_basic",
+    "byte_level_double_sequence",
+    "byte_level_pre_tokenized_sequence",
+    "byte_level_unicode",
+    "split_on_added_tokens_bert",
+    # serialization fails partially
+    "bpe_serde",
+    "test_deserialize_long_file",
+    "wordlevel_serde",
+    "wordpiece_serde",
+    # stream test fails entirely
+    "test_decoding_with_added_bpe",
+    "test_decode_stream_step_no_panic",
+    # training test fails entirely
+    "bpe_values_after_training",
+    "bpe_continuing_subword_prefix_error",
+    # unigram test fails partially
+    "test_train_unigram_from_file",
+    "test_unigram_from_file",
+]
+skip-exact.tests = true
+comments = [
+    "skip doctest that's missing a data file",
+    "skip failing tests that are missing data files",
+]
