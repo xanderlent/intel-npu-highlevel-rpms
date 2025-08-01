@@ -1,6 +1,7 @@
 # High-Level Software that uses the Intel AI Boost NPU
 
 The goal of this repository is to provide Fedora packages for software that runs on the Intel NPU at a higher level than the driver.
+I'm also using this repo to play around with packaging the various huggingface AI libraries.
 
 You can find binary packages built from this repository in [my xanderlent/intel-npu-highlevel Copr](https://copr.fedorainfracloud.org/coprs/xanderlent/intel-npu-highlevel/).
 
@@ -9,14 +10,6 @@ You can find binary packages built from this repository in [my xanderlent/intel-
 - Enable the copr.
 - Install the `python3-intel-npu-acceleration-library` package.
 - Read [Intel's docs](https://intel.github.io/intel-npu-acceleration-library/) to get examples and learn how to use the package to run LLMs and other workloads on your NPU.
-
-## More about the packages
-
-Hopefully, with effort and care, these packages will eventually find their way upstream, into Fedora proper. (For now, the Fedora Review step has been disabled in copr because it drastically improves build times on small packages like these.) As of late January 2025, I am working within the Fedora AI/ML SIG to help get this code upstream.
-
-Including the driver repo means I cannot easily provide aarch64 builds (without splitting the oneapi-level-zero dependency out into another copr). For now I am returning to only building on x86\_64, but I may consider that option in the future.
-
-Right now, most of these packages are originally for Python, so they were generated with the [`pyp2spec`](https://github.com/befeleme/pyp2spec) tool. I'm not completely sure how to use it, so I might be missing some steps, but it definitely does not seem as automated as I would like in terms of converting Python packages to RPMs... On the other hand, [rust2rpm](https://pagure.io/fedora-rust/rust2rpm) was a breeze to use. (`rust2rpm --no-rpmautospec -t fedora --compat crate@version`, leave out `--compat` for non-versioned packages.)
 
 ## A note on system requirements
 
@@ -79,10 +72,6 @@ This was set up in the copr to allow the newer version of huggingface transforme
 
 As I work to get these packages into Fedora rawhide (for example in the F43 cycle), I will backport them to F41/F42.
 
-### A note on rust-criterion
-
-It was removed by the Fedora rust-sig as a dev dependency. It's easier just to drop it and any tests that use it.
-
 #### Main TODOs
 
 - The unmodified build process for intel-npu-acceleration-library downloads a binary OpenVINO distribution.
@@ -91,17 +80,12 @@ It was removed by the Fedora rust-sig as a dev dependency. It's easier just to d
     native library object as a python module. Maybe that needs to move to lib, lib64, or libexec for the package?
   - Even worse, their OS detection doesn't handle all the prebuilt distros... Oh because only some have NPU support. Sigh.
   - Should probably suggest USE\_SYSTEM\_OPENVINO or something as a fallback upstream.
-- On OpenVINO, the good news is that Fedora 42+ packages OpenVINO.
-- Numpy v2 is backwards-compatible with numpy v1, so not a big issue, just need to fix packages that specify one or the other.
 - a lot of packages need their licenses fixed up to be SPDX
-- most of my packages don't correctly annotate licenses, docs, test data, etc right now
-- I may need to manually specify deps on packages outside of the python ones?
-- the aaaa spec link exists because the default spec for rpkg should be alphabetically first
+- some of my packages don't correctly annotate licenses, docs, test data, etc right now
 - neural\_compressor is missing the requirements.txt files in the source distribution, instead they are in the egg-info requires.txt format...
 - neural\_compressor only needs the deps because parts of it try to import them, we are currently skipping that check to get it to build
 - pycocotools has a randomly-included MIT-licensed C++ JSON parser taken from https://github.com/vivkin/gason at some point. Sigh.
-- I need to check the huggingface packages and rust deps for vendored stuff
-- for ex, the esaxx-rs crate is Apache-2.0 licensed but it vendors an MIT licensed C++ library. Sigh.
+- I need to check the various packages for vendored code suprises.
 - tokenizers seems to have functions that download random models directly from the internet; these might already be *packaged* in Fedora in huggingface\_hub which IIUC Copr and others use for AI in log-detective? Is the random downloading potentially a problem? Should we be packaging models as well for Fedora? -> Probably a MUCH bigger discussion on the mailing list, frankly...
 - did deleting things in neural-compressor (esp.) or acclerate or transformers etc. damage the package rather than just stripping unused stuff?
 
