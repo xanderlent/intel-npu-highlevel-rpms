@@ -6,7 +6,7 @@
 
 Name:           rust-numpy
 Version:        0.25.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        PyO3-based Rust bindings of the NumPy C-API
 
 License:        BSD-2-Clause
@@ -14,9 +14,9 @@ URL:            https://crates.io/crates/numpy
 Source:         %{crates_source}
 
 BuildRequires:  cargo-rpm-macros >= 24
-# TODO: add this with rust2rpm
-# the numpy package needs to be present to run tests
-BuildRequires: python3dist(numpy)
+%if %{with check}
+BuildRequires:  python3dist(numpy)
+%endif
 
 %global _description %{expand:
 PyO3-based Rust bindings of the NumPy C-API.}
