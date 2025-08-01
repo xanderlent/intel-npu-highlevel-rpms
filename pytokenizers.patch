@@ -1,14 +1,14 @@
-diff -ur a/bindings/python/Cargo.toml b/bindings/python/Cargo.toml
---- a/bindings/python/Cargo.toml	1969-12-31 19:00:00.000000000 -0500
-+++ b/bindings/python/Cargo.toml	1969-12-31 19:00:00.000000000 -0500
-@@ -18,9 +18,7 @@
- numpy = "0.23"
+diff -ur tokenizers-0.21.4-orig/bindings/python/Cargo.toml tokenizers-0.21.4/bindings/python/Cargo.toml
+--- tokenizers-0.21.4-orig/bindings/python/Cargo.toml	1969-12-31 19:00:00.000000000 -0500
++++ tokenizers-0.21.4/bindings/python/Cargo.toml	2025-07-31 23:07:00.356891890 -0400
+@@ -19,9 +19,7 @@
  ndarray = "0.16"
- itertools = "0.12"
+ itertools = "0.14"
+ ahash = { version = "0.8.11", features = ["serde"] }
 -
 -[dependencies.tokenizers]
 -path = "../../tokenizers"
-+tokenizers = "=0.21.1"
++tokenizers = "=0.21.4"
  
  [dev-dependencies]
  tempfile = "3.10"

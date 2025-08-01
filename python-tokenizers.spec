@@ -1,33 +1,39 @@
 Name:           python-tokenizers
-Version:        0.21.1
-Release:        2%{?dist}
-# Fill in the actual package summary to submit package to Fedora
+Version:        0.21.4
+Release:        1%{?dist}
 Summary:        Implementation of today's most used tokenizers, with a focus on performances and versatility
 
-# Check if the automatically generated License and its spelling is correct for Fedora
-# https://docs.fedoraproject.org/en-US/packaging-guidelines/LicensingGuidelines/
-# The Python code is Apache-2.0
 SourceLicense:  Apache-2.0
 # Generated license info from Rust dependencies
 #
 # (MIT OR Apache-2.0) AND Unicode-DFS-2016
 # Apache-2.0
+# Apache-2.0 AND MIT
 # Apache-2.0 OR BSL-1.0
 # Apache-2.0 OR MIT
+# Apache-2.0 OR MIT OR Zlib
 # BSD-2-Clause
 # BSD-2-Clause OR Apache-2.0 OR MIT
 # MIT
 # MIT OR Apache-2.0
 # Unlicense OR MIT
-License:	((MIT OR Apache-2.0) AND Unicode-DFS-2016) AND (Apache-2.0) AND (Apache-2.0 OR BSL-1.0) AND (Apache-2.0 OR MIT) AND (BSD-2-Clause) AND (BSD-2-Clause OR Apache-2.0 OR MIT) AND (MIT) AND (MIT OR Apache-2.0) AND (Unlicense OR MIT)
+%define license_expression %{shrink:
+Unicode-DFS-2016 AND
+Apache-2.0 AND
+(Apache-2.0 OR BSL-1.0) AND
+(Apache-2.0 OR MIT OR Zlib) AND
+BSD-2-Clause AND
+MIT AND
+(Unlicense OR MIT)
+}
+License:	%{license_expression}
 URL:            https://github.com/huggingface/tokenizers
 Source:         %{pypi_source tokenizers}
 Patch:		pytokenizers.patch
 
 BuildRequires:  python3-devel
-BuildRequires:  gcc
 BuildRequires:  cargo-rpm-macros >= 24
-# For some reason the generated buildrequires don't catch this?
+# TODO: For some reason the generated buildrequires don't catch this?
 BuildRequires:	crate(tempfile/default)
 
 
