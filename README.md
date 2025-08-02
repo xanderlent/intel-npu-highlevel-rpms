@@ -57,6 +57,7 @@ My primary goal is supporting the above list of software packaged. All the deps 
     - python-safetensors (backported from rawhide)
 - python-datasets
 - python-evaluate
+  - python-transformers (see above)
 
 ### Backporting OpenVINO from Fedora 42
 
