@@ -1,6 +1,6 @@
 Name:           python-tokenizers
 Version:        0.21.4
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Implementation of today's most used tokenizers, with a focus on performances and versatility
 
 SourceLicense:  Apache-2.0
@@ -29,7 +29,6 @@ MIT AND
 License:	%{license_expression}
 URL:            https://github.com/huggingface/tokenizers
 Source:         %{pypi_source tokenizers}
-Patch:		pytokenizers.patch
 
 BuildRequires:  python3-devel
 BuildRequires:  cargo-rpm-macros >= 24
@@ -58,6 +57,10 @@ cp -a tokenizers/LICENSE LICENSE
 rm -r tokenizers/
 # Remove locked versions
 rm bindings/python/Cargo.lock
+# Replace the path-based dependency on the bundled crate with an exact-version
+# dependency.
+tomcli set bindings/python/Cargo.toml del dependencies.tokenizers.path
+tomcli set bindings/python/Cargo.toml str dependencies.tokenizers.version '=%{version}'
 
 %generate_buildrequires
 # Get the cargo buildrequires first, so that maturin will succeed
