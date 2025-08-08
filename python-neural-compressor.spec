@@ -1,6 +1,6 @@
 Name:           python-neural-compressor
 Version:        3.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Repository of Intel® Neural Compressor
 
@@ -108,6 +108,16 @@ rm neural_compressor/torch/algorithms/static_quant/save_load.py
 rm neural_compressor/torch/algorithms/weight_only/autoround.py
 # needs numba
 rm neural_compressor/torch/utils/bit_packer.py
+# breaks on PyTorch 2.8 as shipped in rawhide/F43
+%if 0%{?fedora} >= 43
+rm neural_compressor/adaptor/torch_utils/hawq_metric.py
+rm neural_compressor/torch/algorithms/pt2e_quant/core.py
+rm neural_compressor/torch/algorithms/pt2e_quant/__init__.py
+rm neural_compressor/torch/algorithms/pt2e_quant/half_precision_rewriter.py
+rm neural_compressor/torch/algorithms/pt2e_quant/utility.py
+rm neural_compressor/torch/export/pt2e_export.py
+rm neural_compressor/torch/export/__init__.py
+%endif
 
 
 %generate_buildrequires
