@@ -1,6 +1,6 @@
 Name:           python-tokenizers
 Version:        0.21.4
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Implementation of today's most used tokenizers, with a focus on performances and versatility
 
 SourceLicense:  Apache-2.0
@@ -32,6 +32,7 @@ Source:         %{pypi_source tokenizers}
 
 BuildRequires:  python3-devel
 BuildRequires:  cargo-rpm-macros >= 24
+BuildRequires:	tomcli
 # TODO: For some reason the generated buildrequires don't catch this?
 BuildRequires:	crate(tempfile/default)
 
