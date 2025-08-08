@@ -19,7 +19,7 @@ BuildRequires:  python3dist(datasets)
 BuildRequires:  python3dist(evaluate)
 BuildRequires:  python3dist(nltk)
 BuildRequires:  python3dist(onnx)
-BuildRequires:  python3dist(onnxiruntime)
+BuildRequires:  python3dist(onnxruntime)
 
 
 
