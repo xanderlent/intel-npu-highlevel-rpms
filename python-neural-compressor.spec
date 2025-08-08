@@ -1,12 +1,12 @@
 Name:           python-neural-compressor
-Version:        3.3.1
+Version:        3.4.1
 Release:        1%{?dist}
 Summary:        Intel® Neural Compressor
 
 License:        Apache-2.0
 URL:            https://github.com/intel/neural-compressor
 Source:         %{pypi_source neural_compressor}
-%define commit_hash 679def043cc78740fed4da6c81604a2beda785b0
+%define commit_hash 5b8acf3a0be1b938bfbfbbd1f188ad675eaad445
 Source:		https://raw.githubusercontent.com/intel/neural-compressor/%{commit_hash}/requirements.txt
 Source:		https://raw.githubusercontent.com/intel/neural-compressor/%{commit_hash}/requirements_pt.txt
 Source:		https://raw.githubusercontent.com/intel/neural-compressor/%{commit_hash}/requirements_tf.txt
