@@ -1,6 +1,6 @@
 Name:           python-neural-compressor
 Version:        3.4.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Intel® Neural Compressor
 
 License:        Apache-2.0
