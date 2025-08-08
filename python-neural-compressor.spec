@@ -13,6 +13,7 @@ Source:		https://raw.githubusercontent.com/intel/neural-compressor/%{commit_hash
 
 BuildArch:      noarch
 BuildRequires:  python3-devel
+BuildRequires:  git-core
 # Dependencies for successful import tests (though optional at runtime?)
 BuildRequires:  python3dist(datasets)
 BuildRequires:  python3dist(evaluate)
