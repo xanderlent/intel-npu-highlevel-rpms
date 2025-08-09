@@ -73,6 +73,11 @@ This was set up in the copr to allow the newer version of huggingface transforme
 
 As I work to get these packages into Fedora rawhide (for example in the F43 cycle), I will backport them to F41/F42.
 
+### pycocotools split
+
+The -legacy specfile is built for all versions of Fedora, but the latest pycocotools is only built for F43+ due to recent dependencies.
+
+
 #### Main TODOs
 
 - The unmodified build process for intel-npu-acceleration-library downloads a binary OpenVINO distribution.

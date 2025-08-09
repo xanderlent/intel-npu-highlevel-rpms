@@ -1,5 +1,5 @@
 Name:           python-pycocotools
-Version:        2.0.10
+Version:        2.0.8
 Release:        2%{?dist}
 Summary:        Official APIs for the MS-COCO dataset
 
@@ -24,15 +24,15 @@ Summary:        %{summary}
 
 %description -n python3-pycocotools %_description
 
-%pyproject_extras_subpkg -n python3-pycocotools all
-
 
 %prep
 %autosetup -p1 -n pycocotools-%{version}
+# Use sed to drop the numpy 2 requirement, it's backwards-compatible
+sed -i "s/numpy>=2.0.0rc1/numpy/" pyproject.toml
 
 
 %generate_buildrequires
-%pyproject_buildrequires -x all
+%pyproject_buildrequires
 
 
 %build
