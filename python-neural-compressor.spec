@@ -1,6 +1,6 @@
 Name:           python-neural-compressor
 Version:        3.4.1
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Intel® Neural Compressor
 
 License:        Apache-2.0
@@ -17,10 +17,10 @@ BuildRequires:  git-core
 # Dependencies for successful import tests (though optional at runtime?)
 BuildRequires:  python3dist(datasets)
 BuildRequires:  python3dist(evaluate)
-BuildRequires:  python3dist(torch)
 BuildRequires:  python3dist(nltk)
 BuildRequires:  python3dist(onnx)
 BuildRequires:  python3dist(onnxruntime)
+BuildRequires:  python3dist(transformers)
 
 
 
