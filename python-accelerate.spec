@@ -9,7 +9,7 @@ Source:         %{pypi_source accelerate}
 
 BuildArch:      noarch
 BuildRequires:  python3-devel
-# For passing the test imports
+# For passing the import test
 BuildRequires:	python3dist(pytest)
 BuildRequires:	python3dist(parameterized)
 
@@ -26,6 +26,9 @@ Summary:        %{summary}
 
 %description -n python3-accelerate %_description
 
+# Extras not packaged:
+# - deepspeed: Missing deepspeed package in Fedora
+# - sagemaker: Missing sagemaker package in Fedora
 %pyproject_extras_subpkg -n python3-accelerate rich
 
 
@@ -55,7 +58,7 @@ export ACCELERATE_ENABLE_RICH=True
 %pyproject_check_import
 unset ACCELERATE_ENABLE_RICH
 # Upstream source uses make to run tests, but they don't ship the Makefile to PyPI so...
-# Lots of test fails. TODO: Skip all the failing tests?
+# TODO: Manually run the test suites by copying them out of the Makefile?
 #pytest
 
 
