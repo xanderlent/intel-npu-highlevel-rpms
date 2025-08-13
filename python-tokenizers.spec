@@ -1,7 +1,7 @@
 Name:           python-tokenizers
 Version:        0.21.4
 Release:        4%{?dist}
-Summary:        Implementation of today's most used tokenizers, with a focus on performances and versatility
+Summary:        Implementation of today's most used tokenizers
 
 SourceLicense:  Apache-2.0
 # Generated license info from Rust dependencies
@@ -33,13 +33,16 @@ Source:         %{pypi_source tokenizers}
 BuildRequires:  python3-devel
 BuildRequires:  cargo-rpm-macros >= 24
 BuildRequires:	tomcli
+BuildRequires:  python3dist(pytest)
 # TODO: For some reason the generated buildrequires don't catch this?
 BuildRequires:	crate(tempfile/default)
 
 
 # Fill in the actual package description to submit package to Fedora
 %global _description %{expand:
-This is package 'tokenizers' generated automatically by pyp2spec.}
+Provides an implementation of today's most used tokenizers,
+with a focus on performance and versatility.
+Bindings over the rust-tokenizers implementation.}
 
 %description %_description
 
@@ -62,6 +65,8 @@ rm bindings/python/Cargo.lock
 # dependency.
 tomcli set bindings/python/Cargo.toml del dependencies.tokenizers.path
 tomcli set bindings/python/Cargo.toml str dependencies.tokenizers.version '=%{version}'
+# Drop tests that depend on python3dist(datasets)
+rm bindings/python/tests/documentation/test_tutorial_train_from_iterators.py
 
 %generate_buildrequires
 # Get the cargo buildrequires first, so that maturin will succeed
@@ -85,7 +90,12 @@ cd ../../
 
 %check
 %pyproject_check_import
-# TODO: Tests
+cd bindings/python
+# TODO: The cargo tests for the bindings fail to link to Python
+#cargo_test
+# only run the tests, not the benches
+%pytest -s -v ./tests/
+cd ../../
 
 
 %files -n python3-tokenizers -f %{pyproject_files}
