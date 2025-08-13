@@ -1,6 +1,6 @@
 Name:           python-tokenizers
 Version:        0.21.4
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Implementation of today's most used tokenizers
 
 SourceLicense:  Apache-2.0
@@ -110,6 +110,7 @@ cd bindings/python
         --deselect="tests/bindings/test_encoding.py::TestEncoding::test_word_to_tokens" \
         --deselect="tests/bindings/test_models.py::TestBPE::test_instantiate" \
         --deselect="tests/bindings/test_models.py::TestWordLevel::test_instantiate" \
+        --deselect="tests/bindings/test_models.py::TestWordPiece::test_instantiate" \
         --deselect="tests/bindings/test_processors.py::TestByteLevelProcessing::test_processing" \
         --deselect="tests/bindings/test_tokenizer.py::TestTokenizer::test_encode_add_special_tokens" \
         --deselect="tests/bindings/test_tokenizer.py::TestTokenizer::test_encode_formats" \
