@@ -11,9 +11,10 @@ BuildArch:      noarch
 BuildRequires:  python3-devel
 
 
-# Fill in the actual package description to submit package to Fedora
 %global _description %{expand:
-This is package 'datasets' generated automatically by pyp2spec.}
+Datasets is a lightweight library providing two main features:
+- one-line dataloaders for many public datasets
+- efficient data pre-processing}
 
 %description %_description
 
@@ -22,18 +23,26 @@ Summary:        %{summary}
 
 %description -n python3-datasets %_description
 
+# Extras not packaged
+# - audio: Missing torchcodec package.
+# - jax: Missing jax and jaxlib packages.
+# - pdf: Missing pdfplumber package.
+# - streaming: Legacy extra, no deps, can package if needed.
+# - tensorflow: Missing tensorflow package.
+# - tensorflow_gpu: Missing tensorflow package.
+# - benchmarks, dev, docs, quality, tests, tests-numpy2:
+#     Development tools, no need to package.
 %pyproject_extras_subpkg -n python3-datasets torch,vision
 
 
 %prep
 %autosetup -p1 -n datasets-%{version}
 # The project pins dill and multiprocess due to concerns about determinism.
-# Our package may, then, exhibit different behavior from upstream.
 # Relax dill version bound to allow latest upstream
 sed -i "s/dill>=0.3.0,<0.3.9/dill>=0.3.0/" setup.py
 # Relax multiprocess version bound to allow the latest version
 sed -i "s/multiprocess<0.70.17/multiprocess/" setup.py
-# Relax fsspec version because Fedora might ship a newer version
+# Relax fsspec version because Fedora ships a newer version
 sed -i "s/fsspec\[http\]>=2023.1.0,<=2025.3.0/fsspec\[http\]>=2023.1.0/" setup.py
 # Remove modules that use unpackaged dependencies
 # This file relies on pyspark
