@@ -1,6 +1,6 @@
 Name:           python-optimum
 Version:        1.27.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 # Fill in the actual package summary to submit package to Fedora
 Summary:        Optimum Library is an extension of the Hugging Face Transformers library, providing a framework to integrate third-party libraries from Hardware Partners and interface with their specific functionality.
 
@@ -15,11 +15,12 @@ BuildRequires:  python3-devel
 # Import test requirements
 BuildRequires:  python3dist(accelerate)
 BuildRequires:  python3dist(datasets)
+BuildRequires:  python3dist(onnx)
+BuildRequires:  python3dist(optuna)
 BuildRequires:  python3dist(pytest)
 BuildRequires:  python3dist(pytest-xdist)
 BuildRequires:  python3dist(torchaudio)
 BuildRequires:  python3dist(torchvision)
-BuildRequires:  python3dist(optuna)
 
 
 # Fill in the actual package description to submit package to Fedora
