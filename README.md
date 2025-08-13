@@ -56,13 +56,13 @@ My primary goal is supporting the above list of software packaged. All the deps 
         - rust-spm\_precompiled (backported from rawhide)
         - rust-unicode-normalization-alignments (backported from rawhide)
     - python-safetensors (backported from rawhide)
-- python-datasets
+- python-datasets (review in [rhbz#2388144](https://bugzilla.redhat.com/show_bug.cgi?id=2388144))
 - python-evaluate
   - python-transformers (see above)
 
 ### Backporting OpenVINO from Fedora 42
 
-Fedora 42+ packages OpenVINO 2024.5.0 which is newer than the bundled OpenVINO 2024.4.4 in intel-npu-acceleration-library 1.4.0, but seems to work OK. The NPU plugin spews warnings but is functional, if and only if the compiler-in-driver component is present.
+Fedora 42+ packages OpenVINO 2024.5.0 (or newer) which is newer than the bundled OpenVINO 2024.4.4 in intel-npu-acceleration-library 1.4.0, but seems to work OK. The NPU plugin spews warnings but is functional, if and only if the compiler-in-driver component is present.
 
 I have manually enabled building openvino from the F42 package source for F41 in this copr to fill the gap.
 
