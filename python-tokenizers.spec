@@ -71,22 +71,24 @@ cd ../../
 %pyproject_buildrequires
 
 %build
-%pyproject_wheel
+# Generate the dependency license file first, so maturin will find it
 cd bindings/python/
 %cargo_license_summary
 %{cargo_license} > LICENSE.dependencies
 cd ../../
+%pyproject_wheel
 
 %install
 %pyproject_install
-%pyproject_save_files tokenizers
+# When saving the files, assert that a license file was found
+%pyproject_save_files -l tokenizers
 
 %check
 %pyproject_check_import
+# TODO: Tests
 
 
 %files -n python3-tokenizers -f %{pyproject_files}
-%license LICENSE bindings/python/LICENSE.dependencies
 %doc bindings/python/README.md bindings/python/CHANGELOG.md
 
 %changelog
