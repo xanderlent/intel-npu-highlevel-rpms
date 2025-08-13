@@ -1,6 +1,6 @@
 Name:           python-accelerate
 Version:        1.10.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Accelerate PyTorch with distributed training and inference
 
 License:        Apache-2.0
@@ -115,11 +115,13 @@ unset ACCELERATE_ENABLE_RICH
         --deselect="tests/test_cli.py::ToFSDP2Tester::test_no_output_without_overwrite" \
         --deselect="tests/test_cli.py::ModelEstimatorTester::test_gated" \
         --deselect="tests/test_cli.py::ToFSDP2Tester::test_overwrite_when_output_file_exists" \
-        --deselect="tests/test_cli.py::ToFSDP2Tester::test_nonexistent_config_file"
+        --deselect="tests/test_cli.py::ToFSDP2Tester::test_nonexistent_config_file" \
+        --deselect="tests/test_cli.py::ModelEstimatorTester::test_no_metadata" \
 # Note that we deselected tests where:
 # - The test config files are missing from the PyPI dist.
 # - transformers is a curcular depenededency  test_gates-
-# - ikAttributeError: type object 'ToFSDP2Tester' has no attribute 'original_config`'
+# - AttributeError: type object 'ToFSDP2Tester' has no attribute 'original_config`'
+# - Internet access is required
 # Upstream's test_big_modeling suite
 # Not currently supported due to circular dep on python3dist(transformers)
 #pytest -s -v ./tests/test_big_modeling.py ./tests/test_modeling_utils.py
