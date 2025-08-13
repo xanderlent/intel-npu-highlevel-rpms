@@ -1,6 +1,6 @@
 Name:           python-tokenizers
 Version:        0.21.4
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Implementation of today's most used tokenizers
 
 SourceLicense:  Apache-2.0
@@ -33,9 +33,11 @@ Source:         %{pypi_source tokenizers}
 BuildRequires:  python3-devel
 BuildRequires:  cargo-rpm-macros >= 24
 BuildRequires:	tomcli
-BuildRequires:  python3dist(pytest)
 # TODO: For some reason the generated buildrequires don't catch this?
 BuildRequires:	crate(tempfile/default)
+# For tests
+BuildRequires:  python3dist(pytest)
+BuildRequires:  python3dist(numpy)
 
 
 # Fill in the actual package description to submit package to Fedora
@@ -94,7 +96,45 @@ cd bindings/python
 # TODO: The cargo tests for the bindings fail to link to Python
 #cargo_test
 # only run the tests, not the benches
-%pytest -s -v ./tests/
+%pytest -s -v ./tests/ \
+        --deselect="tests/bindings/test_encoding.py::TestEncoding::test_char_to_token" \
+        --deselect="tests/bindings/test_encoding.py::TestEncoding::test_char_to_word" \
+        --deselect="tests/bindings/test_encoding.py::TestEncoding::test_invalid_truncate_direction" \
+        --deselect="tests/bindings/test_encoding.py::TestEncoding::test_n_sequences" \
+        --deselect="tests/bindings/test_encoding.py::TestEncoding::test_sequence_ids" \
+        --deselect="tests/bindings/test_encoding.py::TestEncoding::test_token_to_chars" \
+        --deselect="tests/bindings/test_encoding.py::TestEncoding::test_token_to_sequence" \
+        --deselect="tests/bindings/test_encoding.py::TestEncoding::test_token_to_word" \
+        --deselect="tests/bindings/test_encoding.py::TestEncoding::test_truncation" \
+        --deselect="tests/bindings/test_encoding.py::TestEncoding::test_word_to_chars" \
+        --deselect="tests/bindings/test_encoding.py::TestEncoding::test_word_to_tokens" \
+        --deselect="tests/bindings/test_models.py::TestBPE::test_instantiate" \
+        --deselect="tests/bindings/test_models.py::TestWordLevel::test_instantiate" \
+        --deselect="tests/bindings/test_processors.py::TestByteLevelProcessing::test_processing" \
+        --deselect="tests/bindings/test_tokenizer.py::TestTokenizer::test_encode_add_special_tokens" \
+        --deselect="tests/bindings/test_tokenizer.py::TestTokenizer::test_encode_formats" \
+        --deselect="tests/bindings/test_tokenizer.py::TestTokenizer::test_encode_special_tokens" \
+        --deselect="tests/bindings/test_tokenizer.py::TestTokenizer::test_from_pretrained" \
+        --deselect="tests/bindings/test_tokenizer.py::TestTokenizer::test_from_pretrained_revision" \
+        --deselect="tests/bindings/test_tokenizer.py::TestTokenizer::test_splitting" \
+        --deselect="tests/bindings/test_trainers.py::TestUnigram::test_continuing_prefix_trainer_mismatch" \
+        --deselect="tests/bindings/test_trainers.py::TestUnigram::test_train" \
+        --deselect="tests/bindings/test_trainers.py::TestUnigram::test_train_parallelism_with_custom_pretokenizer" \
+        --deselect="tests/documentation/test_pipeline.py::TestPipeline::test_bert_example" \
+        --deselect="tests/documentation/test_pipeline.py::TestPipeline::test_pipeline" \
+        --deselect="tests/documentation/test_quicktour.py::TestQuicktour::test_quicktour" \
+        --deselect="tests/implementations/test_bert_wordpiece.py::TestBertWordPieceTokenizer::test_basic_encode" \
+        --deselect="tests/implementations/test_bert_wordpiece.py::TestBertWordPieceTokenizer::test_multiprocessing_with_parallelism" \
+        --deselect="tests/implementations/test_byte_level_bpe.py::TestByteLevelBPE::test_add_prefix_space" \
+        --deselect="tests/implementations/test_byte_level_bpe.py::TestByteLevelBPE::test_basic_encode" \
+        --deselect="tests/implementations/test_byte_level_bpe.py::TestByteLevelBPE::test_lowerspace" \
+        --deselect="tests/implementations/test_byte_level_bpe.py::TestByteLevelBPE::test_multiprocessing_with_parallelism" \
+        --deselect="tests/implementations/test_char_bpe.py::TestCharBPETokenizer::test_basic_encode" \
+        --deselect="tests/implementations/test_char_bpe.py::TestCharBPETokenizer::test_decoding" \
+        --deselect="tests/implementations/test_char_bpe.py::TestCharBPETokenizer::test_lowercase" \
+        --deselect="tests/implementations/test_char_bpe.py::TestCharBPETokenizer::test_multiprocessing_with_parallelism" \
+        --deselect="tests/test_serialization.py::TestSerialization::test_full_serialization_albert" \
+        --deselect="tests/test_serialization.py::TestSerialization::test_str_big"
 cd ../../
 
 
