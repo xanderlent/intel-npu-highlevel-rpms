@@ -5,7 +5,7 @@ Summary:        Implementation of today's most used tokenizers, with a focus on 
 
 SourceLicense:  Apache-2.0
 # Generated license info from Rust dependencies
-#
+# 
 # (MIT OR Apache-2.0) AND Unicode-DFS-2016
 # Apache-2.0
 # Apache-2.0 AND MIT
