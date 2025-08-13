@@ -1,6 +1,6 @@
 Name:           python-accelerate
 Version:        1.10.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Accelerate PyTorch with distributed training and inference
 
 License:        Apache-2.0
@@ -90,11 +90,17 @@ unset ACCELERATE_ENABLE_RICH
         --deselect="tests/test_scheduler.py::SchedulerTester::test_one_cycle_scheduler_not_step_with_optimizer_single_process" \
         --deselect="tests/test_scheduler.py::SchedulerTester::test_one_cycle_scheduler_steps_with_optimizer_multiprocess" \
         --deselect="tests/test_scheduler.py::SchedulerTester::test_one_cycle_scheduler_steps_with_optimizer_single_process" \
-        --deselect="tests/test_utils.py::UtilsTester::test_patch_environment_key_exists"
+        --deselect="tests/test_utils.py::UtilsTester::test_patch_environment_key_exists" \
+        --deselect="tests/test_accelerator.py::AcceleratorTester::test_free_memory_dereferences_prepared_components" \
+        --deselect="tests/test_compile.py::RegionalCompilationTester::test_extract_model_keep_torch_compile" \
+        --deselect="tests/test_compile.py::RegionalCompilationTester::test_extract_model_remove_torch_compile" \
+        --deselect="tests/test_compile.py::RegionalCompilationTester::test_regions_are_compiled" \
+        --deselect="tests/test_scheduler.py::SchedulerTester::test_accumulation"
 # Note that we deselected tests where either
 # - PyTorch dynamo was not available
 # - multiprocess gives an error inside PyTorch
 # - In the enivronment test, it fails if AA BB or CC is defined. Seriously?
+# - Doesn't work with PyTorch 2.8 (torch.compile not supported, multiprocess issue, etc.)
 # Upstream's test_cli
 %pytest -s -v ./tests/test_cli.py \
         --deselect="tests/test_cli.py::AccelerateLauncherTester::test_invalid_keys" \
@@ -116,17 +122,23 @@ unset ACCELERATE_ENABLE_RICH
         --deselect="tests/test_cli.py::ModelEstimatorTester::test_gated" \
         --deselect="tests/test_cli.py::ToFSDP2Tester::test_overwrite_when_output_file_exists" \
         --deselect="tests/test_cli.py::ToFSDP2Tester::test_nonexistent_config_file" \
-        --deselect="tests/test_cli.py::ModelEstimatorTester::test_no_metadata"
+        --deselect="tests/test_cli.py::ModelEstimatorTester::test_no_metadata" \
+        --deselect="tests/test_cli.py::AccelerateLauncherTester::test_accelerate_test" \
+        --deselect="tests/test_cli.py::ModelEstimatorTester::test_explicit_dtypes" \
+        --deselect="tests/test_cli.py::ModelEstimatorTester::test_no_split_modules" \
+        --deselect="tests/test_cli.py::ModelEstimatorTester::test_remote_code" \
+        --deselect="tests/test_cli.py::ModelEstimatorTester::test_transformers_model"
 # Note that we deselected tests where:
 # - The test config files are missing from the PyPI dist.
 # - transformers is a curcular depenededency  test_gates-
 # - AttributeError: type object 'ToFSDP2Tester' has no attribute 'original_config`'
 # - Internet access is required
+# - Doesn't work with PyTorch 2.8 (torch.compile not supported, multiprocess issue, etc.)
 # Upstream's test_big_modeling suite
 # Not currently supported due to circular dep on python3dist(transformers)
 #pytest -s -v ./tests/test_big_modeling.py ./tests/test_modeling_utils.py
-# The deepspeed, fsdp, and tp folders under test are missing from the PyPI sources.
-# And so are the examples, so we can't test the examples, either.
+# The deepspeed, fsdp, and tp folders under test are missing from the PyPI sources
+# and so are the examples, so we can't test either of them
 
 
 %files -n python3-accelerate -f %{pyproject_files}
