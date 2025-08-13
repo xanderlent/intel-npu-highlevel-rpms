@@ -116,7 +116,7 @@ unset ACCELERATE_ENABLE_RICH
         --deselect="tests/test_cli.py::ModelEstimatorTester::test_gated" \
         --deselect="tests/test_cli.py::ToFSDP2Tester::test_overwrite_when_output_file_exists" \
         --deselect="tests/test_cli.py::ToFSDP2Tester::test_nonexistent_config_file" \
-        --deselect="tests/test_cli.py::ModelEstimatorTester::test_no_metadata" \
+        --deselect="tests/test_cli.py::ModelEstimatorTester::test_no_metadata"
 # Note that we deselected tests where:
 # - The test config files are missing from the PyPI dist.
 # - transformers is a curcular depenededency  test_gates-
