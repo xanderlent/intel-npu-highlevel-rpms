@@ -21,6 +21,11 @@ I also unofficially maintain the driver packaging in [another project](https://g
 
 - [Intel NPU Acceleration Library](https://github.com/intel/intel-npu-acceleration-library)
 	- A Python library for running various AI/ML workloads on the Intel NPU. They also provide some [docs](https://intel.github.io/intel-npu-acceleration-library/index.html).
+- The core bits of the HuggingFace suite:
+  - accelerate
+  - datasets
+  - optimum
+  - transformers
 
 ## Support Status
 
@@ -44,7 +49,7 @@ My primary goal is supporting the above list of software packaged. All the deps 
   - python-transformers (+accelerate,+ftfy,+num2words,+optuna,+sentencepiece,+serving,+sklearn,+tiktoken,+tokenizers,+torch,+torch-vision,+torchhub,+vision; future work for +onnx{,runtime},+modelcreation)
     - python-accelerate (see above)
     - python-blobfile (backported from rawhide)
-    - python-tokenizers
+    - python-tokenizers (review in [rhbz#2388154](https://bugzilla.redhat.com/show_bug.cgi?id=2388154))
       - rust-numpy (review in [rhbz#2385892](https://bugzilla.redhat.com/show_bug.cgi?id=2385892))
       - rust-tokenizers (review in [rhbz#2358553](https://bugzilla.redhat.com/show_bug.cgi?id=2358553))
         - rust-esaxx-rs (backported from rawhide)
@@ -58,6 +63,10 @@ My primary goal is supporting the above list of software packaged. All the deps 
     - python-safetensors (backported from rawhide)
 - python-datasets (review in [rhbz#2388144](https://bugzilla.redhat.com/show_bug.cgi?id=2388144))
 - python-evaluate
+  - python-transformers (see above)
+- python-optimum
+  - python-accelerate (see above)
+  - python-datasets (see above)
   - python-transformers (see above)
 
 ### Backporting OpenVINO from Fedora 42
