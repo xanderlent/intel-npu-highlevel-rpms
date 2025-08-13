@@ -30,19 +30,20 @@ My primary goal is supporting the above list of software packaged. All the deps 
 - Fedora 40 is no longer supported, as it reached EOL in May 2025.
 - Fedora 41 is supported. (OpenVINO is built as a backport from Fedora 42. Some deps are backported from rawhide.)
 - Fedora 42 is supported. (Some deps are backported from rawhide.)
+- Fedora 43 is coming soon.
 - Fedora rawhide is partially suppported, because sometimes it breaks and I can't immediately fix it.
 
 ### Packaged software and dependencies:
 - python-intel-npu-acceleration-library (docs are not packaged due to additional deps)
   - openvino (only for F41, see below, packaged upstream in F42+)
   - python-neural-compressor (+pt)
-    - python-accelerate
+    - python-accelerate (review in [rhbz#2388140](https://bugzilla.redhat.com/show_bug.cgi?id=2388140))
     - (opencv-python-headless was substituted with packaged opencv)
     - python-pycocotools
     - python-transformers (see below)
   - python-transformers (+accelerate,+ftfy,+num2words,+optuna,+sentencepiece,+serving,+sklearn,+tiktoken,+tokenizers,+torch,+torch-vision,+torchhub,+vision; future work for +onnx{,runtime},+modelcreation)
     - python-accelerate (see above)
-    - python-blobfile (review in [rhbz#2385893](https://bugzilla.redhat.com/show_bug.cgi?id=2385893))
+    - python-blobfile (backported from rawhide)
     - python-tokenizers
       - rust-numpy (review in [rhbz#2385892](https://bugzilla.redhat.com/show_bug.cgi?id=2385892))
       - rust-tokenizers (review in [rhbz#2358553](https://bugzilla.redhat.com/show_bug.cgi?id=2358553))
