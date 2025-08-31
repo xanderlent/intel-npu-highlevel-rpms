@@ -42,7 +42,7 @@ My primary goal is supporting the above list of software packaged. All the deps 
 - python-intel-npu-acceleration-library (docs are not packaged due to additional deps)
   - openvino (only for F41, see below, packaged upstream in F42+)
   - python-neural-compressor (+pt)
-    - python-accelerate (review in [rhbz#2388140](https://bugzilla.redhat.com/show_bug.cgi?id=2388140))
+    - python-accelerate (backported from rawhide)
     - (opencv-python-headless was substituted with packaged opencv)
     - python-pycocotools
     - python-transformers (see below)
@@ -61,7 +61,7 @@ My primary goal is supporting the above list of software packaged. All the deps 
         - rust-spm\_precompiled (backported from rawhide)
         - rust-unicode-normalization-alignments (backported from rawhide)
     - python-safetensors (backported from rawhide)
-- python-datasets (review in [rhbz#2388144](https://bugzilla.redhat.com/show_bug.cgi?id=2388144))
+- python-datasets (backported from rawhide)
 - python-evaluate
   - python-transformers (see above)
 - python-optimum
