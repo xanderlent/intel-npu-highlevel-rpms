@@ -48,19 +48,19 @@ My primary goal is supporting the above list of software packaged. All the deps 
     - python-transformers (see below)
   - python-transformers (+accelerate,+ftfy,+num2words,+optuna,+sentencepiece,+serving,+sklearn,+tiktoken,+tokenizers,+torch,+torch-vision,+torchhub,+vision; future work for +onnx{,runtime},+modelcreation)
     - python-accelerate (see above)
-    - python-blobfile (backported from rawhide)
+    - python-blobfile (backported from f43)
     - python-tokenizers (review in [rhbz#2388154](https://bugzilla.redhat.com/show_bug.cgi?id=2388154))
       - rust-numpy (review in [rhbz#2385892](https://bugzilla.redhat.com/show_bug.cgi?id=2385892))
       - rust-tokenizers (review in [rhbz#2358553](https://bugzilla.redhat.com/show_bug.cgi?id=2358553))
-        - rust-esaxx-rs (backported from rawhide)
-        - rust-macro\_rules\_attribute (backported from rawhide)
-          - rust-macro\_rules\_attribute-proc\_macro (backported from rawhide)
-        - rust-monostate (backported from rawhide)
-          - rust-monostate-impl (backported from rawhide)
-        - rust-rayon-cond (backported from rawhide)
-        - rust-spm\_precompiled (backported from rawhide)
-        - rust-unicode-normalization-alignments (backported from rawhide)
-    - python-safetensors (backported from rawhide)
+        - rust-esaxx-rs (backported from f43)
+        - rust-macro\_rules\_attribute (backported from f43)
+          - rust-macro\_rules\_attribute-proc\_macro (backported from f43)
+        - rust-monostate (backported from f43)
+          - rust-monostate-impl (backported from f43)
+        - rust-rayon-cond (backported from f43)
+        - rust-spm\_precompiled (backported from f43)
+        - rust-unicode-normalization-alignments (backported from f43)
+    - python-safetensors (backported from f43)
 - python-datasets (backported from rawhide)
 - python-evaluate
   - python-transformers (see above)
@@ -79,9 +79,9 @@ I have manually enabled building openvino from the F42 package source for F41 in
 
 This was set up in the copr to allow the newer version of huggingface transformers to build on F41.
 
-### Backporting other deps from rawhide
+### Backporting other deps from rawhide of Fedora 43
 
-As I work to get these packages into Fedora rawhide (for example in the F43 cycle), I will backport them to F41/F42.
+As I work to get these packages into Fedora 43 or rawhide, I will backport them to F41/F42.
 
 ### pycocotools split
 
