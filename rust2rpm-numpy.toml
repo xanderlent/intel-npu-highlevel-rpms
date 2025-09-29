@@ -1,3 +1,0 @@
-# Run me with: rust2rpm -C rust2rpm-numpy.toml numpy
-[requires]
-test = [ "python3dist(numpy)" ]
