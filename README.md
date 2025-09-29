@@ -19,11 +19,10 @@ I also unofficially maintain the driver packaging in [another project](https://g
 
 ## List of software packaged
 
+- Huggingface backports from our official @ai-ml-sig/huggingface-backports COPR are included in this COPR.
 - [Intel NPU Acceleration Library](https://github.com/intel/intel-npu-acceleration-library)
 	- A Python library for running various AI/ML workloads on the Intel NPU. They also provide some [docs](https://intel.github.io/intel-npu-acceleration-library/index.html).
 - The core bits of the HuggingFace suite:
-  - accelerate
-  - datasets
   - optimum
   - transformers
 
@@ -42,26 +41,17 @@ My primary goal is supporting the above list of software packaged. All the deps 
 - python-intel-npu-acceleration-library (docs are not packaged due to additional deps)
   - openvino (only for F41, see below, packaged upstream in F42+)
   - python-neural-compressor (+pt)
-    - python-accelerate (backported from rawhide)
+    - python-accelerate (backported from rawhide in official COPR)
     - (opencv-python-headless was substituted with packaged opencv)
     - python-pycocotools
     - python-transformers (see below)
   - python-transformers (+accelerate,+ftfy,+num2words,+optuna,+sentencepiece,+serving,+sklearn,+tiktoken,+tokenizers,+torch,+torch-vision,+torchhub,+vision; future work for +onnx{,runtime},+modelcreation)
     - python-accelerate (see above)
-    - python-blobfile (backported from f43)
+    - python-blobfile (backported from f43 in official COPR)
     - python-tokenizers (review in [rhbz#2388154](https://bugzilla.redhat.com/show_bug.cgi?id=2388154))
       - rust-numpy (review in [rhbz#2385892](https://bugzilla.redhat.com/show_bug.cgi?id=2385892))
       - rust-tokenizers (review in [rhbz#2358553](https://bugzilla.redhat.com/show_bug.cgi?id=2358553))
-        - rust-esaxx-rs (backported from f43)
-        - rust-macro\_rules\_attribute (backported from f43)
-          - rust-macro\_rules\_attribute-proc\_macro (backported from f43)
-        - rust-monostate (backported from f43)
-          - rust-monostate-impl (backported from f43)
-        - rust-rayon-cond (backported from f43)
-        - rust-spm\_precompiled (backported from f43)
-        - rust-unicode-normalization-alignments (backported from f43)
-    - python-safetensors (backported from f43)
-- python-datasets (backported from rawhide)
+- python-datasets (backported from rawhide in official COPR)
 - python-evaluate
   - python-transformers (see above)
 - python-optimum
